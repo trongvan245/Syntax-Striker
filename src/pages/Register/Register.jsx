@@ -3,8 +3,6 @@ import { useState } from 'react'
 import './Register.scss'
 // import { auto } from '@popperjs/core'
 
-
-
 /** Register
  *  @returns Registration page
  */
@@ -113,7 +111,7 @@ const Register = () => {
         </div>
 
         <div className={`form-section contact ${showContact ? 'show' : ''}`}>
-          {!true ? (
+          {!showContact ? (
             <img
               src='src\assets\Images\Register\cooker_masterchefVN.webp'
               alt=''
