@@ -1,3 +1,3 @@
 export default function Header() {
-  return <div>Edit header here</div>
+  return <div className='tw-bg-primaryColorDark '>Edit header here</div>
 }
