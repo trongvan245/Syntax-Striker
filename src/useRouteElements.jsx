@@ -2,23 +2,34 @@ import { useRoutes } from 'react-router-dom'
 import RegisterLayout from './layout/RegisterLayout/'
 import LandingPage from './pages/LandingPage'
 import Register from './pages/Register'
+import Login from './pages/Login'
+import MainLayout from './layout/MainLayout'
 
 export default function useRouteElements() {
   const routeElements = useRoutes([
     {
       path: '',
-      element: <RegisterLayout />,
-      children: [
-        {
-          path: '',
-          element: <LandingPage />
-        },
-        { path: '/register', element: <Register /> }
-      ]
+      element: (
+        <MainLayout>
+          <LandingPage />
+        </MainLayout>
+      )
     },
     {
-      path: '',
-      element: <LandingPage />
+      path: '/register',
+      element: (
+        <RegisterLayout>
+          <Register />
+        </RegisterLayout>
+      )
+    },
+    {
+      path: '/login',
+      element: (
+        <RegisterLayout>
+          <Login />
+        </RegisterLayout>
+      )
     }
   ])
 
