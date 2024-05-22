@@ -17,7 +17,7 @@ export default function Footer() {
           <ContactInfo name='Lê Hồng Phúc' email='phuc.lechieuvinh@hcmut.edu.vn' phone='+84 962 534 955' />
           <ContactInfo name='Nguyễn Ngọc Minh Quốc' email='???@???.com' phone='@_@' />
           <ContactInfo name='Nguyễn Truyền Tuấn' email='???@???.com' phone=':>>' />
-          <ContactInfo name='Bùi Trọng Văn' email='yet.another@example.com' phone=":))" />
+          <ContactInfo name='Bùi Trọng Văn' email='yet.another@example.com' phone=':))' />
         </div>
         <p className='mb-0 mt-3'>Copyright © 2024 Syntax Striker. All rights reserved.</p>
       </footer>
