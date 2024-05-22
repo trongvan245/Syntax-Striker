@@ -19,9 +19,11 @@ const Register = () => {
     })
   }
 
+  const [showContact, setShowContact] = useState(false)
   const handleSubmit = (e) => {
     e.preventDefault()
     // Handle form submission logic here
+    setShowContact(true)
     console.log(form)
   }
 
@@ -29,7 +31,7 @@ const Register = () => {
     <div className='register-container'>
       <form onSubmit={handleSubmit}>
         <div className='form-section'>
-          <h2>Register</h2>
+          <h2 style={{ fontSize: '25px', fontWeight: 'bold' }}>Register</h2>
           <input
             type='text'
             name='restaurantName'
@@ -75,29 +77,42 @@ const Register = () => {
             <button>Sign up with X</button>
           </div>
         </div>
+
         <div className='form-section contact'>
-          <h2>Contact</h2>
-          <input
-            type='text'
-            name='ownerName'
-            placeholder='Owner fullname'
-            value={form.ownerName}
-            onChange={handleChange}
-          />
-          <input
-            type='tel'
-            name='phoneNumber'
-            placeholder='Phone number'
-            value={form.phoneNumber}
-            onChange={handleChange}
-          />
-          <input type='text' name='faxNumber' placeholder='Fax number' value={form.faxNumber} onChange={handleChange} />
-          <button type='button' className='mark-location'>
-            Mark restaurant location
-          </button>
-          <button type='submit' className='confirm'>
-            Confirm
-          </button>
+          {!showContact ? (
+            <img src='src\assets\Images\Register\cooker_masterchefVN.webp' alt='' className='contact-image' />
+          ) : (
+            <>
+              <h2 style={{ fontSize: '25px', fontWeight: 'bold' }}>Contact</h2>
+              <input
+                type='text'
+                name='ownerName'
+                placeholder='Owner fullname'
+                value={form.ownerName}
+                onChange={handleChange}
+              />
+              <input
+                type='tel'
+                name='phoneNumber'
+                placeholder='Phone number'
+                value={form.phoneNumber}
+                onChange={handleChange}
+              />
+              <input
+                type='text'
+                name='faxNumber'
+                placeholder='Fax number'
+                value={form.faxNumber}
+                onChange={handleChange}
+              />
+              <button type='button' className='mark-location'>
+                Mark restaurant location
+              </button>
+              <button type='submit' className='confirm'>
+                Confirm
+              </button>
+            </>
+          )}
         </div>
       </form>
     </div>
