@@ -44,7 +44,7 @@ button {
   background: #cc3333;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 50px;
   cursor: pointer;
 }
 
@@ -74,20 +74,35 @@ button:hover {
 }
 
 .contact input {
-  background: #ff6b69;
-  color: white;
-  border: none;
+  background: #ffa2a2;
+  color: rgb(0, 0, 0);
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
 }
 
 .contact input::placeholder {
+  color: #000000;
+}
+
+.mark-location {
+  border-radius: 50px;
+  background: #ff7c7c;
+  border: 1px solid #ffffff;
   color: white;
 }
 
-.contact button {
-  background: #ff1e1c;
-  border: none;
+.mark-location:hover {
+  background: #e60e0b;
 }
 
-.contact button:hover {
-  background: #e60e0b;
+.confirm {
+  background: #000;
+  color: white;
+}
+
+.confirm:hover {
+  background: #333;
 }

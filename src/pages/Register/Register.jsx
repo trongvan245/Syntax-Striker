@@ -75,10 +75,15 @@ const Register = () => {
             <button>Sign up with X</button>
           </div>
         </div>
-
-
         <div className='form-section contact'>
           <h2>Contact</h2>
+          <input
+            type='text'
+            name='ownerName'
+            placeholder='Owner fullname'
+            value={form.ownerName}
+            onChange={handleChange}
+          />
           <input
             type='tel'
             name='phoneNumber'
@@ -86,10 +91,13 @@ const Register = () => {
             value={form.phoneNumber}
             onChange={handleChange}
           />
-          <input type='text' name='owner' placeholder='Owner fullname' value={form.ownerName} onChange={handleChange} />
           <input type='text' name='faxNumber' placeholder='Fax number' value={form.faxNumber} onChange={handleChange} />
-          <button type='button'>Mark restaurant location</button>
-          <button type='submit'>Confirm</button>
+          <button type='button' className='mark-location'>
+            Mark restaurant location
+          </button>
+          <button type='submit' className='confirm'>
+            Confirm
+          </button>
         </div>
       </form>
     </div>
