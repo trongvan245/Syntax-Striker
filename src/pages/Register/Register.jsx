@@ -1,7 +1,13 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
+// import Map from './GGMap'
 import './Register.scss'
 // import { auto } from '@popperjs/core'
 
+
+
+/** Register
+ *  @returns Registration page
+ */
 const Register = () => {
   const [form, setForm] = useState({
     restaurantName: '',
@@ -10,8 +16,14 @@ const Register = () => {
     confirmPassword: '',
     phoneNumber: '',
     ownerName: '',
-    faxNumber: ''
+    faxNumber: '',
+    latCoordinates: '',
+    lngCoordinates: ''
   })
+
+  // Location information
+  // const [showMap, setShowMap] = useState(false)
+  // const [selectedLocation, setSelectedLocation] = useState(null)
 
   const handleChange = (e) => {
     setForm({
@@ -44,8 +56,6 @@ const Register = () => {
     })
     console.log(form)
   }
-
-  const contactImageRef = useRef(null)
 
   return (
     <div className='register-container'>
@@ -103,13 +113,12 @@ const Register = () => {
         </div>
 
         <div className={`form-section contact ${showContact ? 'show' : ''}`}>
-          {!showContact ? (
+          {!true ? (
             <img
               src='src\assets\Images\Register\cooker_masterchefVN.webp'
               alt=''
               className='contact-image'
               style={{ opacity: 0.85 }}
-              ref={contactImageRef}
             />
           ) : (
             <>
@@ -139,9 +148,18 @@ const Register = () => {
                 pattern='[0-9]*'
                 // required
               />
+              {/* <button type='button' className='mark-location'onClick={() => setShowMap(true)}> */}
               <button type='button' className='mark-location'>
-                Mark restaurant location
+                Select your restaurant location
               </button>
+              {/* {showMap && (
+                <MapComponent
+                  showMap={showMap}
+                  setSelectedLocation={setSelectedLocation}
+                  setShowMap={setShowMap}
+                  selectedLocation={selectedLocation}
+                />
+              )} */}
               <button type='submit' className='confirm'>
                 Confirm
               </button>
