@@ -13,6 +13,8 @@
     "prettier:fix": "prettier --write \"src/**/(*.tsx|*.ts|*.css|*.scss)\""
   },
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.1",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
     "react": "^18.2.0",
