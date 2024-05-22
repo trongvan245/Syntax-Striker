@@ -2,6 +2,7 @@ $primaryColorDark: #cc3333;
 $primaryColorLight: #ffdfdf;
 $secondaryColor1: #fff8ee;
 $secondaryColor2: #303030;
+$secondaryColor3: #2a435d;
 $popUpColor: rgba(255, 255, 255, 0.5);
 
 .bg-primary-dark{
@@ -18,6 +19,10 @@ $popUpColor: rgba(255, 255, 255, 0.5);
 
 .bg-secondary-2{
     background-color: $secondaryColor2;
+}
+
+.bg-secondary-3{
+    background-color: $secondaryColor3;
 }
 
 .bg-popup{
