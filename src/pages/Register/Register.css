@@ -1,0 +1,93 @@
+@import './../../App.scss';
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #fff8ee;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  background: #ffdfdf;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-section {
+  padding: 20px;
+  flex: 1;
+}
+
+.form-section h2 {
+  margin-bottom: 20px;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='tel'] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #000000;
+  border-radius: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background: #cc3333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #902424;
+}
+
+.social-login button {
+  background: #cc3333;
+  border: none;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.social-login button:hover {
+  text-decoration: underline;
+  background: #902424;
+}
+
+.contact {
+  background: #cc3333;
+  color: white;
+}
+
+.contact h2 {
+  color: white;
+}
+
+.contact input {
+  background: #ff6b69;
+  color: white;
+  border: none;
+}
+
+.contact input::placeholder {
+  color: white;
+}
+
+.contact button {
+  background: #ff1e1c;
+  border: none;
+}
+
+.contact button:hover {
+  background: #e60e0b;
+}
