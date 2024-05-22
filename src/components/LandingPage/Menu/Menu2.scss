@@ -1,0 +1,83 @@
+/* Menu.css */
+.heading-menu{
+  font-weight: bold;
+  margin: 30px 0;   
+}
+.menu-container {
+    padding: 20px;
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Arial, sans-serif;
+
+  }
+  
+  .menu-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .menu-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    padding: 15px;
+  }
+  .menu-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .menu-item-image {
+    height: 250px;
+    object-fit: cover;
+  }
+  
+  .menu-item-info {
+    padding: 15px;
+  }
+  
+  .menu-item-info h3 {
+    margin: 10px 0;
+    font-size: 1.5em;
+  }
+  
+  .menu-item-info p {
+    margin: 5px 0;
+    font-size: 1.5em;
+  }
+  
+  .menu-item-price {
+    font-weight: bold;
+    color: #02761d;
+  }
+
+  .order-button{
+    background-color: #23a117; /* A nice accent color */
+    color: white; /* Text color */
+    padding: 10px 30px; /* Padding inside the button */
+    font-size: 1.3em; /* Font size of the text */
+    font-weight: bold; /* Bold font weight */
+    
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition effects */
+  }
+  button:hover {
+    background-color: #1e8d14; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly larger on hover */
+  }
+  
+  button:active {
+    background-color: rgb(11, 98, 3); /* Even darker shade when active */
+    transform: scale(0.95); /* Slightly smaller when clicked */
+  }
+  
+  button:focus {
+    outline: none; /* Remove the default focus outline */
+    box-shadow: 0 0 0 3px rgba(255, 138, 128, 0.4); /* Custom focus outline */
+  }
