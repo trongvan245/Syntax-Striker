@@ -1,0 +1,59 @@
+@import './../../App.scss';
+
+i.fa-solid {
+  margin-right: 5px;
+}
+
+button.btn-primary {
+  margin: 0px 3px;
+}
+
+#intro-content-2 {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+  width: 35%;
+  margin-left: 20px;
+}
+
+.fullscreenDiv {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  padding: 10px;
+  border-radius: 10px;
+  width: 35%;
+  position: absolute;
+  top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+  font-weight: bold;
+}
+
+#my-introduction {
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+th {
+  background-color: $primaryColorLight !important;
+  font-size: 20px;
+  color: #333333;
+}
+
+@media screen and (max-width: 600px) {
+  #header-2 {
+    display: none !important;
+  }
+}
