@@ -1,6 +1,11 @@
 import { useState } from 'react'
-import './Register.css'
+// import Map from './GGMap'
+import './Register.scss'
+// import { auto } from '@popperjs/core'
 
+/** Register
+ *  @returns Registration page
+ */
 const Register = () => {
   const [form, setForm] = useState({
     restaurantName: '',
@@ -9,8 +14,14 @@ const Register = () => {
     confirmPassword: '',
     phoneNumber: '',
     ownerName: '',
-    faxNumber: ''
+    faxNumber: '',
+    latCoordinates: '',
+    lngCoordinates: ''
   })
+
+  // Location information
+  // const [showMap, setShowMap] = useState(false)
+  // const [selectedLocation, setSelectedLocation] = useState(null)
 
   const handleChange = (e) => {
     setForm({
@@ -22,8 +33,25 @@ const Register = () => {
   const [showContact, setShowContact] = useState(false)
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Handle form submission logic here
+    const { password, confirmPassword, phoneNumber, faxNumber } = form
+    if (password !== confirmPassword) {
+      alert('Confirm password does not match password')
+      return
+    }
+    if (phoneNumber && phoneNumber.length !== 10) {
+      alert('Phone number must have 10 digits')
+      return
+    }
+    if (faxNumber && faxNumber.length < 10) {
+      alert('Fax number must have at least 10 digits')
+      return
+    }
+
     setShowContact(true)
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
     console.log(form)
   }
 
@@ -31,6 +59,7 @@ const Register = () => {
     <div className='register-container'>
       <form onSubmit={handleSubmit}>
         <div className='form-section'>
+          <img className='form-section-RestaurantImage' src='src\assets\Images\Register\restaurant.webp' alt='' />
           <h2 style={{ fontSize: '25px', fontWeight: 'bold' }}>Register</h2>
           <input
             type='text'
@@ -65,22 +94,30 @@ const Register = () => {
             required
           />
           <label>
-            <input type='checkbox' required /> I accept the terms and privacy policy
+            <input type='checkbox' required /> {'   '} I accept the terms and privacy policy
           </label>
           <button type='submit'>Sign up</button>
-          <p>
-            Already have an account? <a href='/login'>Log in</a>
+          <p style={{ textAlign: 'center' }}>
+            Already have an account?{' '}
+            <a href='/login' className='login-link'>
+              Log in
+            </a>
           </p>
-          <div className='social-login'>
+          {/* <div className='social-login'>
             <button>Sign up with Google</button>
             <button>Sign up with Facebook</button>
             <button>Sign up with X</button>
-          </div>
+          </div> */}
         </div>
 
-        <div className='form-section contact'>
+        <div className={`form-section contact ${showContact ? 'show' : ''}`}>
           {!showContact ? (
-            <img src='src\assets\Images\Register\cooker_masterchefVN.webp' alt='' className='contact-image' />
+            <img
+              src='src\assets\Images\Register\cooker_masterchefVN.webp'
+              alt=''
+              className='contact-image'
+              style={{ opacity: 0.85 }}
+            />
           ) : (
             <>
               <h2 style={{ fontSize: '25px', fontWeight: 'bold' }}>Contact</h2>
@@ -94,20 +131,33 @@ const Register = () => {
               <input
                 type='tel'
                 name='phoneNumber'
-                placeholder='Phone number'
+                placeholder='Phone number*'
                 value={form.phoneNumber}
                 onChange={handleChange}
+                pattern='[0-9]*'
+                required
               />
               <input
-                type='text'
+                type='tel'
                 name='faxNumber'
                 placeholder='Fax number'
                 value={form.faxNumber}
                 onChange={handleChange}
+                pattern='[0-9]*'
+                // required
               />
+              {/* <button type='button' className='mark-location'onClick={() => setShowMap(true)}> */}
               <button type='button' className='mark-location'>
-                Mark restaurant location
+                Select your restaurant location
               </button>
+              {/* {showMap && (
+                <MapComponent
+                  showMap={showMap}
+                  setSelectedLocation={setSelectedLocation}
+                  setShowMap={setShowMap}
+                  selectedLocation={selectedLocation}
+                />
+              )} */}
               <button type='submit' className='confirm'>
                 Confirm
               </button>
