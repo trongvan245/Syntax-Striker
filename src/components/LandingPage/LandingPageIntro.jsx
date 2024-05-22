@@ -35,12 +35,12 @@ function Intro() {
           <p style={{ textAlign: 'justify' }}>
             Và thật độc đáo. Khám phá những tính năng mới mà chúng tôi mang lại cho bạn.
           </p>
-          <button className='btn btn-primary'>
+          <a className='btn btn-primary mr-2' href='#menu1'>
             <i className='fa-solid fa-book'></i>Menu 1
-          </button>
-          <button className='btn btn-primary'>
+          </a>
+          <a className='btn btn-primary' href='#menu2'>
             <i className='fa-solid fa-book'></i>Menu 2
-          </button>
+          </a>
         </div>
       </div>
     </>
