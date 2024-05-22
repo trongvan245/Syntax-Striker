@@ -14,6 +14,11 @@ form {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+.form-section-RestaurantImage {
+  display: block;
+  margin: auto;
+  width: 15%;
+}
 
 .form-section {
   padding: 20px;
@@ -62,6 +67,13 @@ button:hover {
   background: #902424;
 }
 
+.login-link {
+  font-weight: bold;
+  color: #cc3333;
+}
+
+//----------------------
+
 .contact {
   background: #cc3333;
   color: white;
@@ -106,8 +118,14 @@ button:hover {
 }
 
 .contact-image {
-    display: block;
-    margin: auto;
-    width: 75%;
-    max-width: 100%;
-  }
+  display: block;
+  margin: auto;
+  width: 75%;
+  max-width: 100%;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.contact-section.show .contact-image {
+  opacity: 0.5;
+  
+}
