@@ -96,7 +96,9 @@ const Register = () => {
           <label>
             <input type='checkbox' required /> {'   '} I accept the terms and privacy policy
           </label>
-          <button type='submit'>Sign up</button>
+          <button type='submit' className='form-section-Button'>
+            Sign up
+          </button>
           <p style={{ textAlign: 'center' }}>
             Already have an account?{' '}
             <a href='/login' className='login-link'>
