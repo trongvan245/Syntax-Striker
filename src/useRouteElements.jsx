@@ -4,6 +4,8 @@ import LandingPage from './pages/LandingPage'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import MainLayout from './layout/MainLayout'
+import Restaurants from './pages/Restaurants'
+import Test from './../src/Test.jsx'
 import CreateMenu from './pages/CreateMenu'
 
 export default function useRouteElements() {
@@ -38,6 +40,22 @@ export default function useRouteElements() {
         <RegisterLayout>
           <Login />
         </RegisterLayout>
+      )
+    },
+    {
+      path: '/restaurants',
+      element: (
+        <MainLayout>
+          <Restaurants />
+        </MainLayout>
+      )
+    },
+    {
+      path: '/test',
+      element: (
+        <MainLayout>
+          <Test />
+        </MainLayout>
       )
     }
   ])

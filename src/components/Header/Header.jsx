@@ -1,20 +1,96 @@
-import { NavLink } from 'react-router-dom'
+import './Header.scss'
+
+function Logo() {
+  return (
+    <div className='d-flex justify-content-center align-items-center' id='logo'>
+      <img src='/src/assets/Images/Header/Logo-DH-Cong-Nghe-Thong-Tin-UIT-V.webp' alt='UIT Logo' />
+      <img src='/src/assets/Images/Header/800px-HCMUT_official_logo.png' alt='HCMUT Logo' />
+    </div>
+  )
+}
+
+function LogInSection(props) {
+  return (
+    <div
+      className='d-flex'
+      style={{
+        width: props.width,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: '100%'
+      }}
+      id='login'
+    >
+      <a href='/login'>
+        <i className='fa-solid fa-right-to-bracket'></i>
+      </a>
+      <a href='/register'>
+        <i className='fa-solid fa-user-plus'></i>
+      </a>
+    </div>
+  )
+}
+
+function Menu() {
+  const menu = [
+    { name: 'Home', link: '/' },
+    { name: 'Quick Start', link: '/' },
+    { name: 'References', link: '/' },
+    { name: 'Contact', link: '/' }
+  ]
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%'
+      }}
+    >
+      <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
+        {menu.map((item, index) => (
+          <li key={index}>
+            <a href={item.link}>{item.name}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
 
 export default function Header() {
   return (
-    <div className='tw-grid tw-grid-cols-3 tw-w-full tw-bg-secondaryColor1 tw-px-10 tw-py-4'>
-      <div className='tw-col-span-2 tw-flex tw-items-center tw-justify-start tw-space-x-6 tw-uppercase tw-text-2xl'>
-        <div>Logo</div>
-        <NavLink to={'/'}>
-          <div>Home</div>
-        </NavLink>
-        <div>About Us</div>
+    <nav className='navbar navbar-expand-lg d-flex flex-row-reverse p-0' id='navbarLandingPage'>
+      <div className='bg-secondary-1 container-fluid p-1'>
+        <button
+          className='navbar-toggler'
+          type='button'
+          data-bs-toggle='collapse'
+          data-bs-target='#mynavbar'
+          style={{
+            width: '50px',
+            fontSize: '0.8rem'
+          }}
+        >
+          <span className='navbar-toggler-icon'></span>
+        </button>
+        <a
+          href='/'
+          className='navbar-brand d-block'
+          style={{
+            width: '150px'
+          }}
+        >
+          <Logo />
+        </a>
+        <div className='collapse navbar-collapse' id='mynavbar'>
+          <Menu />
+          <div className='container-fluid' id='loginSection'>
+            <LogInSection width='100%' />
+          </div>
+        </div>
       </div>
-      <div className='tw-col-span-1 tw-flex tw-uppercase tw-text-xl tw-justify-center'>
-        <NavLink to={'/login'} className='tw-bg-red-600 tw-p-2 tw-rounded-lg tw-text-white'>
-          Login
-        </NavLink>
-      </div>
-    </div>
+    </nav>
   )
 }
