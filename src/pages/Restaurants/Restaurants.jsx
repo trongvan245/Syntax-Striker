@@ -4,6 +4,7 @@ import { PiCurrencyDollarSimpleFill } from 'react-icons/pi'
 import { WiStars } from 'react-icons/wi'
 
 import { useState } from 'react'
+
 import './Restaurants.scss'
 import Rating from './Rating'
 import Pagination from './Pagination'
@@ -58,6 +59,7 @@ const restaurants = [
     location: 'District 5'
   },
   {
+    id: 12,
     name: 'Domino Restaurant',
     price: '190-600',
     rating: 3.0,
@@ -166,13 +168,16 @@ function Restaurants() {
       <div id='carouselExampleSlidesOnly' className='carousel slide' data-bs-ride='carousel'>
         <div className='carousel-inner' style={{ maxHeight: window.innerWidth < 992 ? '200px' : '400px' }}>
           <div className='carousel-item active'>
-            <img src='src\assets\Images\LandingPage\background_1.jpg' className='d-block w-100' alt='...' />
+            <img src='src\assets\Images\Restaurants\slide1.png' className='d-block w-100' alt='Slide 1' />
           </div>
           <div className='carousel-item'>
-            <img src='src\assets\Images\LandingPage\background_1.jpg' className='d-block w-100' alt='...' />
+            <img src='src\assets\Images\Restaurants\slide2.png' className='d-block w-100' alt='Slide 2' />
           </div>
           <div className='carousel-item'>
-            <img src='src\assets\Images\LandingPage\background_1.jpg' className='d-block w-100' alt='...' />
+            <img src='src\assets\Images\Restaurants\slide3.png' className='d-block w-100' alt='Slide 3' />
+          </div>
+          <div className='carousel-item'>
+            <img src='src\assets\Images\Restaurants\slide4.png' className='d-block w-100' alt='Slide 4' />
           </div>
         </div>
       </div>
