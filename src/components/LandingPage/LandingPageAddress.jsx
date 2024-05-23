@@ -1,4 +1,3 @@
-import './LandingPageStyles.scss'
 function Address() {
   return (
     <div id='contactLandingPage' className='container mt-4' style={{ textAlign: 'left', lineHeight: 2 }}>

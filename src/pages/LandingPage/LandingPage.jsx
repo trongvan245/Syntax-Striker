@@ -2,7 +2,7 @@ import Intro from '../../components/LandingPage/LandingPageIntro'
 import Address from '../../components/LandingPage/LandingPageAddress'
 import SampleMenu1 from '../../components/LandingPage/LandingPageSampleMenu1'
 import SampleMenu2 from '../../components/LandingPage/Menu/LandingPageSampleMenu2'
-import '../../components/LandingPage/LandingPageStyles.scss'
+import styles from '../../components/LandingPage/LandingPageStyles.module.scss'
 import { useState, useEffect } from 'react'
 
 export default function LandingPage() {
@@ -31,7 +31,7 @@ export default function LandingPage() {
       <SampleMenu2 />
       <Address />
       <button
-        id='moveToTopButton'
+        className={styles.moveToTopButton}
         onClick={() => {
           window.scrollTo({
             top: 0,
