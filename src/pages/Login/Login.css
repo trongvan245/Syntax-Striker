@@ -68,6 +68,7 @@ body{
   }
 
 .login-button {
+    font-weight: bold;
     width: 100%;
     padding: 10px;
     background-color: #1a73e8;
@@ -85,10 +86,51 @@ body{
     display: flex;
     justify-content: space-between;
 }
-.social-button {
-    width: 30%;
-    padding: 10px;
+
+
+.social-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .social-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ff8a80;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .social-button:hover {
+    background-color: #f1f1f1;
+    transform: scale(1.1);
+  }
+  
+  .social-button.google {
+    color: #db4437;
+  }
+  
+  .social-button.twitter {
+    color: #1da1f2;
+  }
+  .social-button.facebook {
+    color: #045aab;
+  }
+
+  .register-button {
+    font-weight: bold;
+    color: #007bff;
+    padding: 15px;
+    margin-top: 30px;
+    background-color: #39ac2e;
     border: none;
+    color: #fff;
     border-radius: 5px;
     cursor: pointer;
-}
+  }
