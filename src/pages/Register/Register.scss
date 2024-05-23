@@ -6,7 +6,7 @@
   background: #fff8ee;
 }
 
-form {
+.register-container form {
   display: flex;
   flex-direction: row;
   background: #ffdfdf;
@@ -29,18 +29,18 @@ form {
   margin-bottom: 20px;
 }
 
-input[type='text'],
-input[type='email'],
-input[type='password'],
-input[type='tel'] {
+.form-section input[type='text'],
+.form-section input[type='email'],
+.form-section input[type='password'],
+.form-section input[type='tel'] {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  border: 1px solid #000000;
+  border: 1px solid #000000;  
   border-radius: 10px;
 }
 
-button {
+.form-section-Button {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
@@ -51,7 +51,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.form-section-Button:hover {
   background: #902424;
 }
 
@@ -73,7 +73,6 @@ button:hover {
 }
 
 //----------------------
-
 .contact {
   background: #cc3333;
   color: white;
@@ -97,11 +96,15 @@ button:hover {
   color: #000000;
 }
 
-.mark-location {
+.mark-location{
   border-radius: 50px;
   background: #ff7c7c;
   border: 1px solid #ffffff;
   color: white;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  cursor: pointer;
 }
 
 .mark-location:hover {
@@ -109,8 +112,14 @@ button:hover {
 }
 
 .confirm {
-  background: #000;
+  background: #000000;
   color: white;
+  border-radius: 50px;
+  border: 1px solid #ffffff;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  cursor: pointer;
 }
 
 .confirm:hover {
@@ -127,5 +136,4 @@ button:hover {
 
 .contact-section.show .contact-image {
   opacity: 0.5;
-  
 }
