@@ -1,14 +1,14 @@
 @import './../../App.scss';
 
-i.fa-solid {
+.fa-solid {
   margin-right: 5px;
 }
 
-a.btn-primary {
+.btn-primary {
   margin: 0px 3px;
 }
 
-#intro-content-2 {
+.introContent2 {
   background-color: rgba(255, 255, 255, 0.5);
   padding: 10px;
   border-radius: 10px;
@@ -37,7 +37,7 @@ a.btn-primary {
   font-weight: bold;
 }
 
-#my-introduction {
+.myIntroduction {
   position: absolute;
   bottom: 50px;
   left: 50px;
@@ -53,12 +53,12 @@ th {
 }
 
 @media screen and (max-width: 600px) {
-  #header-2 {
+  .header2 {
     display: none !important;
   }
 }
 
-#moveToTopButton {
+.moveToTopButton {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -73,6 +73,6 @@ th {
   display: none;
 }
 
-#moveToTopButton:hover {
+.moveToTopButton:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }

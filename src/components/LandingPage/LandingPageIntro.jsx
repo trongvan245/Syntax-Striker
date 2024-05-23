@@ -1,4 +1,4 @@
-import './LandingPageStyles.scss'
+import styles from './LandingPageStyles.module.scss'
 function Intro() {
   return (
     <>
@@ -13,7 +13,7 @@ function Intro() {
             position: 'relative'
           }}
         />
-        <div id='my-introduction'>
+        <div className={styles.myIntroduction}>
           <h2>Menu trực tuyến cho nhà hàng 📝</h2>
           <p>Come hungry, leave happy with Syntax Striker 😁</p>
           <a className='btn btn-primary' href='#contactLandingPage'>
@@ -22,13 +22,13 @@ function Intro() {
           </a>
         </div>
       </div>
-      <div id='header-2' className='fullscreenDiv bg-primary-light'>
+      <div className={`${styles.fullscreenDiv} ${styles.header2} bg-primary-light`}>
         <img
           src='/src/assets/Images/LandingPage/picture_1.jpg'
           alt='Fish'
           style={{ width: '60%', objectFit: 'cover', maxHeight: '90%' }}
         />
-        <div id='intro-content-2'>
+        <div className={styles.introContent2}>
           <p className='display-4' style={{ fontStyle: 'italic' }}>
             Việc tạo menu thật là đơn giản
           </p>
