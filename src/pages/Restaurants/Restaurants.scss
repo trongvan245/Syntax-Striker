@@ -1,0 +1,83 @@
+.restaurants-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff8ee;
+  box-shadow: 0 0 10px #000000;
+}
+
+.restaurants-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+/* @media (max-width: 992px) {
+    .restaurants-grid {
+      grid-template-columns: 1fr;
+    }
+  } */
+
+.restaurant-box {
+  background-color: #fff8ee;
+  padding: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0px 10px #000000;
+  transition: transform 0.5s ease-in-out;
+  border-radius: 25px;
+}
+
+.restaurant-box:hover {
+  transform: translateY(-5px);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0px 10px #cc3333;
+}
+
+// .restaurant-box img {
+//   width: 100%;
+//   height: 200px;
+//   object-fit: cover;
+//   margin-bottom: 0px;
+// }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.pagination button {
+  background-color: #ec7575;
+  color: #fff8ee;
+  padding: 5px 8px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  font-size: 16px;
+  font-weight: bold;
+  max-width: 50px;
+}
+
+.pagination button:hover {
+  background-color: #720c0c;
+}
+
+.pagination button:disabled { 
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.pagination button.active {
+  background-color: #cc3333;
+  color: #fff8ee;
+  font-weight: bold;
+  transform: translateY(-2px);
+}
+
+.pagination span {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 5px;
+  font-size: 14px;
+  color: #ffffff;
+}

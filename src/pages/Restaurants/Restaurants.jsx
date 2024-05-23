@@ -1,95 +1,100 @@
-import { useState, useEffect } from 'react'
-import './Restaurants.css'
+import { BsTelephoneFill } from 'react-icons/bs'
+import { FaLocationDot } from 'react-icons/fa6'
+import { PiCurrencyDollarSimpleFill } from 'react-icons/pi'
+
+import { useState } from 'react'
+import './Restaurants.scss'
+import Rating from './Rating'
+import Pagination from './Pagination'
 
 const restaurants = [
   {
     name: 'Pizza Restaurant 1',
-    minPrice: 200,
-    maxPrice: 550,
+    price: '150-600',
     rating: 4.9,
     tel: '0909123456',
     location: 'District 3'
   },
   {
     name: 'Domino Restaurant 1',
-    price: '190-600$',
+    price: '190-600',
     rating: 4.2,
     tel: '0909123456',
     location: 'District 3'
   },
   {
     name: 'Domino Restaurant 2',
-    price: '190-600$',
+    price: '190-600',
     rating: 4.3,
     tel: '0909123456',
     location: 'District 5'
   },
   {
     name: 'Domino Restaurant 3',
-    price: '190-600$',
+    price: '190-600',
     rating: 4.0,
     tel: '0909123456',
     location: 'District 4'
   },
   {
     name: 'Domino Restaurant',
-    price: '190-600$',
+    price: '190-600',
     rating: 3.0,
     tel: '0909123456',
     location: 'District 5'
   },
   {
     name: 'Domino Restaurant',
-    price: '190-600$',
+    price: '190-600',
     rating: 2.0,
     tel: '0909123456',
     location: 'District 5'
   },
   {
     name: 'Domino Restaurant',
-    price: '190-600$',
+    price: '190-600',
     rating: 3.0,
     tel: '0909123456',
     location: 'District 5'
   },
   {
     name: 'Domino Restaurant',
-    price: '190-600$',
+    price: '190-600',
     rating: 3.0,
     tel: '0909123456',
     location: 'District 5'
   },
   {
     name: 'Domino Restaurant',
-    price: '190-600$',
+    price: '190-600',
     rating: 2.0,
     tel: '0909123456',
     location: 'District 5'
   },
   {
     name: 'Domino Restaurant',
-    price: '190-600$',
+    price: '190-600',
     rating: 4.2,
     tel: '0909123456',
     location: 'District 5'
   },
   {
     name: 'Domino Restaurant',
-    price: '190-600$',
+    price: '190-600',
     rating: 1.3,
     tel: '0909123456',
     location: 'District 5'
   },
   {
     name: 'Domino Restaurant',
-    price: '190-600$',
+    price: '190-600',
     rating: 4.9,
     tel: '0909123456',
     location: 'District 5'
   },
   {
     name: 'Domino Restaurant',
-    price: '190-600$',
+    price: '190-600',
     rating: 3.6,
     tel: '0909123456',
     location: 'District 5'
@@ -141,6 +146,8 @@ function Restaurants() {
 
   const paginatedRestaurants = locationRestaurants.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
 
+  const totalPages = Math.ceil(locationRestaurants.length / itemsPerPage)
+
   return (
     <div className='restaurants-container'>
       <input type='text' placeholder='Search by name' value={searchTerm} onChange={handleSearchChange} />
@@ -160,21 +167,24 @@ function Restaurants() {
       <div className='restaurants-grid'>
         {paginatedRestaurants.map((restaurant) => (
           <div className='restaurant-box' key={restaurant.id}>
-            <h2>{restaurant.name}</h2>
-            <p>{restaurant.rating}</p>
-            <p>{restaurant.price}</p>
-            <p>Location: {restaurant.location}</p>
+            <h2 style={{ fontWeight: 'bold', color: '#cc3333' }}>{restaurant.name}</h2>
+            <p style={{ fontSize: '20px', fontWeight: 'bold' }}>
+              <Rating rating={restaurant.rating} style={{ display: 'inline' }} />
+            </p>
+            <p style={{ fontSize: '20px', fontWeight: 'bold' }}>
+              {' '}
+              Price: {restaurant.price} <PiCurrencyDollarSimpleFill style={{ scale: '120%', color: '#008839' }} />
+            </p>
+            <p style={{ fontWeight: 'bold' }}>
+              Tel: {restaurant.tel} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
+              {' --- '}
+              Location: {restaurant.location} <FaLocationDot style={{ scale: '80%', color: '#cc3333' }} />
+            </p>
           </div>
         ))}
       </div>
-      <div className='pagination'>
-        {Array.from({ length: Math.ceil(locationRestaurants.length / itemsPerPage) }, (_, i) => i + 1).map(
-          (pageNumber) => (
-            <button key={pageNumber} onClick={() => handlePageChange(pageNumber)}>
-              {pageNumber}
-            </button>
-          )
-        )}
+      <div>
+        <Pagination totalPages={totalPages} currentPage={currentPage} handlePageChange={handlePageChange} />
       </div>
     </div>
   )
