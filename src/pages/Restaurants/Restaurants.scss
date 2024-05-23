@@ -4,6 +4,53 @@
   padding: 20px;
   background-color: #fff8ee;
   box-shadow: 0 0 10px #000000;
+  min-height: 1200px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  background-color: #cc3333;
+  border-radius: 20px;
+}
+
+.search-container input {
+  padding: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 20px;
+  color: #cc3333;
+  font-size: large;
+  border: 2px solid #000000;
+}
+.search-container select {
+  padding: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 20px;
+  border-color: #000000;
+  border: 2px solid #000000;
+  color: #ffffff;
+  background-color: #d30000;
+  font-size: large;
+  font-weight: bold;
+  cursor: pointer;
+}
+.search-container select option {
+  background-color: #fcdddd;
+  color: #000000;
+  font-weight: bold;
+}
+.search-container select option:checked {
+  background-color: #cc3333;
+  color: #ffff;
+}
+
+.search-container input {
+  flex: 1;
+  color: #000000;
 }
 
 .restaurants-grid {
@@ -12,12 +59,6 @@
   grid-gap: 20px;
 }
 
-/* @media (max-width: 992px) {
-    .restaurants-grid {
-      grid-template-columns: 1fr;
-    }
-  } */
-
 .restaurant-box {
   background-color: #fff8ee;
   padding: 20px;
@@ -25,6 +66,7 @@
   box-shadow: 0 0px 10px #000000;
   transition: transform 0.5s ease-in-out;
   border-radius: 25px;
+  cursor: pointer;
 }
 
 .restaurant-box:hover {
@@ -62,7 +104,7 @@
   background-color: #720c0c;
 }
 
-.pagination button:disabled { 
+.pagination button:disabled {
   background-color: #999;
   cursor: not-allowed;
 }
@@ -80,4 +122,70 @@
   margin: 0 5px;
   font-size: 14px;
   color: #ffffff;
+}
+
+@media (max-width: 992px) {
+  .restaurants-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .restaurant-box {
+    background-color: #fff8ee;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0px 10px #000000;
+    transition: transform 0.5s ease-in-out;
+    border-radius: 25px;
+  }
+
+  .search-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 10px; /* Gap between items */
+    align-items: center;
+    margin: 20px 0;
+    background-color: #cc3333;
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .search-container input {
+    grid-column: 1 / span 2; /* Take the first column */
+    width: 95%;
+    padding: 8px;
+    border-radius: 20px;
+    font-size: 14px;
+    border: 1px solid #000000;
+    margin-bottom: 10px;
+  }
+
+  .search-container select {
+    width: 45%;
+    padding: 6px;
+    margin: 5px 0;
+    border-radius: 20px;
+    border-color: #000000;
+    border: 1px solid #000000;
+    color: #ffffff;
+    background-color: #ff3333;
+    font-size: 12;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    width: 95%;
+  }
+
+  .search-container select option {
+    background-color: #fcdddd;
+    color: #000000;
+    font-size: 10;
+    font-weight: normal;
+  }
+
+  .search-container select option:checked {
+    background-color: #cc3333;
+    color: #ffff;
+    font-size: 12;
+    font-weight: bold;
+  }
 }
