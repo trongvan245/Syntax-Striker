@@ -42,10 +42,12 @@ export default function Login() {
             required/>
           <div className="login-options">
             <label>
-              <input type="checkbox" />
+              <input type='checkbox' />
               Remember me
             </label>
-            <a href="#" className="forgot-password">Forgot password</a>
+            <a href='#' className='forgot-password'>
+              Forgot password
+            </a>
           </div>
           <button type="submit" className="login-button">Log In</button>
           <div className="divider">or</div>
@@ -59,6 +61,7 @@ export default function Login() {
             </button>
             <button className="social-button facebook">
               <FontAwesomeIcon icon={faFacebook} size="2x"  disabled = {true}/>
+
             </button>
           </div>
 
@@ -71,10 +74,10 @@ export default function Login() {
         </form>
         
       </div>
-      <div className="login-image-container">
+      <div className='login-image-container'>
         {/* Add your background image or any content here */}
-        <img src="path-to-chef-image.png" alt="Chef" />
+        <img src='path-to-chef-image.png' alt='Chef' />
       </div>
     </div>
-  );
+  )
 }
