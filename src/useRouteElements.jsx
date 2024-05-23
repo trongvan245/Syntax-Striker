@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage'
 import Register from './pages/Register'
 import Login from './pages/Login'
 import MainLayout from './layout/MainLayout'
+import CreateMenu from './pages/CreateMenu'
 
 export default function useRouteElements() {
   const routeElements = useRoutes([
@@ -12,6 +13,14 @@ export default function useRouteElements() {
       element: (
         <MainLayout>
           <LandingPage />
+        </MainLayout>
+      )
+    },
+    {
+      path: '/createMenu',
+      element: (
+        <MainLayout>
+          <CreateMenu />
         </MainLayout>
       )
     },
