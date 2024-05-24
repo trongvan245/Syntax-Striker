@@ -1,4 +1,5 @@
 import { useState } from 'react'
+// import axios from 'axios'
 // import Map from './GGMap'
 import './Register.scss'
 // import { auto } from '@popperjs/core'
@@ -31,7 +32,7 @@ const Register = () => {
   }
 
   const [showContact, setShowContact] = useState(false)
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     const { password, confirmPassword, phoneNumber, faxNumber } = form
     if (password !== confirmPassword) {
@@ -53,6 +54,34 @@ const Register = () => {
       [e.target.name]: e.target.value
     })
     console.log(form)
+    if (!showContact) {
+      setShowContact(true)
+    } else {
+      // Submit form data to API
+      try {
+        const response = await fetch('https://syntax-striker.onrender.com/users/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(form)
+        })
+
+        if (!response.ok) {
+          const errorData = await response.json()
+          console.error('Error:', errorData)
+          alert(`Error: ${errorData.message}`)
+          return
+        }
+
+        const data = await response.json()
+        console.log('Success:', data)
+        alert('Registration successful!')
+      } catch (error) {
+        console.error('Error:', error)
+        alert('An error occurred. Please try again.')
+      }
+    }
   }
 
   return (
