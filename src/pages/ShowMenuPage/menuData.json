@@ -1,0 +1,30 @@
+{
+  "0": {
+    "food_items": [
+      {
+        "name": "Bun Bo",
+        "pricing": 3000,
+        "rating": 4.5
+      },
+      {
+        "name": "Banh trang",
+        "pricing": 5000,
+        "rating": 5.0
+      }
+    ]
+  },
+  "1": {
+    "food_items": [
+      {
+        "name": "Pho",
+        "pricing": 4000,
+        "rating": 4.8
+      },
+      {
+        "name": "Hamburger",
+        "pricing": 1000,
+        "rating": 4.0
+      }
+    ]
+  }
+}

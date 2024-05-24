@@ -24,7 +24,7 @@ export default function Login() {
   const handlePasswordChange = (e) => setPassword(e.target.value)
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault()  
     const loginResult = (response) => {
       window.alert(response.message)
       window.location.href = '/'

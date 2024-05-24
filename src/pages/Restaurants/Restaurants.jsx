@@ -8,6 +8,8 @@ import { useState } from 'react'
 import './Restaurants.scss'
 import Rating from './Rating'
 import Pagination from './Pagination'
+// import RestaurantMenuPage from '../ShowMenuPage/RestaurantMenuPage'
+import { Link } from 'react-router-dom'
 
 const locationsInHCMC = [
   'TP. Thủ Đức',
@@ -37,7 +39,7 @@ const locationsInHCMC = [
 const restaurants = [
   {
     id: 0,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
+    img: 'src/assets/Images/Header/800px-HCMUT_official_logo.png',
     name: 'Pizza Restaurant 1',
     price: '150-600',
     rating: 4.9,
@@ -46,10 +48,10 @@ const restaurants = [
   },
   {
     id: 1,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
+    img: 'src/assets/Images/Header/Logo-DH-Cong-Nghe-Thong-Tin-UIT-V.webp',
     name: 'Domino Restaurant 1',
     price: '190-600',
-    rating: 4.2,
+    rating: 4.9,
     tel: '0909123456',
     location: 'Q. 3'
   },
@@ -257,7 +259,9 @@ function Restaurants() {
             {paginatedRestaurants.map((restaurant) => (
               <div className='restaurant-box' key={restaurant.id}>
                 <div className='restaurant-info'>
-                  <h2 style={{ marginLeft: '8px', fontWeight: 'bold', color: '#cc3333' }}>{restaurant.name}</h2>
+                  <Link style={{ marginLeft: '8px' }} to={`/menu/${restaurant.id}`}>
+                    {restaurant.name}{' '}
+                  </Link>
                   <div
                     style={{
                       marginLeft: '8px',

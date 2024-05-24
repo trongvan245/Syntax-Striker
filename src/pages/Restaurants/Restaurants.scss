@@ -83,14 +83,24 @@
 .restaurant-info {
   flex-basis: 60%;
 }
+.restaurant-info a {
+  font-size: 32px;
+  font-weight: bold;
+  color: #cc3333;
+  text-decoration: none; /* remove underline */
+}
 
+.restaurant-info a:hover {
+  color: #990000; /* change text color on hover */
+  text-decoration: underline; /* add underline on hover */
+}
 .restaurant-image {
   flex-basis: 40%;
   text-align: center;
 }
 
 .restaurant-image img {
-  width: 100%;
+  width: auto;
   max-height: 400px;
   border-radius: 20px;
   margin-top: 10px;
@@ -213,8 +223,8 @@
   }
 
   .restaurant-image img {
-    max-width: 300px;
-    max-height: 300px;
+    max-width: auto;
+    max-height: 250px;
     border-radius: 10px;
   }
 }
@@ -222,6 +232,17 @@
 @media (max-width: 620px) {
   .SearchRestaurantText {
     font-size: 20px;
+  }
+  .restaurant-info a {
+    font-size: 22px;
+    font-weight: bold;
+    color: #cc3333;
+    text-decoration: none; /* remove underline */
+  }
+  
+  .restaurant-info a:hover {
+    color: #990000; /* change text color on hover */
+    text-decoration: underline; /* add underline on hover */
   }
 }
 
