@@ -6,7 +6,9 @@
   box-shadow: 0 0 10px #000000;
   min-height: 1200px;
 }
-
+.SearchRestaurantText {
+  font-size: 32px;
+}
 .search-container {
   display: flex;
   justify-content: center;
@@ -159,12 +161,12 @@
     border-radius: 20px;
     font-size: 14px;
     border: 1px solid #000000;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
   }
 
   .search-container select {
     padding: 5px;
-    margin: 2px 0;
+    margin: 0px 0;
     margin-left: 10px;
     margin-right: 10px;
     border-radius: 20px;
@@ -172,7 +174,7 @@
     border: 1px solid #000000;
     color: #ffffff;
     background-color: #ff3333;
-    font-size: 12;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
     display: flex;
@@ -191,5 +193,17 @@
     color: #ffff;
     font-size: 12;
     font-weight: bold;
+  }
+}
+
+@media (max-width: 620px) {
+  .SearchRestaurantText {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .SearchRestaurantText {
+    font-size: 16px;
   }
 }

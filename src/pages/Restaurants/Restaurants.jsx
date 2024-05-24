@@ -16,7 +16,7 @@ const restaurants = [
     price: '150-600',
     rating: 4.9,
     tel: '0909123456',
-    location: 'District 3'
+    location: 'Quận 3'
   },
   {
     id: 1,
@@ -24,7 +24,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.2,
     tel: '0909123456',
-    location: 'District 3'
+    location: 'Quận 3'
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.3,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Quận 5'
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.0,
     tel: '0909123456',
-    location: 'District 4'
+    location: 'Quận 4'
   },
   {
     id: 4,
@@ -48,7 +48,7 @@ const restaurants = [
     price: '190-600',
     rating: 3.0,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Quận 5'
   },
   {
     id: 5,
@@ -56,7 +56,7 @@ const restaurants = [
     price: '190-600',
     rating: 2.0,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Quận 5'
   },
   {
     id: 12,
@@ -64,7 +64,7 @@ const restaurants = [
     price: '190-600',
     rating: 3.0,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Quận 5'
   },
   {
     id: 6,
@@ -72,7 +72,7 @@ const restaurants = [
     price: '190-600',
     rating: 3.0,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Quận 5'
   },
   {
     id: 7,
@@ -80,7 +80,7 @@ const restaurants = [
     price: '190-600',
     rating: 2.0,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Quận 5'
   },
   {
     id: 8,
@@ -88,7 +88,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.2,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Quận 5'
   },
   {
     id: 9,
@@ -96,7 +96,7 @@ const restaurants = [
     price: '190-600',
     rating: 1.3,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Quận 5'
   },
   {
     id: 10,
@@ -104,7 +104,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.9,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Quận 5'
   },
   {
     id: 11,
@@ -112,7 +112,7 @@ const restaurants = [
     price: '190-600',
     rating: 3.6,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Quận 5'
   }
   // ... other restaurants
 ]
@@ -193,25 +193,25 @@ function Restaurants() {
             color: '#cc3333'
           }}
         >
-          <p style={{ fontSize: window.innerWidth < 550 ? '16px' : '32px' }}>
-            <WiStars style={{ fontSize: '30px' }} /> These're the restaurants you love{' '}
+          <p className='SearchRestaurantText'>
+            <WiStars style={{ fontSize: '30px' }} /> Tìm kiếm nhà hàng bạn yêu thích{' '}
             <WiStars style={{ fontSize: '30px' }} />
           </p>
         </div>
         <div className='search-container'>
-          <input type='text' placeholder='Search by name' value={searchTerm} onChange={handleSearchChange} />
+          <input type='text' placeholder='Tìm kiếm tên nhà hàng' value={searchTerm} onChange={handleSearchChange} />
           <select value={sortOption} onChange={handleSortChange}>
-            <option value='Best Rating'>Best Rating</option>
-            <option value='Most Expensive'>Most Expensive</option>
-            <option value='Cheapest'>Cheapest</option>
+            <option value='Best Rating'>Đánh giá cao</option>
+            <option value='Most Expensive'>Mắc nhất</option>
+            <option value='Cheapest'>Rẻ nhất</option>
           </select>
           <select value={locationOption} onChange={handleLocationChange}>
-            <option value='All'>All Locations</option>
-            <option value='District 1'>District 1</option>
-            <option value='District 2'>District 2</option>
-            <option value='District 3'>District 3</option>
-            <option value='District 4'>District 4</option>
-            <option value='District 5'>District 5</option>
+            <option value='All'>Tất cả địa điểm</option>
+            <option value='Quận 1'>Quận 1</option>
+            <option value='Quận 2'>Quận 2</option>
+            <option value='Quận 3'>Quận 3</option>
+            <option value='Quận 4'>Quận 4</option>
+            <option value='Quận 5'>Quận 5</option>
           </select>
         </div>
         {locationRestaurants.length > 0 ? (
@@ -224,22 +224,22 @@ function Restaurants() {
                 </div>
                 <p style={{ fontSize: window.innerWidth < 992 ? '16px' : '20px', fontWeight: 'bold' }}>
                   {' '}
-                  Price: {restaurant.price} <PiCurrencyDollarSimpleFill style={{ scale: '120%', color: '#008839' }} />
+                  Giá: {restaurant.price} <PiCurrencyDollarSimpleFill style={{ scale: '120%', color: '#008839' }} />
                 </p>
                 {window.innerWidth < 992 ? (
                   <div style={{ fontSize: '14px', fontWeight: 'bold' }}>
                     <p>
-                      Tel: {restaurant.tel} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
+                      SĐT: {restaurant.tel} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
                     </p>
                     <p>
-                      Location: {restaurant.location} <FaLocationDot style={{ scale: '80%', color: '#cc3333' }} />
+                      Vị trí: {restaurant.location} <FaLocationDot style={{ scale: '80%', color: '#cc3333' }} />
                     </p>
                   </div>
                 ) : (
                   <p style={{ fontWeight: 'bold' }}>
-                    Tel: {restaurant.tel} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
+                    SĐT: {restaurant.tel} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
                     {' --- '}
-                    Location: {restaurant.location} <FaLocationDot style={{ scale: '80%', color: '#cc3333' }} />
+                    Vị trí: {restaurant.location} <FaLocationDot style={{ scale: '80%', color: '#cc3333' }} />
                   </p>
                 )}
               </div>
