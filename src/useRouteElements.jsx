@@ -7,6 +7,7 @@ import MainLayout from './layout/MainLayout'
 import Restaurants from './pages/Restaurants'
 import Test from './../src/Test.jsx'
 import CreateMenu from './pages/CreateMenu'
+import Info from './pages/Info/Info.jsx'
 
 export default function useRouteElements() {
   const routeElements = useRoutes([
@@ -23,6 +24,14 @@ export default function useRouteElements() {
       element: (
         <MainLayout>
           <CreateMenu />
+        </MainLayout>
+      )
+    },
+    {
+      path: '/info',
+      element: (
+        <MainLayout>
+          <Info />
         </MainLayout>
       )
     },
