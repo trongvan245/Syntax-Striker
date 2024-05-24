@@ -29,6 +29,7 @@ export default function Login() {
       window.alert(response.message)
       window.location.href = '/'
     }
+    const backup = $('#login-button').html()
     $('#login-button').html(
       `<div class="spinner-border text-danger" role="status">
         <span class="sr-only">Loading...</span>
@@ -38,7 +39,18 @@ export default function Login() {
     $('#login-button').css('cursor', 'not-allowed')
     $('#login-button').css('background-color', 'gray')
     $('#login-button').css('padding', '5px 10px')
-    AccountManagement.login(email, password, loginResult)
+
+    const failToLogin = (response) => {
+      console.log(response.responseJSON)
+      const message = response.responseJSON.message + (response.responseJSON?.errors?.email?.msg ? ': ' + response.responseJSON.errors.email.msg : '.')
+      $('#login-error').text(message)
+      $('#login-button').html(backup)
+      $('#login-button').prop('disabled', false)
+      $('#login-button').css('cursor', 'pointer')
+      $('#login-button').css('background-color', 'blue')
+      $('#login-button').css('padding', '10px 10px')
+    }
+    AccountManagement.login(email, password, loginResult, failToLogin)
   }
 
   if (isAuth) {
@@ -60,6 +72,9 @@ export default function Login() {
             </a>
           </div>
           <form className='login-form' onSubmit={handleSubmit}>
+            <div>
+              <span className='text-danger' id='login-error'></span>
+            </div>
             <h2>Log In</h2>
             <input type='email' placeholder='Email' value={email} onChange={handleEmailChange} />
             <input type='password' placeholder='Password' value={password} onChange={handlePasswordChange} required />
