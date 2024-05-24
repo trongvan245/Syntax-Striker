@@ -1,11 +1,11 @@
-import './Header.scss'
+import styles from './Header.module.scss'
 import AccountManagement from '../../model/AccountManagement.jsx'
 import { useEffect, useState } from 'react'
 import { AuthContext } from '/src/components/Context.jsx'
 
 function Logo() {
   return (
-    <div className='d-flex justify-content-center align-items-center' id='logo'>
+    <div className={`${styles.logoSection} d-flex justify-content-center align-items-center`} id='logo'>
       <img src='/src/assets/Images/Header/Logo-DH-Cong-Nghe-Thong-Tin-UIT-V.webp' alt='UIT Logo' />
       <img src='/src/assets/Images/Header/800px-HCMUT_official_logo.png' alt='HCMUT Logo' />
     </div>
@@ -32,7 +32,7 @@ function LogInSection(props) {
 
   const ifNotLogin = (
     <div
-      className='d-flex'
+      className={`d-flex ${styles.login}`}
       style={{
         width: props.width,
         display: 'flex',
@@ -63,7 +63,12 @@ function LogInSection(props) {
       }}
       id='login'
     >
-      <div className='dropdown'>
+      <div
+        className={styles.dropdown}
+        onClick={() => {
+          $('#HeaderDropdown').toggle()
+        }}
+      >
         <img
           src={avatarURL}
           alt='Avatar'
@@ -81,9 +86,17 @@ function LogInSection(props) {
         >
           {name}
         </span>
-        <div className='dropdown-content'>
-          <a href='/profile'>Profile</a>
-          <a href='/logout'>Log out</a>
+        <div className={styles.dropdownContent} id='HeaderDropdown'>
+          <div>
+            <a href='/'>Profile</a>
+            <a
+              onClick={() => {
+                AccountManagement.logout()
+              }}
+            >
+              Log out
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -112,7 +125,7 @@ function Menu() {
         width: '100%'
       }}
     >
-      <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
+      <ul className={`navbar-nav me-auto mb-2 mb-lg-0 ${styles.landingList}`}>
         {menu.map((item, index) => (
           <li key={index}>
             <a href={item.link}>{item.name}</a>
@@ -125,7 +138,10 @@ function Menu() {
 
 export default function Header() {
   return (
-    <nav className='navbar navbar-expand-lg d-flex flex-row-reverse p-0' id='navbarLandingPage'>
+    <nav
+      className={`navbar navbar-expand-lg d-flex flex-row-reverse p-0 ${styles.navbarLandingPage}`}
+      id='navbarLandingPage'
+    >
       <div className='bg-secondary-1 container-fluid p-1'>
         <button
           className='navbar-toggler'
@@ -148,9 +164,9 @@ export default function Header() {
         >
           <Logo />
         </a>
-        <div className='collapse navbar-collapse' id='mynavbar'>
+        <div className={`collapse navbar-collapse ${styles.landingCollapseSection}`} id='mynavbar'>
           <Menu />
-          <div className='container-fluid' id='loginSection'>
+          <div className={`container-fluid ${styles.loginSection}`}>
             <LogInSection width='100%' />
           </div>
         </div>

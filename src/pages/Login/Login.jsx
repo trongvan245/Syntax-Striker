@@ -27,12 +27,7 @@ export default function Login() {
     e.preventDefault()
     const loginResult = (response) => {
       window.alert(response.message)
-      $('body').html(`
-        <div class='container-fluid d-flex justify-content-center align-items-center flex-column' style='height: 100vh;'>
-          <h1>${response.message}</h1>
-          <button class='btn btn-primary' onclick='window.location.href = "/";'>Go back to home</button>
-        </div>
-      `)
+      window.location.href = '/'
     }
     $('#login-button').html(
       `<div class="spinner-border text-danger" role="status">

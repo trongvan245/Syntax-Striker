@@ -62,10 +62,35 @@ export default class AccountManagement extends BaseManagement {
       this.#saveRefreshToken(response.result.refresh_token)
       myCallback(response)
     }
+
+    // Send request to the server
     $.ajax({
       url: url,
       method: 'POST',
       contentType: 'application/json',
+      data: JSON.stringify(sendData),
+      success: success,
+      error: this.debugFailure
+    })
+  }
+
+  static async logout() {
+    const url = this.getHostUrl() + '/users/logout'
+    const sendData = {
+      refresh_token: this.#getRefreshToken()
+    }
+    const success = () => {
+      this.deleteToken()
+      this.clearInformation()
+      window.location.href = '/'
+    }
+    $.ajax({
+      url: url,
+      method: 'POST',
+      contentType: 'application/json',
+      headers: {
+        Authorization: 'Bearer ' + this.#getActiveToken()
+      },
       data: JSON.stringify(sendData),
       success: success,
       error: this.debugFailure
