@@ -36,11 +36,7 @@ export default function useRouteElements() {
     },
     {
       path: '/login',
-      element: (
-        <RegisterLayout>
-          <Login />
-        </RegisterLayout>
-      )
+      element: <Login />
     },
     {
       path: '/restaurants',

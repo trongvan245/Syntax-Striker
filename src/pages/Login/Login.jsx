@@ -49,13 +49,15 @@ export default function Login() {
       <div className='login-page'>
         <div className='login-form-container'>
           <div className='logo'>
-            <img
-              src='/src/assets/Images/logo.png'
-              alt='Logo'
-              style={{
-                height: '80px'
-              }}
-            />
+            <a href='/'>
+              <img
+                src='/src/assets/Images/logo.png'
+                alt='Logo'
+                style={{
+                  height: '80px'
+                }}
+              />
+            </a>
           </div>
           <form className='login-form' onSubmit={handleSubmit}>
             <h2>Log In</h2>
@@ -86,7 +88,6 @@ export default function Login() {
                 <FontAwesomeIcon icon={faFacebook} size='2x' disabled={true} />
               </button>
             </div>
-
 
             <div className='divider-dash'></div>
 

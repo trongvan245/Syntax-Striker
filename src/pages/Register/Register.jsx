@@ -2,7 +2,6 @@ import { useState } from 'react'
 // import axios from 'axios'
 // import Map from './GGMap'
 import './Register.scss'
-import $ from 'jquery' // Import jQuerys
 // import { auto } from '@popperjs/core'
 
 const hostUrl = 'https://syntax-striker.onrender.com'
