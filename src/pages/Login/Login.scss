@@ -1,125 +1,138 @@
 @import './../../App.scss';
 
 .login-page {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 .login-form-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #f5f5f5;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f5f5f5;
 }
 .login-form {
-    background: #fff;
-    padding: 40px;
-    margin: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
+  background: #fff;
+  padding: 40px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
 }
 .login-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 .login-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.logo{
-    height: 100px;
-    width: 100px;
-    background-color: #333;
+.logo {
+  background-color: $primaryColorDark;
+  padding: 15px;
+  border-radius: 15px;
 }
 .login-image-container {
-    flex: 1;
-    background-color: rgb(152, 6, 6);
+  flex: 1;
+  background-color: rgb(152, 6, 6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .login-options label {
-    display: flex;
-    align-items: center;
-  }
-  
-  .login-options .forgot-password {
-    color: #007bff;
-    text-decoration: none;
-  }
+  display: flex;
+  align-items: center;
+}
+
+.login-options .forgot-password {
+  color: #007bff;
+  text-decoration: none;
+}
 
 .login-button {
-    font-weight: bold;
-    width: 100%;
-    padding: 10px;
-    background-color: #1a73e8;
-    border: none;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  padding: 10px;
+  background-color: #1a73e8;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
 }
 .divider {
-    margin: 20px 0;
-    color: #ccc;
+  margin: 20px 0;
+  color: #ccc;
 }
 
 .social-login {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
-
 .social-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-  }
-  
-  .social-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    border: 2px solid #ff8a80;
-    border-radius: 50%;
-    background-color: white;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-  }
-  
-  .social-button:hover {
-    background-color: #f1f1f1;
-    transform: scale(1.1);
-  }
-  
-  .social-button.google {
-    color: #db4437;
-  }
-  
-  .social-button.twitter {
-    color: #1da1f2;
-  }
-  .social-button.facebook {
-    color: #045aab;
-  }
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
 
-  .register-button {
-    font-weight: bold;
-    color: #007bff;
-    padding: 15px;
-    margin-top: 30px;
-    background-color: #39ac2e;
-    border: none;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #ff8a80;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    transform 0.3s;
+}
+
+.social-button:hover {
+  background-color: #f1f1f1;
+  transform: scale(1.1);
+}
+
+.social-button.google {
+  color: #db4437;
+}
+
+.social-button.twitter {
+  color: #1da1f2;
+}
+.social-button.facebook {
+  color: #045aab;
+}
+
+.register-button {
+  font-weight: bold;
+  color: #007bff;
+  padding: 15px;
+  margin-top: 30px;
+  background-color: #39ac2e;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 992px) {
+  .login-page{
+    flex-direction: column;
   }
+  .login-image-container{
+    display: none;
+  }
+}
