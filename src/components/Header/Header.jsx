@@ -1,4 +1,5 @@
 import './Header.scss'
+import AccountManagement from '../../model/AccountManagement.jsx'
 
 function Logo() {
   return (
@@ -10,7 +11,7 @@ function Logo() {
 }
 
 function LogInSection(props) {
-  return (
+  const ifNotLogin = (
     <div
       className='d-flex'
       style={{
@@ -30,6 +31,22 @@ function LogInSection(props) {
       </a>
     </div>
   )
+  const ifLogin = (
+    <div
+      className='d-flex'
+      style={{
+        width: props.width,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        height: '100%'
+      }}
+      id='login'
+    >
+      <p>Haha</p>
+    </div>
+  )
+  return AccountManagement.isAuth() ? ifLogin : ifNotLogin
 }
 
 function Menu() {
