@@ -2,28 +2,32 @@ import { useState } from 'react'
 // import axios from 'axios'
 // import Map from './GGMap'
 import './Register.scss'
+import $ from 'jquery' // Import jQuerys
 // import { auto } from '@popperjs/core'
+
+const hostUrl = 'https://syntax-striker.onrender.com'
 
 /** Register
  *  @returns Registration page
  */
 const Register = () => {
   const [form, setForm] = useState({
-    restaurantName: '',
+    name: '',
     email: '',
     password: '',
-    confirmPassword: '',
-    phoneNumber: '',
-    ownerName: '',
-    faxNumber: '',
-    latCoordinates: '',
-    lngCoordinates: ''
+    confirm_password: '',
+    phone_number: '',
+    owner_name: ''
+    // faxNumber: '',
+    // latCoordinates: '',
+    // lngCoordinates: ''
   })
 
   // Location information
   // const [showMap, setShowMap] = useState(false)
   // const [selectedLocation, setSelectedLocation] = useState(null)
 
+  // Change
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -32,54 +36,87 @@ const Register = () => {
   }
 
   const [showContact, setShowContact] = useState(false)
+
+  // Submit
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const { password, confirmPassword, phoneNumber, faxNumber } = form
-    if (password !== confirmPassword) {
+    const { password, confirm_password, phone_number } = form
+
+    if (password.length < 6 || password.length > 50) {
+      alert('Password length must be from 6 to 50')
+      return
+    }
+    // Validate password expresion
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,50}$/
+    if (!passwordRegex.test(password)) {
+      alert(
+        'Password must be at least 6 characters long and contain at least 1 lowercase letter, 1 uppercase letter and 1 number'
+      )
+      return
+    }
+
+    // Validate confirm password length
+    if (confirm_password.length < 6 || confirm_password.length > 50) {
+      alert('Password length must be from 6 to 50')
+      return
+    }
+
+    // Compare password and confirm password
+    if (password !== confirm_password) {
       alert('Confirm password does not match password')
       return
     }
-    if (phoneNumber && phoneNumber.length !== 10) {
+
+    // Validate phone number length
+    if (phone_number && phone_number.length !== 10) {
       alert('Phone number must have 10 digits')
       return
     }
-    if (faxNumber && faxNumber.length < 10) {
-      alert('Fax number must have at least 10 digits')
-      return
-    }
+
+    // if (faxNumber && faxNumber.length < 10) {
+    //   alert('Fax number must have at least 10 digits')
+    //   return
+    // }
 
     setShowContact(true)
     setForm({
       ...form,
       [e.target.name]: e.target.value
     })
-    console.log(form)
+    // console.log('=========================')
+    // console.log(JSON.stringify(form))
+
     if (!showContact) {
       setShowContact(true)
     } else {
       // Submit form data to API
+      console.log(' Submit form data to API')
+      console.log(JSON.stringify(form))
+
       try {
-        const response = await fetch('https://syntax-striker.onrender.com/users/register', {
+        const url = `${hostUrl}/users/register`
+        const response = await $.ajax({
+          url: url,
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(form)
+          contentType: 'application/json',
+          data: JSON.stringify(form)
         })
 
-        if (!response.ok) {
-          const errorData = await response.json()
-          console.error('Error:', errorData)
-          alert(`Error: ${errorData.message}`)
-          return
-        }
-
-        const data = await response.json()
-        console.log('Success:', data)
+        console.log('Success:', response)
         alert('Registration successful!')
       } catch (error) {
-        console.error('Error:', error)
-        alert('An error occurred. Please try again.')
+        // alert(error.responseJSON.message)
+        if (
+          error.responseJSON &&
+          error.responseJSON.errors &&
+          error.responseJSON.errors.email &&
+          error.responseJSON.errors.email.msg
+        ) {
+          alert(error.responseJSON.errors.email.msg)
+        } else {
+          alert((error.responseJSON && error.responseJSON.message) || 'An error occurred. Please try again.')
+        }
+        // console.log(error.responseJSON.errors.email.msg)
       }
     }
   }
@@ -92,9 +129,9 @@ const Register = () => {
           <h2 style={{ fontSize: '25px', fontWeight: 'bold' }}>Register</h2>
           <input
             type='text'
-            name='restaurantName'
+            name='name'
             placeholder='Restaurant name*'
-            value={form.restaurantName}
+            value={form.name}
             onChange={handleChange}
             required
           />
@@ -116,9 +153,9 @@ const Register = () => {
           />
           <input
             type='password'
-            name='confirmPassword'
+            name='confirm_password'
             placeholder='Confirm password*'
-            value={form.confirmPassword}
+            value={form.confirm_password}
             onChange={handleChange}
             required
           />
@@ -154,16 +191,16 @@ const Register = () => {
               <h2 style={{ fontSize: '25px', fontWeight: 'bold' }}>Contact</h2>
               <input
                 type='text'
-                name='ownerName'
+                name='owner_name'
                 placeholder='Owner fullname'
-                value={form.ownerName}
+                value={form.owner_name}
                 onChange={handleChange}
               />
               <input
                 type='tel'
-                name='phoneNumber'
+                name='phone_number'
                 placeholder='Phone number*'
-                value={form.phoneNumber}
+                value={form.phone_number}
                 onChange={handleChange}
                 pattern='[0-9]*'
                 required
@@ -172,9 +209,9 @@ const Register = () => {
                 type='tel'
                 name='faxNumber'
                 placeholder='Fax number'
-                value={form.faxNumber}
-                onChange={handleChange}
-                pattern='[0-9]*'
+                // value={form.faxNumber}
+                // onChange={handleChange}
+                // pattern='[0-9]*'
                 // required
               />
               {/* <button type='button' className='mark-location'onClick={() => setShowMap(true)}> */}
