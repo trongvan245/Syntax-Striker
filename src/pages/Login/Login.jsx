@@ -1,12 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import './Login.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle, faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons'
 import AccountManagement from '../../model/AccountManagement.jsx'
+import { AuthContext } from '/src/components/Context.jsx'
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isAuth, setIsAuth] = useState(useContext(AuthContext) ? true : false)
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      if (isAuth) return
+      await AccountManagement.isAuth((result) => {
+        setIsAuth(result)
+      })
+    }
+    checkAuth()
+  }, [isAuth])
 
   const handleEmailChange = (e) => setEmail(e.target.value)
   const handlePasswordChange = (e) => setPassword(e.target.value)
@@ -34,8 +46,9 @@ export default function Login() {
     AccountManagement.login(email, password, loginResult)
   }
 
-  if (AccountManagement.isAuth()) {
+  if (isAuth) {
     window.location.href = '/'
+    return <></>
   } else
     return (
       <div className='login-page'>

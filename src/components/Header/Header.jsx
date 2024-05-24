@@ -1,5 +1,7 @@
 import './Header.scss'
 import AccountManagement from '../../model/AccountManagement.jsx'
+import { useEffect, useState } from 'react'
+import { AuthContext } from '/src/components/Context.jsx'
 
 function Logo() {
   return (
@@ -11,6 +13,23 @@ function Logo() {
 }
 
 function LogInSection(props) {
+  const [isLoggedIn, setIsLoggedIn] = useState(null)
+  const [avatarURL, setAvatarURL] = useState('/src/assets/Images/temp-avatar.jpg')
+  const [name, setName] = useState('')
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      await AccountManagement.isAuth((result) => {
+        setIsLoggedIn(result)
+        if (isLoggedIn) {
+          if (AccountManagement.getAvatarURL()) setAvatarURL(AccountManagement.getAvatarURL())
+          setName(AccountManagement.getName())
+        }
+      })
+    }
+    checkAuth()
+  }, [avatarURL, isLoggedIn, name])
+
   const ifNotLogin = (
     <div
       className='d-flex'
@@ -31,22 +50,46 @@ function LogInSection(props) {
       </a>
     </div>
   )
+
   const ifLogin = (
     <div
       className='d-flex'
       style={{
         width: props.width,
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         height: '100%'
       }}
       id='login'
     >
-      <p>Haha</p>
+      <div>
+        <img
+          src={avatarURL}
+          alt='Avatar'
+          style={{
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            marginRight: '10px'
+          }}
+        />
+        <span
+          style={{
+            fontWeight: 'bold'
+          }}
+        >
+          {name}
+        </span>
+      </div>
     </div>
   )
-  return AccountManagement.isAuth() ? ifLogin : ifNotLogin
+
+  return (
+    <AuthContext.Provider value={isLoggedIn} id='isAuth'>
+      {isLoggedIn ? ifLogin : ifNotLogin}
+    </AuthContext.Provider>
+  )
 }
 
 function Menu() {

@@ -1,14 +1,33 @@
 import AccountManagement from './model/AccountManagement.jsx'
+import { useEffect, useState, useContext } from 'react'
+import { AuthContext } from './components/Context.jsx'
+
 export default function Test() {
-  const logIn = () => {
-    AccountManagement.login('nekan123@gmail.com', 'Trongvan123456', (response) => {
-      console.log(response)
-    })
-    // AccountManagement.hello()
-  }
-  return (
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(useContext(AuthContext) ? true : false)
+  useEffect(() => {
+    const checkAuth = async () => {
+      if (isLoggedIn) return
+      await AccountManagement.isAuth((result) => {
+        setIsLoaded(true)
+        if (result) {
+          setIsLoggedIn(true)
+        }
+      })
+    }
+    checkAuth()
+  }, [isLoggedIn])
+  return !isLoaded ? (
+    <></>
+  ) : (
     <div>
-      <button onClick={logIn}>Test</button>
+      <button
+        onClick={() => {
+          console.log('Testing....')
+        }}
+      >
+        Test
+      </button>
     </div>
   )
 }

@@ -5,12 +5,53 @@ export default class AccountManagement extends BaseManagement {
     super()
   }
 
-  static isAuth() {
-    // Temporary implementation
-    return this.#getActiveToken() !== null
+  // ======================= PUBLIC METHODS ZONE =======================
+
+  /**
+   * Check if user is authenticated
+   * @param {function(bool)} myCallback - Callback function
+   **/
+  static async isAuth(myCallback) {
+    await this.getAccountInformation((response) => {
+      myCallback(response ? true : false)
+    })
   }
 
-  static login(email, password, myCallback) {
+  /**
+   * Get account information
+   * @param {function(response.user)} myCallback - Callback function
+   **/
+  static async getAccountInformation(myCallback) {
+    const url = this.getHostUrl() + '/users/me'
+
+    const success = (response) => {
+      this.#saveName(response.user.name)
+      this.#saveAvatarURL(response.user.avatar)
+      myCallback(response.user)
+    }
+    const error = () => {
+      this.deleteToken()
+      this.clearInformation()
+    }
+    $.ajax({
+      url: url,
+      method: 'GET',
+      contentType: 'application/json',
+      headers: {
+        Authorization: 'Bearer ' + this.#getActiveToken()
+      },
+      success: success,
+      error: error
+    })
+  }
+
+  /**
+   * Login to the system
+   * @param {string} email - Email
+   * @param {string} password - Password
+   * @param {function(response)} myCallback - Callback function
+   **/
+  static async login(email, password, myCallback) {
     const url = this.getHostUrl() + '/users/login'
     const sendData = {
       email: email,
@@ -31,6 +72,40 @@ export default class AccountManagement extends BaseManagement {
     })
   }
 
+  /**
+   * Get name of the user
+   * @returns {string} Name of the user
+   * */
+  static getName() {
+    return localStorage.getItem('name')
+  }
+
+  /**
+   * Get avatar URL of the user
+   * @returns {string} Avatar URL of the user
+   * */
+  static getAvatarURL() {
+    return localStorage.getItem('avatarURL')
+  }
+
+  /**
+   * Delete token from local storage
+   * */
+  static deleteToken() {
+    localStorage.removeItem('activeToken')
+    localStorage.removeItem('refreshToken')
+  }
+
+  /**
+   * Clear information from local storage
+   * */
+  static clearInformation() {
+    localStorage.removeItem('name')
+    localStorage.removeItem('avatarURL')
+  }
+
+  // ======================= PRIVATE METHODS ZONE =======================
+
   static #saveActiveToken(token) {
     localStorage.setItem('activeToken', token)
   }
@@ -47,7 +122,15 @@ export default class AccountManagement extends BaseManagement {
     return localStorage.getItem('refreshToken')
   }
 
-  static hello() {
+  static #saveName(name) {
+    localStorage.setItem('name', name)
+  }
+
+  static #saveAvatarURL(avatarURL) {
+    localStorage.setItem('avatarURL', avatarURL)
+  }
+
+  static async hello() {
     const url = this.getHostUrl() + '/hello'
 
     $.ajax({
@@ -55,7 +138,7 @@ export default class AccountManagement extends BaseManagement {
       method: 'GET',
       contentType: 'application/json',
       headers: {
-        Authorization: 'Bearer your_token_here', // if you need authorization
+        Authorization: 'Bearer your_token_here' // if you need authorization
       },
       success: this.debugSuccess,
       error: this.debugFailure
