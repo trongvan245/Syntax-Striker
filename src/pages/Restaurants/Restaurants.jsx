@@ -9,7 +9,7 @@ import './Restaurants.scss'
 import Rating from './Rating'
 import Pagination from './Pagination'
 
-const locationInHCMC = [
+const locationsInHCMC = [
   'TP. Thủ Đức',
   'Q. 1',
   'Q. 3',
@@ -232,7 +232,7 @@ function Restaurants() {
           </select>
           <select value={locationOption} onChange={handleLocationChange}>
             <option value='All'>Tất cả địa điểm</option>
-            {locationInHCMC.map((location, index) => (
+            {locationsInHCMC.map((location, index) => (
               <option key={index} value={location}>
                 {location}
               </option>
