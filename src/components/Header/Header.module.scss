@@ -1,13 +1,47 @@
 @import './../../App.scss';
 
-#logo img {
+.logoSection img {
   height: 80%;
   max-height: 50px;
   max-width: 50px;
   aspect-ratio: 1/1;
 }
 
-ul {
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 0;
+  min-width: 160px;
+  border: 1px solid $primaryColorLight;
+  box-shadow:
+    0px 8px 16px 0px rgba(0, 0, 0, 0.2),
+    /* Original shadow */ 0px 12px 24px 0px rgba(0, 0, 0, 0.1),
+    /* Additional layer for depth */ 0px 16px 32px 0px rgba(0, 0, 0, 0.05); /* Another layer for realism */
+  border-radius: 3px;
+  z-index: 1;
+  div {
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      padding: 12px 16px;
+    }
+    a:hover {
+      background-color: $primaryColorLight;
+    }
+  }
+}
+
+.landingList {
   li {
     list-style: none;
     height: 100%;
@@ -34,9 +68,9 @@ ul {
 }
 
 @media screen and (max-width: 992px) {
-  #loginSection {
+  .loginSection {
     width: 100%;
-    #login {
+    .login {
       a {
         height: 40px;
         width: 40px;
@@ -54,7 +88,7 @@ ul {
     }
   }
 
-  ul{
+  .landingList {
     li {
       a {
         padding: 8px;
@@ -64,21 +98,21 @@ ul {
 }
 
 @media screen and (min-width: 992px) {
-  #navbarLandingPage {
+  .navbarLandingPage {
     height: 60px;
   }
 
-  div.collapse.navbar-collapse {
-    width: 70%;
+  .landingCollapseSection {
+    width: 60%;
   }
 
-  #loginSection {
-    width: 20%;
+  .loginSection {
+    width: 30%;
     height: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    #login {
+    .login {
       width: 20%;
       height: 100%;
       display: flex;
