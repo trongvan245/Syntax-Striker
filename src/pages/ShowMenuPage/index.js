@@ -1,3 +1,3 @@
-import RestaurantMenuPage from './RestaurantMenuPage'
+import RestaurantMenuPage from './ShowMenuPage'
 
 export default RestaurantMenuPage

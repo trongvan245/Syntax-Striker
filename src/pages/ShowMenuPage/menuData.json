@@ -2,28 +2,106 @@
   "0": {
     "food_items": [
       {
+        "id": 0,
         "name": "Bun Bo",
         "pricing": 3000,
-        "rating": 4.5
+        "rating": 4.5,
+        "image": "/src/assets/images/Menu/img.png"
       },
       {
+        "id": 1,
         "name": "Banh trang",
         "pricing": 5000,
-        "rating": 5.0
+        "rating": 5.0,
+        "image": "/src/assets/images/Menu/img.png"
+      },
+      {
+        "id": 2,
+        "name": "Banh trang",
+        "pricing": 5000,
+        "rating": 5.0,
+        "image": "/src/assets/images/Menu/img.png"
+      },
+      {
+        "id": 3,
+        "name": "Banh trang",
+        "pricing": 5000,
+        "rating": 5.0,
+        "image": "/src/assets/images/Menu/img.png"
+      },
+      {
+        "id": 4,
+        "name": "Banh trang",
+        "pricing": 5000,
+        "rating": 5.0,
+        "image": "/src/assets/images/Menu/img.png"
+      },
+      {
+        "id": 5,
+        "name": "Banh trang",
+        "pricing": 5000,
+        "rating": 5.0,
+        "image": "/src/assets/images/Menu/img.png"
       }
     ]
   },
   "1": {
     "food_items": [
       {
+        "id": 0,
         "name": "Pho",
         "pricing": 4000,
-        "rating": 4.8
+        "rating": 4.8,
+        "image": "/src/assets/images/Menu/img.png"
       },
       {
+        "id": 1,
         "name": "Hamburger",
         "pricing": 1000,
-        "rating": 4.0
+        "rating": 4.0,
+        "image": "/src/assets/images/Menu/img.png"
+      },
+      {
+        "id": 2,
+        "name": "Bun Bo",
+        "pricing": 3000,
+        "rating": 4.5,
+        "image": "/src/assets/images/Menu/img.png"
+      },
+      {
+        "id": 3,
+        "name": "Banh trang",
+        "pricing": 5000,
+        "rating": 5.0,
+        "image": "/src/assets/images/Menu/img.png"
+      },
+      {
+        "id": 4,
+        "name": "Banh trang",
+        "pricing": 5000,
+        "rating": 5.0,
+        "image": "/src/assets/images/Menu/img.png"
+      },
+      {
+        "id": 5,
+        "name": "Banh trang",
+        "pricing": 5000,
+        "rating": 5.0,
+        "image": "/src/assets/images/Menu/img.png"
+      },
+      {
+        "id": 6,
+        "name": "Banh trang",
+        "pricing": 5000,
+        "rating": 5.0,
+        "image": "/src/assets/images/Menu/img.png"
+      },
+      {
+        "id": 7,
+        "name": "Banh trang",
+        "pricing": 5000,
+        "rating": 5.0,
+        "image": "/src/assets/images/Menu/img.png"
       }
     ]
   }

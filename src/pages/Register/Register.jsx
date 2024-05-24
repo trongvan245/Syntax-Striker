@@ -101,7 +101,7 @@ const Register = () => {
         alert('Registration successful!')
         window.location.href = '/'
       } catch (error) {
-        // alert(error.responseJSON.message)
+        console.log(error.responseJSON)
         if (
           error.responseJSON &&
           error.responseJSON.errors &&

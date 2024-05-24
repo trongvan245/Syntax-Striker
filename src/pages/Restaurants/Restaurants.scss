@@ -69,7 +69,6 @@
   box-shadow: 0 0px 10px #000000;
   transition: transform 0.5s ease-in-out;
   border-radius: 25px;
-  cursor: pointer;
   flex-wrap: wrap;
   justify-content: space-between;
 }
@@ -88,6 +87,7 @@
   font-weight: bold;
   color: #cc3333;
   text-decoration: none; /* remove underline */
+  cursor: pointer;
 }
 
 .restaurant-info a:hover {
@@ -239,7 +239,7 @@
     color: #cc3333;
     text-decoration: none; /* remove underline */
   }
-  
+
   .restaurant-info a:hover {
     color: #990000; /* change text color on hover */
     text-decoration: underline; /* add underline on hover */

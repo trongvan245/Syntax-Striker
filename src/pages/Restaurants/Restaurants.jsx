@@ -208,16 +208,16 @@ function Restaurants() {
       <div id='carouselExampleSlidesOnly' className='carousel slide' data-bs-ride='carousel'>
         <div className='carousel-inner' style={{ maxHeight: window.innerWidth < 992 ? '200px' : '400px' }}>
           <div className='carousel-item active'>
-            <img src='src\assets\Images\Restaurants\slide1.png' className='d-block w-100' alt='Slide 1' />
+            <img src='\src\assets\Images\Restaurants\slide1.png' className='d-block w-100' alt='Slide 1' />
           </div>
           <div className='carousel-item'>
-            <img src='src\assets\Images\Restaurants\slide2.png' className='d-block w-100' alt='Slide 2' />
+            <img src='\src\assets\Images\Restaurants\slide2.png' className='d-block w-100' alt='Slide 2' />
           </div>
           <div className='carousel-item'>
-            <img src='src\assets\Images\Restaurants\slide3.png' className='d-block w-100' alt='Slide 3' />
+            <img src='\src\assets\Images\Restaurants\slide3.png' className='d-block w-100' alt='Slide 3' />
           </div>
           <div className='carousel-item'>
-            <img src='src\assets\Images\Restaurants\slide4.png' className='d-block w-100' alt='Slide 4' />
+            <img src='\src\assets\Images\Restaurants\slide4.png' className='d-block w-100' alt='Slide 4' />
           </div>
         </div>
       </div>

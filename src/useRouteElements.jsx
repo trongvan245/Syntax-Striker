@@ -7,7 +7,7 @@ import MainLayout from './layout/MainLayout'
 import Restaurants from './pages/Restaurants'
 import Test from './../src/Test.jsx'
 import CreateMenu from './pages/CreateMenu'
-import RestaurantMenuPage from './pages/ShowMenuPage'
+import ShowMenuPage from './pages/ShowMenuPage'
 import { useParams } from 'react-router-dom'
 
 export default function useRouteElements() {
@@ -60,7 +60,7 @@ export default function useRouteElements() {
       path: '/menu/:id',
       element: (
         <MainLayout>
-          <RestaurantMenuPage params={useParams()} />
+          <ShowMenuPage params={useParams()} />
         </MainLayout>
       )
     }
