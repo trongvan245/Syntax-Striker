@@ -3,40 +3,43 @@ import { useState } from "react";
 import styles from './CreateMenu.module.scss'
 
 export default function CreateMenu() {
+
     const [menuFoodItems, setmenuFoodItems] = useState([]);
     const [menuDrinkItems, setmenuDrinkItems] = useState([]);
+
     const [newItem, setNewItem] = useState({
     // image: '',
         type: 'food', // Default type
         name: '',
-        price: '',
+        price: '100',
         description: '',
         rating: 0,
     });
   
 
-  const handleAddItem = () => {
+  const handleAddItem = (type) => {
     if (newItem.name.trim() !== '') { // Check if name is not empty
-      if(newItem.type === 'food') {
+      console.log(type);
+      if(type === 'food') {
         setmenuFoodItems([...menuFoodItems, newItem]);
       }
-      else {
+      else if (type) {
         setmenuDrinkItems([...menuDrinkItems, newItem]);
       }
       setNewItem({
         //image: '',
         type: 'food', // Default type
         name: '',
-        price: '',
+        price: '100',
         description: '',
         // rating: 0,
       });
     }
   };
 
-  const handleRemoveItem = (newItem,index) => {
-    console.log(newItem);
-    if(newItem.type === 'food') { 
+  const handleRemoveItem = (type,index) => {
+    //console.log(newItem);
+    if(type === 'food') { 
       const newmenuFoodItems = [...menuFoodItems];
       newmenuFoodItems.splice(index, 1);
       setmenuFoodItems(newmenuFoodItems);
@@ -59,45 +62,8 @@ export default function CreateMenu() {
   console.log(menuFoodItems);
   return (
     <div className={styles.createMenu}>
-      <h1 className={styles.headingMenu} style={{textAlign: "center"}}>Create Your Menu</h1>
-      <form onSubmit={(e) => e.preventDefault()} className={styles.menuForm}>
-        {/* <label htmlFor="image">Image URL:</label>
-        <input
-          type="text"
-          name="image"
-          value={newItem.image}
-          onChange={handleChange}
-        /> */}
-        <label htmlFor="type">Type:</label>
-        <select name="type" id="type" value={newItem.type} onChange={handleChange}>
-          <option value="food">Food</option>
-          <option value="drink">Drink</option>
-        </select>
-
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={newItem.name}
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="price">Price:</label>
-        <input
-          type="number"
-          name="price"
-          value={newItem.price}
-          onChange={handleChange}
-          required
-        />
-        <label htmlFor="description">Description:</label>
-        <textarea
-          name="description"
-          value={newItem.description}
-          onChange={handleChange}
-        />
-        <button onClick={handleAddItem} className={styles.addButton}>Add Item</button>
-      </form>
+      {/* <h1 className={styles.headingMenu} style={{textAlign: "center"}}>Create Your Menu</h1> */}
+      
 
 
       <div className={styles.menuContainer}> 
@@ -107,35 +73,152 @@ export default function CreateMenu() {
         <div className= {styles.divider}>
           <h2 className={styles.headingMenuType}>Food</h2>
           <div className={styles.menuItems}>
-              {menuFoodItems.map((item, index) => (
-              <div key={item.id} className={styles.menuItem}>
+              {menuFoodItems.map((item, index) => ( 
+              <div key={item.index} className={styles.menuItem}>
                   <img src={"/src/assets/images/Menu/img.png"} alt={item.name} className={styles.menuItemImage} />
                   <div className={styles.menuItemInfo}>
                   <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
                   <p>{item.description}</p>
                   <p className={styles.menuItemPrice}>{item.price} VND</p>
                   </div>
-                  <button onClick={() => handleRemoveItem(item,index)} className={styles.removeButton}>Remove</button>
+                  <button onClick={() => handleRemoveItem("food",index)} className={styles.removeButton}>Remove</button>
               </div>
             ))}
+              <div className={styles.menuItem}>
+              
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" className={styles.addButton} >
+                Add item
+              </button>
+
+              <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content" style={{width: "600px"}}>
+
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel">Item Info</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body"  
+                    style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}> 
+                  <div>
+                    <label htmlFor="name">Name:</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={newItem.name}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                      
+                      <div>
+                        <label htmlFor="price">Price:</label>
+                        <input
+                          type="number"
+                          name="price"
+                          value={newItem.price}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="description">Description:</label>
+                        <textarea
+                          name="description"
+                          value={newItem.description}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" onClick={() => handleAddItem("food")}>Add item</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
           </div>
+          
         </div>
 
         <div className= {styles.divider}>
           <h2 className={styles.headingMenuType}>Drink</h2>
-            <div className={styles.menuItems}>  
-                {menuDrinkItems.map((item, index) => (
-                <div key={item.id} className={styles.menuItem}>
+            <div className={styles.menuItems}>
+                {menuDrinkItems.map((item, index) => ( 
+                <div key={item.index} className={styles.menuItem}>
                     <img src={"/src/assets/images/Menu/img.png"} alt={item.name} className={styles.menuItemImage} />
                     <div className={styles.menuItemInfo}>
                     <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
                     <p>{item.description}</p>
                     <p className={styles.menuItemPrice}>{item.price} VND</p>
                     </div>
-                    <button onClick={() => handleRemoveItem(item,index)} className={styles.removeButton}>Remove</button>
+                    <button onClick={() => handleRemoveItem("drink",index)} className={styles.removeButton}>Remove</button>
                 </div>
               ))}
+                <div className={styles.menuItem}>
+                
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop2" className={styles.addButton} >
+                  Add item
+                </button>
+
+                <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content" style={{width: "600px"}}>
+
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Item Info</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body"  
+                      style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}> 
+                    <div>
+                      <label htmlFor="name">Name:</label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={newItem.name}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                        
+                        <div>
+                          <label htmlFor="price">Price:</label>
+                          <input
+                            type="number"
+                            name="price"
+                            value={newItem.price}
+                            onChange={handleChange}
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="description">Description:</label>
+                          <textarea
+                            name="description"
+                            value={newItem.description}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onClick={() => handleAddItem("drink")}>Add item</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
             </div>
+            
+
         </div>
         
       </div>

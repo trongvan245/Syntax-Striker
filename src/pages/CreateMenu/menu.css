@@ -1,0 +1,44 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
+  .container {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .dropzone {
+    border: 2px dashed #4caf50;
+    border-radius: 5px;
+    padding: 20px;
+    cursor: pointer;
+  }
+  
+  .defaultBanners {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .defaultBanner {
+    width: 150px;
+    height: auto;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+  }
+  
+  .defaultBanner:hover {
+    border-color: #4caf50;
+  }
+  
+  .banner-preview {
+    margin-top: 20px;
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #4caf50;
+    border-radius: 5px;
+  }
+  
