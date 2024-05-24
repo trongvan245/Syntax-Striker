@@ -184,14 +184,14 @@
   .search-container select option {
     background-color: #fcdddd;
     color: #000000;
-    font-size: 10;
+    font-size: 14px;
     font-weight: normal;
   }
 
   .search-container select option:checked {
     background-color: #cc3333;
     color: #ffff;
-    font-size: 12;
+    font-size: 14px;
     font-weight: bold;
   }
 }
@@ -205,5 +205,50 @@
 @media (max-width: 420px) {
   .SearchRestaurantText {
     font-size: 16px;
+  }
+
+  .search-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns */
+    gap: 6px; /* Gap between items */
+    align-items: center;
+    margin: 8px 0;
+    background-color: #cc3333;
+    border-radius: 20px;
+    padding: 8px;
+  }
+
+  .search-container input {
+    grid-column: 1 / span 2; /* Take the first column */
+    width: 95%;
+    padding: 6px;
+    border-radius: 20px;
+    font-size: 10px;
+    border: 1px solid #000000;
+    margin-bottom: 2px;
+  }
+
+  .search-container select {
+    padding: 5px;
+    margin: 0px 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 20px;
+    border-color: #000000;
+    border: 1px solid #000000;
+    color: #ffffff;
+    background-color: #ff3333;
+    font-size: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    width: 90%;
+  }
+
+  .search-container select option {
+    background-color: #fcdddd;
+    color: #000000;
+    font-size: 8px;
+    font-weight: normal;
   }
 }

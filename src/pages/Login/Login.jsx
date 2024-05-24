@@ -1,46 +1,33 @@
 import { useState } from 'react'
 import './Login.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle, faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons';
-
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGoogle, faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons'
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  const handleEmailChange = (e) => setEmail(e.target.value);
-  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleEmailChange = (e) => setEmail(e.target.value)
+  const handlePasswordChange = (e) => setPassword(e.target.value)
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     // Handle login logic here
-    console.log('Logging in with:', email, password);
-  };
+    console.log('Logging in with:', email, password)
+  }
 
   return (
-    <div className="login-page">
-      <div className="login-form-container">
-        <div className="logo">
+    <div className='login-page'>
+      <div className='login-form-container'>
+        <div className='logo'>
           {/* Add your logo image here */}
           {/* <img src="path-to-logo.png" alt="Logo" /> */}
         </div>
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form className='login-form' onSubmit={handleSubmit}>
           <h2>Log In</h2>
-          <input 
-            type="email" 
-            placeholder="Email" 
-            value={email}
-            onChange={handleEmailChange}
-          />
-          <input 
-            type="password" 
-            placeholder="Password"
-            value={password}
-            onChange={handlePasswordChange}
-            required/>
-          <div className="login-options">
+          <input type='email' placeholder='Email' value={email} onChange={handleEmailChange} />
+          <input type='password' placeholder='Password' value={password} onChange={handlePasswordChange} required />
+          <div className='login-options'>
             <label>
               <input type='checkbox' />
               Remember me
@@ -49,30 +36,27 @@ export default function Login() {
               Forgot password
             </a>
           </div>
-          <button type="submit" className="login-button">Log In</button>
-          <div className="divider">or</div>
+          <button type='submit' className='login-button'>
+            Log In
+          </button>
+          <div className='divider'>or</div>
 
-          <div className="social-buttons">
-            <button className="social-button google" disabled = {true}>
-              <FontAwesomeIcon icon={faGoogle} size="2x" />
+          <div className='social-buttons'>
+            <button className='social-button google' disabled={true}>
+              <FontAwesomeIcon icon={faGoogle} size='2x' />
             </button>
-            <button className="social-button twitter">
-              <FontAwesomeIcon icon={faTwitter} size="2x"  disabled = {true}/>
+            <button className='social-button twitter'>
+              <FontAwesomeIcon icon={faTwitter} size='2x' disabled={true} />
             </button>
-            <button className="social-button facebook">
-              <FontAwesomeIcon icon={faFacebook} size="2x"  disabled = {true}/>
-
+            <button className='social-button facebook'>
+              <FontAwesomeIcon icon={faFacebook} size='2x' disabled={true} />
             </button>
           </div>
 
           <div className='divider-dash'></div>
 
-          <button className='register-button'>
-            Create new account
-          </button>
-
+          <button className='register-button'>Create new account</button>
         </form>
-        
       </div>
       <div className='login-image-container'>
         {/* Add your background image or any content here */}

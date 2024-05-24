@@ -9,6 +9,31 @@ import './Restaurants.scss'
 import Rating from './Rating'
 import Pagination from './Pagination'
 
+const locationInHCMC = [
+  'TP. Thủ Đức',
+  'Q. 1',
+  'Q. 3',
+  'Q. 4',
+  'Q. 5',
+  'Q. 6',
+  'Q. 7',
+  'Q. 8',
+  'Q. 10',
+  'Q. 11',
+  'Q. 12',
+  'Q. Tân Bình',
+  'Q. Bình Tân',
+  'Q. Bình Thạnh',
+  'Q. Tân Phú',
+  'Q. Gò Vấp',
+  'Q. Phú Nh.',
+  'H. Bình Chánh',
+  'H. Hóc Môn',
+  'H. Cần Giờ',
+  'H. Củ Chi',
+  'H. Nhà bè'
+]
+
 const restaurants = [
   {
     id: 0,
@@ -16,7 +41,7 @@ const restaurants = [
     price: '150-600',
     rating: 4.9,
     tel: '0909123456',
-    location: 'Quận 3'
+    location: 'Q. 3'
   },
   {
     id: 1,
@@ -24,7 +49,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.2,
     tel: '0909123456',
-    location: 'Quận 3'
+    location: 'Q. 3'
   },
   {
     id: 2,
@@ -32,7 +57,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.3,
     tel: '0909123456',
-    location: 'Quận 5'
+    location: 'Q. 5'
   },
   {
     id: 3,
@@ -40,7 +65,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.0,
     tel: '0909123456',
-    location: 'Quận 4'
+    location: 'Q. 4'
   },
   {
     id: 4,
@@ -48,7 +73,7 @@ const restaurants = [
     price: '190-600',
     rating: 3.0,
     tel: '0909123456',
-    location: 'Quận 5'
+    location: 'Q. 5'
   },
   {
     id: 5,
@@ -56,7 +81,7 @@ const restaurants = [
     price: '190-600',
     rating: 2.0,
     tel: '0909123456',
-    location: 'Quận 5'
+    location: 'Q. 5'
   },
   {
     id: 12,
@@ -64,7 +89,7 @@ const restaurants = [
     price: '190-600',
     rating: 3.0,
     tel: '0909123456',
-    location: 'Quận 5'
+    location: 'Q. 5'
   },
   {
     id: 6,
@@ -72,7 +97,7 @@ const restaurants = [
     price: '190-600',
     rating: 3.0,
     tel: '0909123456',
-    location: 'Quận 5'
+    location: 'Q. 5'
   },
   {
     id: 7,
@@ -80,7 +105,7 @@ const restaurants = [
     price: '190-600',
     rating: 2.0,
     tel: '0909123456',
-    location: 'Quận 5'
+    location: 'Q. 5'
   },
   {
     id: 8,
@@ -88,7 +113,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.2,
     tel: '0909123456',
-    location: 'Quận 5'
+    location: 'Q. 5'
   },
   {
     id: 9,
@@ -96,7 +121,7 @@ const restaurants = [
     price: '190-600',
     rating: 1.3,
     tel: '0909123456',
-    location: 'Quận 5'
+    location: 'Q. 5'
   },
   {
     id: 10,
@@ -104,7 +129,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.9,
     tel: '0909123456',
-    location: 'Quận 5'
+    location: 'Q. 5'
   },
   {
     id: 11,
@@ -112,7 +137,7 @@ const restaurants = [
     price: '190-600',
     rating: 3.6,
     tel: '0909123456',
-    location: 'Quận 5'
+    location: 'Q. 5'
   }
   // ... other restaurants
 ]
@@ -207,11 +232,11 @@ function Restaurants() {
           </select>
           <select value={locationOption} onChange={handleLocationChange}>
             <option value='All'>Tất cả địa điểm</option>
-            <option value='Quận 1'>Quận 1</option>
-            <option value='Quận 2'>Quận 2</option>
-            <option value='Quận 3'>Quận 3</option>
-            <option value='Quận 4'>Quận 4</option>
-            <option value='Quận 5'>Quận 5</option>
+            {locationInHCMC.map((location, index) => (
+              <option key={index} value={location}>
+                {location}
+              </option>
+            ))}
           </select>
         </div>
         {locationRestaurants.length > 0 ? (
