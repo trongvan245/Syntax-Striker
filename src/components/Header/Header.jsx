@@ -114,7 +114,8 @@ function Menu() {
     { name: 'Home', link: '/' },
     { name: 'Quick Start', link: '/' },
     { name: 'References', link: '/' },
-    { name: 'Contact', link: '/' }
+    { name: 'Contact', link: '/' },
+    { name: 'Create Menu', link: '/createMenu'}
   ]
   return (
     <div

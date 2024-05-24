@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import MainLayout from './layout/MainLayout'
 import Restaurants from './pages/Restaurants'
 import Test from './../src/Test.jsx'
+import CreateMenu from './pages/CreateMenu'
 
 export default function useRouteElements() {
   const routeElements = useRoutes([
@@ -14,6 +15,14 @@ export default function useRouteElements() {
       element: (
         <MainLayout>
           <LandingPage />
+        </MainLayout>
+      )
+    },
+    {
+      path: '/createMenu',
+      element: (
+        <MainLayout>
+          <CreateMenu />
         </MainLayout>
       )
     },
