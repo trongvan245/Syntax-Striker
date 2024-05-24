@@ -4,9 +4,35 @@ import { PiCurrencyDollarSimpleFill } from 'react-icons/pi'
 import { WiStars } from 'react-icons/wi'
 
 import { useState } from 'react'
+
 import './Restaurants.scss'
 import Rating from './Rating'
 import Pagination from './Pagination'
+
+const locationsInHCMC = [
+  'TP. Thủ Đức',
+  'Q. 1',
+  'Q. 3',
+  'Q. 4',
+  'Q. 5',
+  'Q. 6',
+  'Q. 7',
+  'Q. 8',
+  'Q. 10',
+  'Q. 11',
+  'Q. 12',
+  'Q. Tân Bình',
+  'Q. Bình Tân',
+  'Q. Bình Thạnh',
+  'Q. Tân Phú',
+  'Q. Gò Vấp',
+  'Q. Phú Nh.',
+  'H. Bình Chánh',
+  'H. Hóc Môn',
+  'H. Cần Giờ',
+  'H. Củ Chi',
+  'H. Nhà bè'
+]
 
 const restaurants = [
   {
@@ -15,7 +41,7 @@ const restaurants = [
     price: '150-600',
     rating: 4.9,
     tel: '0909123456',
-    location: 'District 3'
+    location: 'Q. 3'
   },
   {
     id: 1,
@@ -23,7 +49,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.2,
     tel: '0909123456',
-    location: 'District 3'
+    location: 'Q. 3'
   },
   {
     id: 2,
@@ -31,7 +57,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.3,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Q. 5'
   },
   {
     id: 3,
@@ -39,7 +65,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.0,
     tel: '0909123456',
-    location: 'District 4'
+    location: 'Q. 4'
   },
   {
     id: 4,
@@ -47,7 +73,7 @@ const restaurants = [
     price: '190-600',
     rating: 3.0,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Q. 5'
   },
   {
     id: 5,
@@ -55,14 +81,15 @@ const restaurants = [
     price: '190-600',
     rating: 2.0,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Q. 5'
   },
   {
+    id: 12,
     name: 'Domino Restaurant',
     price: '190-600',
     rating: 3.0,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Q. 5'
   },
   {
     id: 6,
@@ -70,7 +97,7 @@ const restaurants = [
     price: '190-600',
     rating: 3.0,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Q. 5'
   },
   {
     id: 7,
@@ -78,7 +105,7 @@ const restaurants = [
     price: '190-600',
     rating: 2.0,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Q. 5'
   },
   {
     id: 8,
@@ -86,7 +113,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.2,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Q. 5'
   },
   {
     id: 9,
@@ -94,7 +121,7 @@ const restaurants = [
     price: '190-600',
     rating: 1.3,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Q. 5'
   },
   {
     id: 10,
@@ -102,7 +129,7 @@ const restaurants = [
     price: '190-600',
     rating: 4.9,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Q. 5'
   },
   {
     id: 11,
@@ -110,7 +137,7 @@ const restaurants = [
     price: '190-600',
     rating: 3.6,
     tel: '0909123456',
-    location: 'District 5'
+    location: 'Q. 5'
   }
   // ... other restaurants
 ]
@@ -166,13 +193,16 @@ function Restaurants() {
       <div id='carouselExampleSlidesOnly' className='carousel slide' data-bs-ride='carousel'>
         <div className='carousel-inner' style={{ maxHeight: window.innerWidth < 992 ? '200px' : '400px' }}>
           <div className='carousel-item active'>
-            <img src='src\assets\Images\LandingPage\background_1.jpg' className='d-block w-100' alt='...' />
+            <img src='src\assets\Images\Restaurants\slide1.png' className='d-block w-100' alt='Slide 1' />
           </div>
           <div className='carousel-item'>
-            <img src='src\assets\Images\LandingPage\background_1.jpg' className='d-block w-100' alt='...' />
+            <img src='src\assets\Images\Restaurants\slide2.png' className='d-block w-100' alt='Slide 2' />
           </div>
           <div className='carousel-item'>
-            <img src='src\assets\Images\LandingPage\background_1.jpg' className='d-block w-100' alt='...' />
+            <img src='src\assets\Images\Restaurants\slide3.png' className='d-block w-100' alt='Slide 3' />
+          </div>
+          <div className='carousel-item'>
+            <img src='src\assets\Images\Restaurants\slide4.png' className='d-block w-100' alt='Slide 4' />
           </div>
         </div>
       </div>
@@ -188,25 +218,25 @@ function Restaurants() {
             color: '#cc3333'
           }}
         >
-          <p style={{ fontSize: window.innerWidth < 550 ? '16px' : '32px' }}>
-            <WiStars style={{ fontSize: '30px' }} /> These're the restaurants you love{' '}
+          <p className='SearchRestaurantText'>
+            <WiStars style={{ fontSize: '30px' }} /> Tìm kiếm nhà hàng bạn yêu thích{' '}
             <WiStars style={{ fontSize: '30px' }} />
           </p>
         </div>
         <div className='search-container'>
-          <input type='text' placeholder='Search by name' value={searchTerm} onChange={handleSearchChange} />
+          <input type='text' placeholder='Tìm kiếm tên nhà hàng' value={searchTerm} onChange={handleSearchChange} />
           <select value={sortOption} onChange={handleSortChange}>
-            <option value='Best Rating'>Best Rating</option>
-            <option value='Most Expensive'>Most Expensive</option>
-            <option value='Cheapest'>Cheapest</option>
+            <option value='Best Rating'>Đánh giá cao</option>
+            <option value='Most Expensive'>Mắc nhất</option>
+            <option value='Cheapest'>Rẻ nhất</option>
           </select>
           <select value={locationOption} onChange={handleLocationChange}>
-            <option value='All'>All Locations</option>
-            <option value='District 1'>District 1</option>
-            <option value='District 2'>District 2</option>
-            <option value='District 3'>District 3</option>
-            <option value='District 4'>District 4</option>
-            <option value='District 5'>District 5</option>
+            <option value='All'>Tất cả địa điểm</option>
+            {locationsInHCMC.map((location, index) => (
+              <option key={index} value={location}>
+                {location}
+              </option>
+            ))}
           </select>
         </div>
         {locationRestaurants.length > 0 ? (
@@ -219,22 +249,22 @@ function Restaurants() {
                 </div>
                 <p style={{ fontSize: window.innerWidth < 992 ? '16px' : '20px', fontWeight: 'bold' }}>
                   {' '}
-                  Price: {restaurant.price} <PiCurrencyDollarSimpleFill style={{ scale: '120%', color: '#008839' }} />
+                  Giá: {restaurant.price} <PiCurrencyDollarSimpleFill style={{ scale: '120%', color: '#008839' }} />
                 </p>
                 {window.innerWidth < 992 ? (
                   <div style={{ fontSize: '14px', fontWeight: 'bold' }}>
                     <p>
-                      Tel: {restaurant.tel} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
+                      SĐT: {restaurant.tel} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
                     </p>
                     <p>
-                      Location: {restaurant.location} <FaLocationDot style={{ scale: '80%', color: '#cc3333' }} />
+                      Vị trí: {restaurant.location} <FaLocationDot style={{ scale: '80%', color: '#cc3333' }} />
                     </p>
                   </div>
                 ) : (
                   <p style={{ fontWeight: 'bold' }}>
-                    Tel: {restaurant.tel} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
+                    SĐT: {restaurant.tel} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
                     {' --- '}
-                    Location: {restaurant.location} <FaLocationDot style={{ scale: '80%', color: '#cc3333' }} />
+                    Vị trí: {restaurant.location} <FaLocationDot style={{ scale: '80%', color: '#cc3333' }} />
                   </p>
                 )}
               </div>

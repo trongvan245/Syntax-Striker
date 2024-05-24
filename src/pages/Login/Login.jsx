@@ -87,6 +87,7 @@ export default function Login() {
               </button>
             </div>
 
+
             <div className='divider-dash'></div>
 
             <button className='register-button'>Create new account</button>
