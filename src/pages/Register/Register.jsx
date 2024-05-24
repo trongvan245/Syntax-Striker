@@ -1,8 +1,6 @@
 import { useState } from 'react'
-// import axios from 'axios'
-// import Map from './GGMap'
 import './Register.scss'
-// import { auto } from '@popperjs/core'
+// import Map from './GGMap'
 
 const hostUrl = 'https://syntax-striker.onrender.com'
 
@@ -26,7 +24,7 @@ const Register = () => {
   // const [showMap, setShowMap] = useState(false)
   // const [selectedLocation, setSelectedLocation] = useState(null)
 
-  // Change
+  // Change information in Registration
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -36,7 +34,7 @@ const Register = () => {
 
   const [showContact, setShowContact] = useState(false)
 
-  // Submit
+  // Submit Registration
   const handleSubmit = async (e) => {
     e.preventDefault()
     const { password, confirm_password, phone_number } = form
@@ -82,8 +80,6 @@ const Register = () => {
       ...form,
       [e.target.name]: e.target.value
     })
-    // console.log('=========================')
-    // console.log(JSON.stringify(form))
 
     if (!showContact) {
       setShowContact(true)
@@ -116,7 +112,6 @@ const Register = () => {
         } else {
           alert((error.responseJSON && error.responseJSON.message) || 'An error occurred. Please try again.')
         }
-        // console.log(error.responseJSON.errors.email.msg)
       }
     }
   }
