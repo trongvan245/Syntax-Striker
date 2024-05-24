@@ -4,7 +4,7 @@ export default class AccountManagement extends BaseManagement {
   constructor() {
     super()
   }
-  static login(email, password) {
+  static login(email, password, myCallback) {
     const url = this.getHostUrl() + '/users/login'
     const sendData = {
       email: email,
@@ -13,7 +13,7 @@ export default class AccountManagement extends BaseManagement {
     const success = (response) => {
       this.#saveActiveToken(response.result.access_token)
       this.#saveRefreshToken(response.result.refresh_token)
-      console.log(response)
+      myCallback(response)
     }
     $.ajax({
       url: url,

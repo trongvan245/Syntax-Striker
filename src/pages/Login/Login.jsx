@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './Login.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle, faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons'
+import AccountManagement from '../../model/AccountManagement.jsx'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -13,7 +14,26 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
     // Handle login logic here
-    console.log('Logging in with:', email, password)
+    // console.log('Logging in with:', email, password)
+    const loginResult = (response) => {
+      window.alert(response.message)
+      $('body').html(`
+        <div class='container-fluid d-flex justify-content-center align-items-center flex-column' style='height: 100vh;'>
+          <h1>${response.message}</h1>
+          <button class='btn btn-primary' onclick='window.location.href = "/";'>Go back to home</button>
+        </div>
+      `)
+    }
+    $('#login-button').html(
+      `<div class="spinner-border text-danger" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>`
+    )
+    $('#login-button').prop('disabled', true)
+    $('#login-button').css('cursor', 'not-allowed')
+    $('#login-button').css('background-color', 'gray')
+    $('#login-button').css('padding', '5px 10px')
+    AccountManagement.login(email, password, loginResult)
   }
 
   return (
@@ -41,7 +61,7 @@ export default function Login() {
               Forgot password
             </a>
           </div>
-          <button type='submit' className='login-button'>
+          <button type='submit' className='login-button' id='login-button'>
             Log In
           </button>
           <div className='divider'>or</div>
