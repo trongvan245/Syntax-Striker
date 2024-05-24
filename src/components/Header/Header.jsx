@@ -63,7 +63,7 @@ function LogInSection(props) {
       }}
       id='login'
     >
-      <div>
+      <div className='dropdown'>
         <img
           src={avatarURL}
           alt='Avatar'
@@ -81,6 +81,10 @@ function LogInSection(props) {
         >
           {name}
         </span>
+        <div className='dropdown-content'>
+          <a href='/profile'>Profile</a>
+          <a href='/logout'>Log out</a>
+        </div>
       </div>
     </div>
   )
