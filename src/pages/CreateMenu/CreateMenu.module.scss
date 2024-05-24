@@ -1,27 +1,23 @@
 @import './../../App.scss';
 .createMenu {
-    font-family: sans-serif;
-    margin: 2rem;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-family: Arial, sans-serif;
-  }
+  font-family: sans-serif;
+  margin: 2rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+}
 
-  .menuForm {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-  }
-  
-  .menuForm label {
-    width: 100px;
-    margin-bottom: 5px;
-  }
-  
-   input[type="text"],
-   input[type="number"],
-   textarea,
+.menuForm {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.stepContainer {
+  input[type='text'],
+  input[type='number'],
+  textarea,
   select {
     width: calc(100% - 110px);
     padding: 5px;
@@ -29,157 +25,262 @@
     border-radius: 3px;
     margin-bottom: 10px;
   }
-  
+}
 
-  .addButton {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    margin: 25px auto;
-    cursor: pointer;
-    border-radius: 5px;
-    display: block;
-  }
-  
-  .addButton:hover {
-    background-color: #3e8e41; /* Darker green on hover */
-  }
+.addButton {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 25px auto;
+  cursor: pointer;
+  border-radius: 5px;
+  display: block;
+}
 
-  .addButton {
-    background-color: #23a117; /* A nice accent color */
-    color: white; /* Text color */
-    padding: 10px 30px; /* Padding inside the button */
-    font-size: 1.3em; /* Font size of the text */
-    font-weight: bold; /* Bold font weight */
-  
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition:
-      background-color 0.3s,
-      transform 0.3s; /* Smooth transition effects */
-  }
-  .addButton:hover {
-    background-color: #1e8d14; /* Darker shade on hover */
-    transform: scale(1.05); /* Slightly larger on hover */
-  }
-  
-  .addButton:active {
-    background-color: rgb(10, 87, 3); /* Even darker shade when active */
-    transform: scale(0.95); /* Slightly smaller when clicked */
-  }
-  
-  .addButton:focus {
-    outline: none; /* Remove the default focus outline */
-    box-shadow: 0 0 0 3px rgba(255, 138, 128, 0.4); /* Custom focus outline */
-  }
-  
+.addButton:hover {
+  background-color: #3e8e41; /* Darker green on hover */
+}
+
+.addButton {
+  background-color: #23a117; /* A nice accent color */
+  color: white; /* Text color */
+  padding: 10px 30px; /* Padding inside the button */
+  font-size: 1.3em; /* Font size of the text */
+  font-weight: bold; /* Bold font weight */
+
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition:
+    background-color 0.3s,
+    transform 0.3s; /* Smooth transition effects */
+}
+.addButton:hover {
+  background-color: #1e8d14; /* Darker shade on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
+}
+
+.addButton:active {
+  background-color: rgb(10, 87, 3); /* Even darker shade when active */
+  transform: scale(0.95); /* Slightly smaller when clicked */
+}
+
+.addButton:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 0 3px rgba(255, 138, 128, 0.4); /* Custom focus outline */
+}
+
+.stepContainer {
+  font-family: sans-serif;
+  margin: 2rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+
+  font-size: 1.5em;
+
+  max-width: 80%;
+  margin: 0 auto;
+  text-align: left;
+  height: 60%;
+}
 
 
 
+.addButton {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 25px auto;
+  cursor: pointer;
+  border-radius: 5px;
+  display: block;
+}
+
+.button:hover {
+  background-color: #3e8e41; /* Darker green on hover */
+}
+
+.button {
+  background-color: #23a117; /* A nice accent color */
+  color: white; /* Text color */
+  padding: 10px 30px; /* Padding inside the button */
+  font-size: 20px; /* Font size of the text */
+  font-weight: bold; /* Bold font weight */
+
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition:
+    background-color 0.3s,
+    transform 0.3s; /* Smooth transition effects */
+
+  &:disabled {
+    background-color: #ccc;
+  }
+}
+.button:hover {
+  background-color: #1e8d14; /* Darker shade on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
+  &:disabled {
+    background-color: #ccc;
+  }
+}
+
+.button:active {
+  background-color: rgb(10, 87, 3); /* Even darker shade when active */
+  transform: scale(0.95); /* Slightly smaller when clicked */
+  &:disabled {
+    background-color: #ccc;
+  }
+}
+
+.button:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 0 3px rgba(255, 138, 128, 0.4); /* Custom focus outline */
+  &:disabled {
+    background-color: #ccc;
+  }
+}
+
+
+
+.formNavigation {
+  font-family: sans-serif;
+  margin: 2rem;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  display: flex;
+  justify-content: space-between;
+}
 
 /* Menu.css */
-.heading-menu {
-    font-weight: bold;
-    margin: 30px 0;
-    text-align: center;
-  }
-  .menuContainer {
-    padding: 20px;
-    max-width: 80%;
-    margin: 0 auto;
-    text-align: center;
-    font-family: Arial, sans-serif;
-  }
+.heading {
+  font-weight: bold;
+  margin: 30px 0;
+  text-align: center;
+}
+.menuContainer {
+  padding: 20px;
+  max-width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
 //   .type{
 //     font-size: 1.5em;
 //     font-weight: bold;
 //     margin: 20px 0;
 //   }
-    .menuItems {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 30px;
-    }
-    .headingMenuType{
-        margin-top: 30px;
-    }
-    .divider {
-        padding: 30px;
-        border-bottom: 1px solid #242020;
-    }
-  .menuItem {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 300px;
-    padding: 15px;
-    width: 350px;
-    height: 500px;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
-  }
-  .menuItem:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  .menuItemImage {
-    height: 300px;
-    object-fit: cover;
-  }
-  
-  .menuItemInfo {
-    padding: 15px;
-    margin: 0;
-  }
-  
-  .menuItemInfo h3 {
-    margin: 10px 0;
-    font-size: 1.5em;
-  }
-  
-  .menuItemInfo p {
-    margin: 5px 0;
-    font-size: 1.5em;
-  }
-  
-  .menuItemPrice {
-    font-weight: bold;
-    color: #02761d;
-  }
-  
-  .removeButton {
-    background-color: #df3333; /* A nice accent color */
-    color: white; /* Text color */
-    padding: 10px 20px; /* Padding inside the button */
-    font-size: 1.3em; /* Font size of the text */
-    font-weight: bold; /* Bold font weight */
-    width: 50%;
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition:
-      background-color 0.3s,
-      transform 0.3s; /* Smooth transition effects */
-  }
-  .removeButton:hover {
-    background-color: #de2b2b; /* Darker shade on hover */
-    transform: scale(1.05); /* Slightly larger on hover */
-  }
-  
-  .removeButton:active {
-    background-color: #d81b1b; /* Even darker shade when active */
-    transform: scale(0.95); /* Slightly smaller when clicked */
-  }
-  
-  .removeButton:focus {
-    outline: none; /* Remove the default focus outline */
-    box-shadow: 0 0 0 3px rgba(255, 138, 128, 0.4); /* Custom focus outline */
-  }
-  
+.menuItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.headingMenuType {
+  margin-top: 30px;
+}
+.divider {
+  padding: 30px;
+  border-bottom: 1px solid #242020;
+}
+.menuItem {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 300px;
+  padding: 15px;
+  width: 350px;
+  height: 500px;
+}
+
+.menuItem:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.menuItemImage {
+  height: 300px;
+  object-fit: cover;
+}
+
+.menuItemInfo {
+  padding: 15px;
+  margin: 0;
+}
+
+.menuItemInfo h3 {
+  margin: 10px 0;
+  font-size: 1.5em;
+}
+
+.menuItemInfo p {
+  margin: 5px 0;
+  font-size: 1.5em;
+}
+
+.menuItemPrice {
+  font-weight: bold;
+  color: #02761d;
+}
+
+.removeButton {
+  background-color: #df3333; /* A nice accent color */
+  color: white; /* Text color */
+  padding: 10px 20px; /* Padding inside the button */
+  font-size: 1.3em; /* Font size of the text */
+  font-weight: bold; /* Bold font weight */
+  width: 50%;
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition:
+    background-color 0.3s,
+    transform 0.3s; /* Smooth transition effects */
+}
+.removeButton:hover {
+  background-color: #de2b2b; /* Darker shade on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
+}
+
+.removeButton:active {
+  background-color: #d81b1b; /* Even darker shade when active */
+  transform: scale(0.95); /* Slightly smaller when clicked */
+}
+
+.removeButton:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 0 3px rgba(255, 138, 128, 0.4); /* Custom focus outline */
+}
+
+
+/* Review.module.scss */
+.heading {
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.restaurantInfo {
+  border: 1px solid black;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.menuSection {
+  margin-bottom: 1em;
+}
+
+.menuItem {
+  margin-left: 1em;
+}
