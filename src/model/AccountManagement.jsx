@@ -49,9 +49,10 @@ export default class AccountManagement extends BaseManagement {
    * Login to the system
    * @param {string} email - Email
    * @param {string} password - Password
-   * @param {function(response)} myCallback - Callback function
+   * @param {function(response)} mySuccessCallback - Callback function for success
+   * @param {function(response)} myFailureCallback - Callback function for failure
    **/
-  static async login(email, password, myCallback) {
+  static async login(email, password, mySuccessCallback, myFailureCallback) {
     const url = this.getHostUrl() + '/users/login'
     const sendData = {
       email: email,
@@ -60,7 +61,11 @@ export default class AccountManagement extends BaseManagement {
     const success = (response) => {
       this.#saveActiveToken(response.result.access_token)
       this.#saveRefreshToken(response.result.refresh_token)
-      myCallback(response)
+      mySuccessCallback(response)
+    }
+
+    const failure = (response) => {
+      myFailureCallback(response)
     }
 
     // Send request to the server
@@ -70,7 +75,7 @@ export default class AccountManagement extends BaseManagement {
       contentType: 'application/json',
       data: JSON.stringify(sendData),
       success: success,
-      error: this.debugFailure
+      error: failure
     })
   }
 
