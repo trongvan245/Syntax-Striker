@@ -4,6 +4,12 @@ export default class AccountManagement extends BaseManagement {
   constructor() {
     super()
   }
+
+  static isAuth() {
+    // Temporary implementation
+    return this.#getActiveToken() !== null
+  }
+
   static login(email, password, myCallback) {
     const url = this.getHostUrl() + '/users/login'
     const sendData = {
