@@ -1,9 +1,21 @@
+import {MDBTypography } from 'mdb-react-ui-kit'
+
 function Address() {
   return (
     <div id='contactLandingPage' className='container mt-4' style={{ textAlign: 'left', lineHeight: 2 }}>
       <div className='row align-items-start'>
         <div className='col'>
-          <p className='display-5'>Trụ sở của chúng tôi</p>
+          <MDBTypography
+            variant='h1'
+            style={{
+              fontSize: '45px',
+              fontWeight: 'bold',
+              textAlign: 'center',
+
+            }}
+          >
+            Menu mẫu cho nhà hàng
+          </MDBTypography>
           <p>
             <strong>Chi nhánh 1: Đường Hàn Thuyên, khu phố 6 P, Thủ Đức, Thành phố Hồ Chí Minh</strong>
             <br />
