@@ -1,0 +1,104 @@
+@import './../../App.scss';
+
+.HeadingContainer {
+  background-color: $primaryColorDark;
+  min-height: 200px;
+}
+
+.heading-menu {
+  padding: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin: 30px 0;
+  color: $primaryColorDark;
+  background-color: $primaryColorLight;
+}
+.menuItemsConainer {
+  padding: 20px;
+  max-width: 90%;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  min-height: 500px;
+  background-color: $secondaryColor1;
+  border: 1px solid $secondaryColor2;
+  border-radius: 30px;
+  box-shadow: 0 0 10px $secondaryColor2;
+}
+
+.menuItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.menuItem {
+  margin-top: 20px;
+  background: #fff;
+  border: 1px solid #a3a3a3;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 200px;
+  padding: 15px;
+  transition: transform 0.3s ease-in-out,  box-shadow 0.2s ease-in-out;
+}
+.menuItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 2px 8px $primaryColorDark ;
+}
+
+.menuItemImage {
+  height: 200px;
+  object-fit: cover;
+}
+
+.menuItemInfo {
+  padding: 15px;
+}
+
+.menuItemInfo h3 {
+  margin: 10px 0;
+  font-size: 1em;
+}
+
+.menuItemInfo p {
+  margin: 5px 0;
+  font-size: 1em;
+}
+
+.menuItemPrice {
+  font-weight: bold;
+  color: #02761d;
+}
+
+.orderButton {
+  width: 80%;
+  margin-left: 10px;
+  background-color: #23a117; /* A nice accent color */
+  color: white; /* Text color */
+  padding: 10px 15px; /* Padding inside the button */
+  font-size: 1em; /* Font size of the text */
+  font-weight: bold; /* Bold font weight */
+
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition:
+    background-color 0.3s,
+    transform 0.3s; /* Smooth transition effects */
+}
+.orderButton:hover {
+  background-color: #1e8d14; /* Darker shade on hover */
+  transform: scale(1.05); /* Slightly larger on hover */
+}
+
+.orderButton:active {
+  background-color: rgb(10, 87, 3); /* Even darker shade when active */
+  transform: scale(0.95); /* Slightly smaller when clicked */
+}
+
+.orderButton:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 0 3px rgba(255, 138, 128, 0.4); /* Custom focus outline */
+}

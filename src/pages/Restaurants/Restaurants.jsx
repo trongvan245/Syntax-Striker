@@ -8,6 +8,8 @@ import { useState } from 'react'
 import './Restaurants.scss'
 import Rating from './Rating'
 import Pagination from './Pagination'
+// import RestaurantMenuPage from '../ShowMenuPage/RestaurantMenuPage'
+import { Link } from 'react-router-dom'
 
 const locationsInHCMC = [
   'TP. Thủ Đức',
@@ -26,7 +28,7 @@ const locationsInHCMC = [
   'Q. Bình Thạnh',
   'Q. Tân Phú',
   'Q. Gò Vấp',
-  'Q. Phú Nh.',
+  'Q. Phú Nhuận',
   'H. Bình Chánh',
   'H. Hóc Môn',
   'H. Cần Giờ',
@@ -37,6 +39,7 @@ const locationsInHCMC = [
 const restaurants = [
   {
     id: 0,
+    img: 'src/assets/Images/Header/800px-HCMUT_official_logo.png',
     name: 'Pizza Restaurant 1',
     price: '150-600',
     rating: 4.9,
@@ -45,14 +48,16 @@ const restaurants = [
   },
   {
     id: 1,
+    img: 'src/assets/Images/Header/Logo-DH-Cong-Nghe-Thong-Tin-UIT-V.webp',
     name: 'Domino Restaurant 1',
     price: '190-600',
-    rating: 4.2,
+    rating: 4.9,
     tel: '0909123456',
     location: 'Q. 3'
   },
   {
     id: 2,
+    img: 'src/assets/Images/LandingPage/background_1.jpg',
     name: 'Domino Restaurant 2',
     price: '190-600',
     rating: 4.3,
@@ -61,6 +66,7 @@ const restaurants = [
   },
   {
     id: 3,
+    img: 'src/assets/Images/LandingPage/background_1.jpg',
     name: 'Domino Restaurant 3',
     price: '190-600',
     rating: 4.0,
@@ -69,6 +75,7 @@ const restaurants = [
   },
   {
     id: 4,
+    img: 'src/assets/Images/LandingPage/background_1.jpg',
     name: 'Domino Restaurant',
     price: '190-600',
     rating: 3.0,
@@ -77,6 +84,7 @@ const restaurants = [
   },
   {
     id: 5,
+    img: 'src/assets/Images/LandingPage/background_1.jpg',
     name: 'Domino Restaurant',
     price: '190-600',
     rating: 2.0,
@@ -85,6 +93,7 @@ const restaurants = [
   },
   {
     id: 12,
+    img: 'src/assets/Images/LandingPage/background_1.jpg',
     name: 'Domino Restaurant',
     price: '190-600',
     rating: 3.0,
@@ -93,6 +102,7 @@ const restaurants = [
   },
   {
     id: 6,
+    img: 'src/assets/Images/LandingPage/background_1.jpg',
     name: 'Domino Restaurant',
     price: '190-600',
     rating: 3.0,
@@ -101,6 +111,7 @@ const restaurants = [
   },
   {
     id: 7,
+    img: 'src/assets/Images/LandingPage/background_1.jpg',
     name: 'Domino Restaurant',
     price: '190-600',
     rating: 2.0,
@@ -109,6 +120,7 @@ const restaurants = [
   },
   {
     id: 8,
+    img: 'src/assets/Images/LandingPage/background_1.jpg',
     name: 'Domino Restaurant',
     price: '190-600',
     rating: 4.2,
@@ -117,6 +129,7 @@ const restaurants = [
   },
   {
     id: 9,
+    img: 'src/assets/Images/LandingPage/background_1.jpg',
     name: 'Domino Restaurant',
     price: '190-600',
     rating: 1.3,
@@ -125,6 +138,7 @@ const restaurants = [
   },
   {
     id: 10,
+    img: 'src/assets/Images/LandingPage/background_1.jpg',
     name: 'Domino Restaurant',
     price: '190-600',
     rating: 4.9,
@@ -133,6 +147,7 @@ const restaurants = [
   },
   {
     id: 11,
+    img: 'src/assets/Images/LandingPage/background_1.jpg',
     name: 'Domino Restaurant',
     price: '190-600',
     rating: 3.6,
@@ -193,16 +208,16 @@ function Restaurants() {
       <div id='carouselExampleSlidesOnly' className='carousel slide' data-bs-ride='carousel'>
         <div className='carousel-inner' style={{ maxHeight: window.innerWidth < 992 ? '200px' : '400px' }}>
           <div className='carousel-item active'>
-            <img src='src\assets\Images\Restaurants\slide1.png' className='d-block w-100' alt='Slide 1' />
+            <img src='\src\assets\Images\Restaurants\slide1.png' className='d-block w-100' alt='Slide 1' />
           </div>
           <div className='carousel-item'>
-            <img src='src\assets\Images\Restaurants\slide2.png' className='d-block w-100' alt='Slide 2' />
+            <img src='\src\assets\Images\Restaurants\slide2.png' className='d-block w-100' alt='Slide 2' />
           </div>
           <div className='carousel-item'>
-            <img src='src\assets\Images\Restaurants\slide3.png' className='d-block w-100' alt='Slide 3' />
+            <img src='\src\assets\Images\Restaurants\slide3.png' className='d-block w-100' alt='Slide 3' />
           </div>
           <div className='carousel-item'>
-            <img src='src\assets\Images\Restaurants\slide4.png' className='d-block w-100' alt='Slide 4' />
+            <img src='\src\assets\Images\Restaurants\slide4.png' className='d-block w-100' alt='Slide 4' />
           </div>
         </div>
       </div>
@@ -243,30 +258,45 @@ function Restaurants() {
           <div className='restaurants-grid'>
             {paginatedRestaurants.map((restaurant) => (
               <div className='restaurant-box' key={restaurant.id}>
-                <h2 style={{ fontWeight: 'bold', color: '#cc3333' }}>{restaurant.name}</h2>
-                <div style={{ fontSize: window.innerWidth < 992 ? '16px' : '20px', fontWeight: 'bold' }}>
-                  <Rating rating={restaurant.rating} style={{ display: 'inline' }} />
-                </div>
-                <p style={{ fontSize: window.innerWidth < 992 ? '16px' : '20px', fontWeight: 'bold' }}>
-                  {' '}
-                  Giá: {restaurant.price} <PiCurrencyDollarSimpleFill style={{ scale: '120%', color: '#008839' }} />
-                </p>
-                {window.innerWidth < 992 ? (
-                  <div style={{ fontSize: '14px', fontWeight: 'bold' }}>
-                    <p>
-                      SĐT: {restaurant.tel} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
-                    </p>
-                    <p>
-                      Vị trí: {restaurant.location} <FaLocationDot style={{ scale: '80%', color: '#cc3333' }} />
-                    </p>
+                <div className='restaurant-info'>
+                  <Link style={{ marginLeft: '8px' }} to={`/menu/${restaurant.id}`}>
+                    {restaurant.name}{' '}
+                  </Link>
+                  <div
+                    style={{
+                      marginLeft: '8px',
+                      fontSize: window.innerWidth < 992 ? '16px' : '20px',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <Rating rating={restaurant.rating} style={{ display: 'inline' }} />
                   </div>
-                ) : (
-                  <p style={{ fontWeight: 'bold' }}>
+                  <p
+                    style={{
+                      marginLeft: '8px',
+                      marginTop: '10px',
+                      fontSize: window.innerWidth < 992 ? '16px' : '20px',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    {' '}
+                    Giá: {restaurant.price} <PiCurrencyDollarSimpleFill style={{ scale: '120%', color: '#008839' }} />
+                  </p>
+                  <p
+                    style={{
+                      marginLeft: '8px',
+                      fontSize: window.innerWidth < 992 ? '16px' : '20px',
+                      fontWeight: 'bold'
+                    }}
+                  >
                     SĐT: {restaurant.tel} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
                     {' --- '}
                     Vị trí: {restaurant.location} <FaLocationDot style={{ scale: '80%', color: '#cc3333' }} />
                   </p>
-                )}
+                </div>
+                <div className='restaurant-image' key={restaurant.id}>
+                  <img src={restaurant.img} alt={restaurant.name} />
+                </div>
               </div>
             ))}
           </div>

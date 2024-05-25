@@ -89,103 +89,8 @@ export default function CreateMenu() {
 
   return (
     <>
+      
       {step === 1 && (
-        <div className={`${styles.stepContainer} container-fluid`}>
-          <h1 className={styles.heading}>Business Info</h1>
-          <div className='row'>
-            <div className='col-lg-3'>
-              <label>Restaurant Name:</label>
-            </div>
-            <div className='col-lg-9'>
-              <input
-                type='text'
-                value={restaurantName}
-                onChange={(e) => setRestaurantName(e.target.value)}
-                className={styles.input}
-              />
-            </div>
-          </div>
-          {/* <FormRow label='Restaurant Name' value={restaurantName} onChange={(e) => setRestaurantName(e.target.value)} /> */}
-
-          <div className='row'>
-            <div className='col-lg-3'>
-              <label>Address:</label>
-            </div>
-            <div className='col-lg-9'>
-              <input
-                type='text'
-                value={restaurantInfo.address}
-                onChange={(e) => setRestaurantInfo({ ...restaurantInfo, address: e.target.value })}
-                className={styles.input}
-              />
-            </div>
-          </div>
-
-          <div className='row'>
-            <div className='col-lg-3'>
-              <label> City: </label>
-            </div>
-            <div className='col-lg-9'>
-              <input
-                type='text'
-                value={restaurantInfo.city}
-                onChange={(e) => setRestaurantInfo({ ...restaurantInfo, city: e.target.value })}
-                className={styles.input}
-              />
-            </div>
-          </div>
-          {/*
-          <div>
-            City:
-            <input
-              type='text'
-              value={restaurantInfo.city}
-              onChange={(e) => setRestaurantInfo({ ...restaurantInfo, city: e.target.value })}
-              className={styles.input}
-            />
-          </div> */}
-          {/* <FormRow
-            label='Address'
-            value={restaurantInfo.address}
-            onChange={(e) => setRestaurantInfo({ ...restaurantInfo, address: e.target.value })}
-          /> */}
-
-          {/* <FormRow
-            label='City'
-            value={restaurantInfo.city}
-            onChange={(e) => setRestaurantInfo({ ...restaurantInfo, city: e.target.value })}
-          /> */}
-
-          <div className='row'>
-            <div className='col-lg-3'>
-              <label> Phone Number: </label>
-            </div>
-            <div className='col-lg-9'>
-              <input
-                type='text'
-                value={restaurantInfo.phone}
-                onChange={(e) => setRestaurantInfo({ ...restaurantInfo, phone: e.target.value })}
-                className={styles.input}
-              />
-            </div>
-          </div>
-          {/* <FormRow
-            label='Phone Number'
-            value={restaurantInfo.phone}
-            onChange={(e) => setRestaurantInfo({ ...restaurantInfo, phone: e.target.value })}
-          /> */}
-          <div className={styles.formNavigation}>
-            <button type='button' onClick={handleNextStep} className={styles.button} disabled>
-              Previous
-            </button>
-
-            <button type='button' onClick={handleNextStep} className={styles.button}>
-              Next
-            </button>
-          </div>
-        </div>
-      )}
-      {step === 2 && (
         <div className>
           <div className={styles.createMenu}>
             {/* <h1 className={styles.headingMenu} style={{textAlign: "center"}}>Create Your Menu</h1> */}
@@ -360,7 +265,7 @@ export default function CreateMenu() {
               </div>
             </div>
             <div className={styles.formNavigation}>
-              <button type='button' onClick={handlePreviousStep} className={styles.button}>
+              <button type='button' onClick={handlePreviousStep} className={styles.button}disabled>
                 Back
               </button>
               <button type='button' onClick={handleNextStep} className={styles.button}>
@@ -370,7 +275,7 @@ export default function CreateMenu() {
           </div>
         </div>
       )}
-      {step == 3 && (
+      {step == 2 && (
         <div className={styles.stepContainer}>
           <h1 className={styles.heading}>Review</h1>
           <div className={styles.restaurantInfo}>

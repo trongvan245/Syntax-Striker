@@ -1,6 +1,6 @@
 import Intro from '../../components/LandingPage/LandingPageIntro'
 import Address from '../../components/LandingPage/LandingPageAddress'
-import SampleMenu1 from '../../components/LandingPage/LandingPageSampleMenu1'
+// import SampleMenu1 from '../../components/LandingPage/LandingPageSampleMenu1'
 import SampleMenu2 from '../../components/LandingPage/Menu/LandingPageSampleMenu2'
 import styles from '../../components/LandingPage/LandingPageStyles.module.scss'
 import { useState, useEffect } from 'react'
@@ -27,7 +27,7 @@ export default function LandingPage() {
   return (
     <>
       <Intro />
-      <SampleMenu1 />
+      {/* <SampleMenu1 /> */}
       <SampleMenu2 />
       <Address />
       <button
