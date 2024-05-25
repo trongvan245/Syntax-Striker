@@ -194,7 +194,7 @@ function Restaurants() {
                 </div>
                 <div className='restaurant-image' key={restaurant.id}>
                   <img
-                    src={restaurant.avatar ? restaurant.avatar : './src/assets/Images/logo.png'}
+                    src={restaurant.avatar ? restaurant.avatar : './src/assets/Images/LandingPage/background_1.jpg'}
                     alt={
                       restaurant.avatar
                         ? `Rất tiếc, không thể tải ảnh nhà hàng ${restaurant.name} :((`
