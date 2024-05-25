@@ -1,13 +1,32 @@
-import { useParams } from 'react-router-dom'
-import menuData from './menuData.json'
-
+import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import './ShowMenuPage.scss'
 import Rating from '../Restaurants/Rating'
+import { WiStars } from 'react-icons/wi'
 
 const ShowMenuPage = () => {
-  const { id } = useParams()
-  const restaurant = Object.keys(menuData).find((key) => key === id)
-  const menuList = restaurant ? menuData[restaurant].food_items : []
+  const [menuData, setMenuData] = useState([])
+  const location = useLocation()
+  const restaurantDetails = location.state || {}
+
+  // console.log(restaurantDetails)
+
+  useEffect(() => {
+    $.ajax({
+      url: 'https://syntax-striker.onrender.com/menu/get-menu',
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({ menu_id: restaurantDetails.menu_id }),
+      success: (response) => {
+        // console.log(response.items)
+        setMenuData(response.items)
+      },
+      error: (error) => {
+        console.log('Error fetching data:', error)
+        alert('Lỗi truy cập dữ liệu từ server (Error: ' + error.message + ').\n' + 'Vui lòng thử lại sau !!!')
+      }
+    })
+  }, [restaurantDetails.menu_id])
 
   return (
     <>
@@ -30,26 +49,44 @@ const ShowMenuPage = () => {
         </div>
       </div>
       <div>
-        <h1 className='heading-menu'>Restaurant Menu</h1>
-        <div className='menuItemsConainer'>
-          <div className='menuItems'>
-            {menuList.map((item) => (
-              <div key={item.id} className='menuItem'>
-                <img src={item.image} alt={item.name} className='menuItemImage' />
-                <div className='menuItemInfo'>
-                  <h3 style={{ fontSize: '22px', fontWeight: 'bold' }}>{item.name}</h3>
-                  {/* <p>{item.description}</p> */}
-                  <h3> Giá: {item.pricing} VNĐ</h3>
-                  <p className='menuItemPrice'>{item.price}</p>
-                  <Rating rating={item.rating} style={{ display: 'inline' }} />
+        <h1 className='heading-menu'>
+          <WiStars /> Khám phá Thực đơn Nhà hàng <WiStars />
+        </h1>
+        {menuData.length > 0 ? (
+          <div className='menuItemsContainer'>
+            <div className='restaurant-details'>
+              <h2>Nhà hàng {restaurantDetails.name}</h2>
+              <p>Địa chỉ: {restaurantDetails.address}</p>
+              <p>Quận/Huyện: {restaurantDetails.location}</p>
+              <p>Liên hệ: {restaurantDetails.phone_number}</p>
+              <p>
+                <Rating rating={restaurantDetails.rating} />
+              </p>
+            </div>
+            <div className='menuItems'>
+              {menuData.map((item) => (
+                <div key={item._id} className='menuItem'>
+                  <img src={item.avatar} alt={item.name} className='menuItemImage' />
+                  <div className='menuItemInfo'>
+                    <h3 style={{ fontSize: '1.5em', fontWeight: 'bold' }}>
+                      {item.name} {item.description && <span className='description-tooltip'>{item.description}</span>}
+                    </h3>
+                    <h3 className='menuItemPrice'>Giá: {item.price} VNĐ</h3>
+                    <Rating rating={item.rating} style={{ display: 'inline' }} />
+                  </div>
+                  <button className='orderButton' style={{ alignContent: 'center', display: 'inline' }}>
+                    Đặt hàng
+                  </button>
                 </div>
-                <button className='orderButton' style={{ alignContent: 'center', display: 'inline' }}>
-                  Đặt hàng
-                </button>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className='menuItemsContainer ' style={{ fontSize: '22px', fontWeight: 'bold', color: 'red' }}>
+            {' '}
+            No menu items available
+          </div>
+        )}
       </div>
     </>
   )

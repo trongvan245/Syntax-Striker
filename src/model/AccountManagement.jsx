@@ -1,4 +1,5 @@
 import BaseManagement from './BaseManagement.jsx'
+import $ from 'jquery'
 
 export default class AccountManagement extends BaseManagement {
   constructor() {
@@ -38,8 +39,37 @@ export default class AccountManagement extends BaseManagement {
       method: 'GET',
       contentType: 'application/json',
       headers: {
-        Authorization: 'Bearer ' + this.#getActiveToken()
+        Authorization: 'Bearer ' + this.getActiveToken()
       },
+      success: success,
+      error: error
+    })
+  }
+
+  /**
+   * Update account information
+   * @param {Object} data - Data to update
+   * @param {function(response)} mySuccessCallback - Callback function for success
+   * @param {function(response)} myFailureCallback - Callback function for failure
+   */
+  static async updateAccountInformation(data, mySuccessCallback, myFailureCallback) {
+    const url = this.getHostUrl() + '/users/me'
+    const success = (response) => {
+      this.#saveName(response.user.name)
+      this.#saveAvatarURL(response.user.avatar)
+      mySuccessCallback(response.user)
+    }
+    const error = (response) => {
+      myFailureCallback(response)
+    }
+    $.ajax({
+      url: url,
+      method: 'POST',
+      contentType: 'application/json',
+      headers: {
+        Authorization: 'Bearer ' + this.getActiveToken()
+      },
+      data: JSON.stringify(data),
       success: success,
       error: error
     })
@@ -82,7 +112,7 @@ export default class AccountManagement extends BaseManagement {
   static async logout() {
     const url = this.getHostUrl() + '/users/logout'
     const sendData = {
-      refresh_token: this.#getRefreshToken()
+      refresh_token: this.getRefreshToken()
     }
     const success = () => {
       this.deleteToken()
@@ -94,7 +124,7 @@ export default class AccountManagement extends BaseManagement {
       method: 'POST',
       contentType: 'application/json',
       headers: {
-        Authorization: 'Bearer ' + this.#getActiveToken()
+        Authorization: 'Bearer ' + this.getActiveToken()
       },
       data: JSON.stringify(sendData),
       success: success,
@@ -102,23 +132,7 @@ export default class AccountManagement extends BaseManagement {
     })
   }
 
-  /**
-   * Get name of the user
-   * @returns {string} Name of the user
-   * */
-  static getName() {
-    return localStorage.getItem('name')
-  }
-
-  /**
-   * Get avatar URL of the user
-   * @returns {string} Avatar URL of the user
-   * */
-  static getAvatarURL() {
-    return localStorage.getItem('avatarURL')
-  }
-
-  /**
+    /**
    * Delete token from local storage
    * */
   static deleteToken() {
@@ -134,6 +148,22 @@ export default class AccountManagement extends BaseManagement {
     localStorage.removeItem('avatarURL')
   }
 
+  static imageUploader(formData, mySuccessCallback, myFailureCallback) {
+    const url = this.getHostUrl() + '/users/avatar'
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: formData,
+      contentType: false,
+      processData: false,
+      headers: {
+        Authorization: 'Bearer ' + this.getActiveToken()
+      },
+      success: mySuccessCallback,
+      error: myFailureCallback
+    })
+  }
+
   // ======================= PRIVATE METHODS ZONE =======================
 
   static #saveActiveToken(token) {
@@ -143,15 +173,6 @@ export default class AccountManagement extends BaseManagement {
   static #saveRefreshToken(token) {
     localStorage.setItem('refreshToken', token)
   }
-
-  static #getActiveToken() {
-    return localStorage.getItem('activeToken')
-  }
-
-  static #getRefreshToken() {
-    return localStorage.getItem('refreshToken')
-  }
-
   static #saveName(name) {
     localStorage.setItem('name', name)
   }

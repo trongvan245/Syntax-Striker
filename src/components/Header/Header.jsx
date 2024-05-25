@@ -88,14 +88,14 @@ function LogInSection(props) {
         </span>
         <div className={styles.dropdownContent} id='HeaderDropdown'>
           <div>
-            <a href='/info'>Profile</a>
-            <a href='/createMenu'>Create Menu</a>
+            <a href='/Info'>Tiểu sử</a>
+            <a href='/createMenu'>Tạo menu</a>
             <a
               onClick={() => {
                 AccountManagement.logout()
               }}
             >
-              Log out
+              Đăng xuất
             </a>
           </div>
         </div>
@@ -112,12 +112,13 @@ function LogInSection(props) {
 
 function Menu() {
   const menu = [
-    { name: 'Home', link: '/' },
-    { name: 'Restaurants', link: '/restaurants' },
-    { name: 'Contact', link: '/' },
+    { name: 'Trang chủ', link: '/' },
+    { name: 'Danh sách nhà hàng', link: '/restaurants' },
+    { name: 'Liên hệ', link: '/' }
   ]
   return (
-    <div className={styles.menuSection}
+    <div
+      className={styles.menuSection}
       style={{
         display: 'flex',
         justifyContent: 'center',
