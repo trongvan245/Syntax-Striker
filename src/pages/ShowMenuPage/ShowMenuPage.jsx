@@ -54,22 +54,52 @@ const ShowMenuPage = () => {
         </h1>
         {menuData.length > 0 ? (
           <div className='menuItemsContainer'>
-            <div className='restaurant-details'>
-              <h2>Nhà hàng {restaurantDetails.name}</h2>
-              <p>Địa chỉ: {restaurantDetails.address}</p>
-              <p>Quận/Huyện: {restaurantDetails.location}</p>
-              <p>Liên hệ: {restaurantDetails.phone_number}</p>
-              <p>
-                <Rating rating={restaurantDetails.rating} />
-              </p>
+            <div className='restaurant-details-Container'>
+              <div className='restaurant-details'>
+                <h2>Nhà hàng {restaurantDetails.name}</h2>
+                <p>Địa chỉ: {restaurantDetails.address}</p>
+                <p>Quận/Huyện: {restaurantDetails.location}</p>
+                <p>Liên hệ: {restaurantDetails.phone_number}</p>
+                <div>
+                  <Rating rating={restaurantDetails.rating} />
+                </div>
+              </div>
+              <div className='restaurantMap' id='my-map-canvas'>
+                <iframe
+                  style={{ height: '100%', width: '100%', border: 0, borderRadius: '15px' }}
+                  src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.231240416692!2d106.80047917480627!3d10.870008889284488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527587e9ad5bf%3A0xafa66f9c8be3c91!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2jhu4cgVGjDtG5nIHRpbiAtIMSQSFFHIFRQLkhDTQ!5e0!3m2!1svi!2s!4v1716362472326!5m2!1svi!2s'
+                />
+              </div>
             </div>
             <div className='menuItems'>
               {menuData.map((item) => (
                 <div key={item._id} className='menuItem'>
-                  <img src={item.avatar} alt={item.name} className='menuItemImage' />
+                  {item.description && (
+                    <>
+                      {/* <span className='description-tooltip'>
+                        {' '}
+                        <p style={{ fontWeight: 'bold', color: '#2a435d' }}>Mô tả</p>
+                        {item.description}
+                      </span> */}
+                      {item.description && (
+                        <div className='description-overlay'>
+                          <p style={{ fontWeight: 'bold', color: '#cc3333' }}>Mô tả</p>
+                          <p className='description-text'>{item.description}</p>
+                        </div>
+                      )}
+                    </>
+                  )}
+                  <img
+                    src={item.avatar || '/src/assets/Images/logo.png'}
+                    alt={`Rất tiếc, không thể tải ảnh ${item.name}.`}
+                    className='menuItemImage'
+                  />
                   <div className='menuItemInfo'>
-                    <h3 style={{ fontSize: '1.5em', fontWeight: 'bold' }}>
-                      {item.name} {item.description && <span className='description-tooltip'>{item.description}</span>}
+                    <h3
+                      className='d-flex align-items-center justify-content-center flex-column'
+                      style={{ fontWeight: 'bold' }}
+                    >
+                      {item.name}
                     </h3>
                     <h3 className='menuItemPrice'>Giá: {item.price} VNĐ</h3>
                     <Rating rating={item.rating} style={{ display: 'inline' }} />
