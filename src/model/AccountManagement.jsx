@@ -46,6 +46,35 @@ export default class AccountManagement extends BaseManagement {
   }
 
   /**
+   * Update account information
+   * @param {Object} data - Data to update
+   * @param {function(response)} mySuccessCallback - Callback function for success
+   * @param {function(response)} myFailureCallback - Callback function for failure
+   */
+  static async updateAccountInformation(data, mySuccessCallback, myFailureCallback) {
+    const url = this.getHostUrl() + '/users/me'
+    const success = (response) => {
+      this.#saveName(response.user.name)
+      this.#saveAvatarURL(response.user.avatar)
+      mySuccessCallback(response.user)
+    }
+    const error = (response) => {
+      myFailureCallback(response)
+    }
+    $.ajax({
+      url: url,
+      method: 'PATCH',
+      contentType: 'application/json',
+      headers: {
+        Authorization: 'Bearer ' + this.#getActiveToken()
+      },
+      data: JSON.stringify(data),
+      success: success,
+      error: error
+    })
+  }
+
+  /**
    * Login to the system
    * @param {string} email - Email
    * @param {string} password - Password

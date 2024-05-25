@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   MDBCol,
   MDBContainer,
@@ -23,29 +23,42 @@ import {
   MDBDropdownItem
 } from 'mdb-react-ui-kit'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
+import AccountManagement from '../../model/AccountManagement'
 
 export default function Info() {
-  // Phuc goi API lay thong tin thay phan nay
-  const infoAPI = {
-    name: 'Syntax Striker',
-    email: 'nekan123@gmail.com',
-    password: 'Trongvan123456',
-    confirm_password: 'Trongvan123456',
-    phone_number: '00008888',
-    owner_name: 'Trong Van',
-    address: 'Quan 1, TP HCM'
-  }
-  const [info, setInfo] = useState(infoAPI)
+  const [info, setInfo] = useState({
+    name: '',
+    email: '',
+    password: '',
+    phone_number: '',
+    owner_name: '',
+    address: ''
+  })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await AccountManagement.getAccountInformation((response) => {
+        setInfo(response)
+      })
+    }
+    fetchData()
+  }, [setInfo])
 
   //Van tu cap nhat trong database
   const handleChange = (e) => {
     const { id, value } = e.target
-    setInfo((prevInfo) => ({
+    const newIndo = (prevInfo) => ({
       ...prevInfo,
       [id]: value
-    }))
+    })
+    const successChange = (response) => {
+      setInfo(response)
+    }
+    const errorChange = (response) => {
+      console.log(response)
+    }
+    AccountManagement.updateAccountInformation(newIndo, successChange, errorChange)
   }
-  console.log(info)
 
   return (
     <section style={{ backgroundColor: '#eee' }}>
@@ -119,7 +132,7 @@ export default function Info() {
                   <div
                     className='modal fade'
                     id='exampleModal'
-                    tabindex='-1'
+                    tabIndex='-1'
                     aria-labelledby='exampleModalLabel'
                     aria-hidden='true'
                   >
@@ -191,7 +204,7 @@ export default function Info() {
                         </div>
                         <div className='modal-footer'>
                           <button type='button' className='btn btn-secondary' data-bs-dismiss='modal'>
-                            Close
+                            Submit
                           </button>
                         </div>
                       </div>
@@ -235,15 +248,6 @@ export default function Info() {
                   </MDBCol>
                   <MDBCol sm='7'>
                     <MDBCardText className='text-muted'>{info.name}</MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm='3'>
-                    <MDBCardText>Type</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm='7'>
-                    <MDBCardText className='text-muted'>Buffer</MDBCardText>
                   </MDBCol>
                 </MDBRow>
                 <hr />
