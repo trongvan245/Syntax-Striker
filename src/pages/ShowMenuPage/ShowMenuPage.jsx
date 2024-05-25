@@ -1,13 +1,33 @@
-import { useParams } from 'react-router-dom'
-import menuData from './menuData.json'
-
+import { useState, useEffect } from 'react'
+import { useParams, useLocation } from 'react-router-dom'
+import $ from 'jquery' // Make sure to import jQuery
 import './ShowMenuPage.scss'
 import Rating from '../Restaurants/Rating'
 
 const ShowMenuPage = () => {
+  const [menuData, setMenuData] = useState([])
   const { id } = useParams()
-  const restaurant = Object.keys(menuData).find((key) => key === id)
-  const menuList = restaurant ? menuData[restaurant].food_items : []
+  const location = useLocation()
+  const restaurantDetails = location.state || {}
+
+  useEffect(() => {
+    $.ajax({
+      url: 'https://syntax-striker.onrender.com/menu/get-menu',
+      method: 'GET',
+      data: JSON.stringify({ menu_id: id }),
+      success: (response) => {
+        console.log(response.items)
+        setMenuData(response)
+        // response.items.forEach((item) => {
+        //   console.log(item.name, item.price, item.rating, item.description)
+        // })
+      },
+      error: (error) => {
+        console.log('Error fetching data: ', error)
+        alert('Lỗi truy cập dữ liệu từ server (Error: ' + error.message + ').\n' + 'Vui lòng thử lại sau !!!')
+      }
+    })
+  }, [id])
 
   return (
     <>
@@ -31,25 +51,38 @@ const ShowMenuPage = () => {
       </div>
       <div>
         <h1 className='heading-menu'>Restaurant Menu</h1>
-        <div className='menuItemsConainer'>
-          <div className='menuItems'>
-            {menuList.map((item) => (
-              <div key={item.id} className='menuItem'>
-                <img src={item.image} alt={item.name} className='menuItemImage' />
-                <div className='menuItemInfo'>
-                  <h3 style={{ fontSize: '22px', fontWeight: 'bold' }}>{item.name}</h3>
-                  {/* <p>{item.description}</p> */}
-                  <h3> Giá: {item.pricing} VNĐ</h3>
-                  <p className='menuItemPrice'>{item.price}</p>
-                  <Rating rating={item.rating} style={{ display: 'inline' }} />
+        {menuData.length > 0 ? (
+          <div className='menuItemsContainer'>
+            <div className='restaurant-details'>
+              <h2>{restaurantDetails.name}</h2>
+              <p>Address: {restaurantDetails.address}</p>
+              <p>Location: {restaurantDetails.location}</p>
+              <p>Phone: {restaurantDetails.phone_number}</p>
+              {/* <Rating rating={restaurantDetails.rating} style={{ display: 'inline' }} /> */}
+            </div>
+            <div className='menuItems'>
+              {menuData.map((item) => (
+                <div key={item._id} className='menuItem'>
+                  <img src={item.avatar} alt={item.name} className='menuItemImage' />
+                  <div className='menuItemInfo'>
+                    <h3 style={{ fontSize: '22px', fontWeight: 'bold' }}>{item.name}</h3>
+                    {item.description && <p>{item.description}</p>}
+                    <h3>Giá: {item.price} VNĐ</h3>
+                    <Rating rating={item.rating} style={{ display: 'inline' }} />
+                  </div>
+                  <button className='orderButton' style={{ alignContent: 'center', display: 'inline' }}>
+                    Đặt hàng
+                  </button>
                 </div>
-                <button className='orderButton' style={{ alignContent: 'center', display: 'inline' }}>
-                  Đặt hàng
-                </button>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className='menuItemsContainer ' style={{ fontSize: '22px', fontWeight: 'bold', color: 'red' }}>
+            {' '}
+            No menu items available
+          </div>
+        )}
       </div>
     </>
   )
