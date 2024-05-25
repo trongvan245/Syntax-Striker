@@ -32,7 +32,7 @@ const Register = () => {
     })
   }
 
-  const [showContact, setShowContact] = useState(false)
+  // const [showContact, setShowContact] = useState(false)
 
   // Submit Registration
   const handleSubmit = async (e) => {
@@ -75,45 +75,45 @@ const Register = () => {
     //   return
     // }
 
-    setShowContact(true)
+    // setShowContact(true)
     setForm({
       ...form,
       [e.target.name]: e.target.value
     })
 
-    if (!showContact) {
-      setShowContact(true)
-    } else {
-      // Submit form data to API
-      console.log(' Submit form data to API')
-      console.log(JSON.stringify(form))
+    // if (!showContact) {
+    //   setShowContact(true)
+    // } else {
+    // Submit form data to API
+    console.log(' Submit form data to API')
+    console.log(JSON.stringify(form))
 
-      try {
-        const url = `${hostUrl}/users/register`
-        const response = await $.ajax({
-          url: url,
-          method: 'POST',
-          contentType: 'application/json',
-          data: JSON.stringify(form)
-        })
+    try {
+      const url = `${hostUrl}/users/register`
+      const response = await $.ajax({
+        url: url,
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(form)
+      })
 
-        console.log('Success:', response)
-        alert('Registration successful!')
-        window.location.href = '/'
-      } catch (error) {
-        console.log(error.responseJSON)
-        if (
-          error.responseJSON &&
-          error.responseJSON.errors &&
-          error.responseJSON.errors.email &&
-          error.responseJSON.errors.email.msg
-        ) {
-          alert(error.responseJSON.errors.email.msg)
-        } else {
-          alert((error.responseJSON && error.responseJSON.message) || 'An error occurred. Please try again.')
-        }
+      console.log('Success:', response)
+      alert('Registration successful!')
+      window.location.href = '/'
+    } catch (error) {
+      console.log(error.responseJSON)
+      if (
+        error.responseJSON &&
+        error.responseJSON.errors &&
+        error.responseJSON.errors.email &&
+        error.responseJSON.errors.email.msg
+      ) {
+        alert(error.responseJSON.errors.email.msg)
+      } else {
+        alert((error.responseJSON && error.responseJSON.message) || 'An error occurred. Please try again.')
       }
     }
+    // }
   }
 
   return (
@@ -121,7 +121,7 @@ const Register = () => {
       <form onSubmit={handleSubmit}>
         <div className='form-section'>
           <img className='form-section-RestaurantImage' src='src\assets\Images\Register\restaurant.webp' alt='' />
-          <h2 style={{ fontSize: '25px', fontWeight: 'bold' }}>Register</h2>
+          <h2 style={{ fontSize: '25px', fontWeight: 'bold', color: '#000000' }}>Register</h2>
           <input
             type='text'
             name='name'
@@ -146,12 +146,34 @@ const Register = () => {
             onChange={handleChange}
             required
           />
+          <p style={{ fontSize: '14px', color: 'red', marginLeft: '8px' }}>
+            Password must be at least 6 characters long and contain at least 1 lowercase letter, 1 uppercase letter and
+            1 number
+          </p>
           <input
             type='password'
             name='confirm_password'
             placeholder='Confirm password*'
             value={form.confirm_password}
             onChange={handleChange}
+            required
+          />
+          <h2 style={{ fontSize: '25px', fontWeight: 'bold', color: '#000000', marginTop: '20px' }}>Contact</h2>
+          <input
+            type='text'
+            name='owner_name'
+            placeholder='Owner fullname*'
+            value={form.owner_name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type='tel'
+            name='phone_number'
+            placeholder='Phone number*'
+            value={form.phone_number}
+            onChange={handleChange}
+            pattern='[0-9]*'
             required
           />
           <label>
@@ -173,17 +195,14 @@ const Register = () => {
           </div> */}
         </div>
 
-        <div className={`form-section contact ${showContact ? 'show' : ''}`}>
-          {!showContact ? (
-            <img
-              src='src\assets\Images\Register\cooker_masterchefVN.webp'
-              alt=''
-              className='contact-image'
-              style={{ opacity: 0.85 }}
-            />
-          ) : (
-            <>
-              <h2 style={{ fontSize: '25px', fontWeight: 'bold' }}>Contact</h2>
+        {window.innerWidth > 992 && (
+          <div className='form-section contact'>
+            {/* <div className={`form-section contact ${showContact ? 'show' : ''}`}> */}
+            {/* {!showContact ? ( */}
+            <img src='src\assets\Images\Register\cooker_masterchefVN.webp' alt='' className='contact-image' />
+            {/* // ) : ( */}
+            {/* // <> */}
+            {/* <h2 style={{ fontSize: '25px', fontWeight: 'bold' }}>Contact</h2>
               <input
                 type='text'
                 name='owner_name'
@@ -204,16 +223,16 @@ const Register = () => {
                 type='tel'
                 name='faxNumber'
                 placeholder='Fax number'
-                // value={form.faxNumber}
-                // onChange={handleChange}
-                // pattern='[0-9]*'
-                // required
-              />
-              {/* <button type='button' className='mark-location'onClick={() => setShowMap(true)}> */}
-              <button type='button' className='mark-location'>
+                value={form.faxNumber}
+                onChange={handleChange}
+                pattern='[0-9]*'
+                required
+              /> */}
+            {/* <button type='button' className='mark-location'onClick={() => setShowMap(true)}> */}
+            {/* <button type='button' className='mark-location'>
                 Select your restaurant location
-              </button>
-              {/* {showMap && (
+              </button> */}
+            {/* {showMap && (
                 <MapComponent
                   showMap={showMap}
                   setSelectedLocation={setSelectedLocation}
@@ -221,12 +240,13 @@ const Register = () => {
                   selectedLocation={selectedLocation}
                 />
               )} */}
-              <button type='submit' className='confirm'>
+            {/* <button type='submit' className='confirm'>
                 Confirm
-              </button>
-            </>
-          )}
-        </div>
+              </button> */}
+            {/* </> */}
+            {/* )} */}
+          </div>
+        )}
       </form>
     </div>
   )
