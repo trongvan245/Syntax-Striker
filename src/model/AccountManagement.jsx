@@ -63,7 +63,7 @@ export default class AccountManagement extends BaseManagement {
     }
     $.ajax({
       url: url,
-      method: 'PATCH',
+      method: 'POST',
       contentType: 'application/json',
       headers: {
         Authorization: 'Bearer ' + this.#getActiveToken()

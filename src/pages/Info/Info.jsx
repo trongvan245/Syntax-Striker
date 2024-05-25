@@ -44,20 +44,27 @@ export default function Info() {
     fetchData()
   }, [setInfo])
 
-  //Van tu cap nhat trong database
-  const handleChange = (e) => {
-    const { id, value } = e.target
-    const newIndo = (prevInfo) => ({
-      ...prevInfo,
-      [id]: value
-    })
-    const successChange = (response) => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const success = (response) => {
       setInfo(response)
     }
-    const errorChange = (response) => {
-      console.log(response)
+    const failure = (response) => {
+      console.log('Data sent: ', info)
+      console.log('Response: ', response)
+      window.alert('Update failed')
+      // Reload the page
+      // window.location.reload()
     }
-    AccountManagement.updateAccountInformation(newIndo, successChange, errorChange)
+    AccountManagement.updateAccountInformation(info, success, failure)
+  }
+
+  const handleChange = (e) => {
+    const { id, value } = e.target
+    setInfo((prevInfo) => ({
+      ...prevInfo,
+      [id]: value
+    }))
   }
 
   return (
@@ -67,7 +74,7 @@ export default function Info() {
           <MDBCol>
             <MDBBreadcrumb className='bg-light rounded-3 p-3 mb-4'>
               <MDBBreadcrumbItem active style={{ fontWeight: 'bold' }}>
-                Infomation
+                Thông tin
               </MDBBreadcrumbItem>
             </MDBBreadcrumb>
           </MDBCol>
@@ -115,14 +122,14 @@ export default function Info() {
             <MDBCard className='mb-4'>
               <MDBBreadcrumb className='bg-light rounded-3 p-3 mb-4'>
                 <MDBBreadcrumbItem active style={{ fontWeight: 'bold' }}>
-                  Owner Profile
+                  Quản lý nhà hàng
                 </MDBBreadcrumbItem>
               </MDBBreadcrumb>
 
               <MDBCardBody>
                 <MDBRow>
                   <MDBCol sm='3'>
-                    <MDBCardText>Full Name</MDBCardText>
+                    <MDBCardText>Họ và tên</MDBCardText>
                   </MDBCol>
                   <MDBCol sm='7'>
                     <MDBCardText className='text-muted'>{info.owner_name}</MDBCardText>
@@ -140,7 +147,7 @@ export default function Info() {
                       <div className='modal-content'>
                         <div className='modal-header'>
                           <h5 className='modal-title' id='exampleModalLabel'>
-                            Edit Information
+                            Chỉnh sửa thông tin
                           </h5>
                           <button
                             type='button'
@@ -155,7 +162,7 @@ export default function Info() {
                               className='mb-4'
                               type='text'
                               id='name'
-                              label='Full name'
+                              label='Họ và tên'
                               value={info.name}
                               onChange={handleChange}
                             />
@@ -171,7 +178,7 @@ export default function Info() {
                               className='mb-4'
                               type='number'
                               id='phone_number'
-                              label='Number'
+                              label='Số điện thoại'
                               value={info.phone_number}
                               onChange={handleChange}
                             />
@@ -179,31 +186,35 @@ export default function Info() {
                               className='mb-4'
                               type='text'
                               id='owner_name'
-                              label='Restaurant Name'
+                              label='Tên nhà hàng'
                               value={info.owner_name}
                               onChange={handleChange}
                             />
                             <MDBInput
                               className='mb-4'
                               type='text'
-                              id='type'
-                              label='Type'
-                              value={info.type}
+                              id='address'
+                              label='Số nhà, (Đường, Phường/Xã)'
+                              value={info.address}
                               onChange={handleChange}
                             />
-
                             <MDBInput
                               className='mb-4'
                               type='text'
-                              id='address'
-                              label='Address'
-                              value={info.address}
+                              id='location'
+                              label='Địa chỉ (Quận/Huyện, Tỉnh/Thành phố)'
+                              value={info.location}
                               onChange={handleChange}
                             />
                           </form>
                         </div>
                         <div className='modal-footer'>
-                          <button type='button' className='btn btn-secondary' data-bs-dismiss='modal'>
+                          <button
+                            type='button'
+                            className='btn btn-secondary'
+                            data-bs-dismiss='modal'
+                            onClick={handleSubmit}
+                          >
                             Submit
                           </button>
                         </div>
@@ -224,7 +235,7 @@ export default function Info() {
                 <hr />
                 <MDBRow>
                   <MDBCol sm='3'>
-                    <MDBCardText>Mobile</MDBCardText>
+                    <MDBCardText>Số điện thoại</MDBCardText>
                   </MDBCol>
                   <MDBCol sm='7'>
                     <MDBCardText className='text-muted'>{info.phone_number}</MDBCardText>
@@ -237,14 +248,14 @@ export default function Info() {
             <MDBCard className='mb-4'>
               <MDBBreadcrumb className='bg-light rounded-3 p-3 mb-4'>
                 <MDBBreadcrumbItem active style={{ fontWeight: 'bold' }}>
-                  Restaurant Infomation
+                  Thông tin nhà hàng
                 </MDBBreadcrumbItem>
               </MDBBreadcrumb>
 
               <MDBCardBody>
                 <MDBRow>
                   <MDBCol sm='3'>
-                    <MDBCardText>Restaurant Name</MDBCardText>
+                    <MDBCardText>Tên nhà hàng</MDBCardText>
                   </MDBCol>
                   <MDBCol sm='7'>
                     <MDBCardText className='text-muted'>{info.name}</MDBCardText>
@@ -253,10 +264,12 @@ export default function Info() {
                 <hr />
                 <MDBRow>
                   <MDBCol sm='3'>
-                    <MDBCardText>Address</MDBCardText>
+                    <MDBCardText>Địa chỉ</MDBCardText>
                   </MDBCol>
                   <MDBCol sm='7'>
-                    <MDBCardText className='text-muted'>{info.address}</MDBCardText>
+                    <MDBCardText className='text-muted'>
+                      {info.address + (info.location ? ', ' + info.location : '')}
+                    </MDBCardText>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
