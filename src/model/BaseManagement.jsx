@@ -25,6 +25,10 @@ export default class BaseManagement {
     return localStorage.getItem('avatarURL')
   }
 
+  static getMenuId() {
+    return localStorage.getItem('menuId')
+  }
+
   static getHostUrl() {
     return 'https://syntax-striker.onrender.com'
   }
