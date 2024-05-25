@@ -5,28 +5,6 @@
   min-height: 200px;
 }
 
-.restaurant-details {
-  background-color: #ffffff;
-  width: 100%;
-  padding: 20px;
-  border-radius: 20px;
-  margin: 20px auto;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-.restaurant-details h2 {
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #ff0000;
-}
-
-.restaurant-details p {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
 .heading-menu {
   padding: 30px;
   font-weight: bold;
@@ -52,11 +30,75 @@
   margin: 0 auto;
   margin-top: 50px;
   margin-bottom: 50px;
-  min-height: 500px;
+  min-height: 900px;
   background-color: $secondaryColor1;
   border: 1px solid $secondaryColor2;
   border-radius: 30px;
   box-shadow: 0 0 10px $secondaryColor2;
+}
+
+.restaurant-details-Container {
+  background-color: $popUpColor;
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 5px auto 40px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.restaurant-details {
+  background-color: #ffffff;
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 20px auto;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  border: 2px solid #303030 ;
+  width: 65%;
+  float: left;
+}
+
+.restaurant-details h2 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #ff0000;
+}
+
+.restaurant-details p {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.restaurantMap {
+  background-color: #303030;
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 20px auto;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  float: right;
+}
+
+@media (max-width: 900px) {
+  .restaurant-details-Container {
+    display: block;
+    justify-content: center;
+  }
+
+  .restaurant-details {
+    width: 95%;
+    float: none;
+  }
+
+  .restaurantMap {
+    width: 95%;
+    float: none;
+  }
 }
 
 .menuItems {
@@ -64,6 +106,8 @@
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  position: relative;
+  margin-bottom: 50px;
 }
 
 .menuItem {
@@ -77,10 +121,10 @@
   transition:
     transform 0.3s ease-in-out,
     box-shadow 0.2s ease-in-out;
-
   align-items: center;
   justify-content: center;
   text-align: center;
+  position: relative;
 }
 .menuItem:hover {
   transform: translateY(-5px);
@@ -141,18 +185,42 @@
   outline: none; /* Remove the default focus outline */
   box-shadow: 0 0 0 3px rgba(255, 138, 128, 0.4); /* Custom focus outline */
 }
+// .menuItem .description-tooltip {
+//   display: none;
+//   position: absolute;
+//   bottom: 100%;
+//   left: 50%;
+//   transform: translateX(-50%);
+//   background-color: #fff;
+//   padding: 5px;
+//   border: 1px solid #ccc;
+//   border-radius: 3px;
+//   color: $secondaryColor2;
+//   font-size: 1.1em;
+// }
 
-.description-tooltip {
+// .menuItem:hover .description-tooltip {
+//   display: block;
+// }
+
+.description-overlay {
   position: absolute;
-  display: none;
-  background-color: #fff;
-  border: 1px solid #a3a3a3;
-  border-radius: 8px;
+  justify-content: center;
+  align-content: center;
+  margin: auto;
+  top: 25%;
+  width: 80%;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
   padding: 10px;
-  width: 200px;
-  z-index: 1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  margin-left: 5%;
 }
 
-.menuItemInfo:hover .description-tooltip {
+.menuItem:hover .description-overlay {
   display: block;
+  opacity: 95%;
+  font-weight: bold;
 }
