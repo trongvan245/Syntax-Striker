@@ -9,6 +9,7 @@ import Test from './../src/Test.jsx'
 import CreateMenu from './pages/CreateMenu'
 import ShowMenuPage from './pages/ShowMenuPage'
 import { useParams } from 'react-router-dom'
+import Info from './pages/Info/Info.jsx'
 
 export default function useRouteElements() {
   const routeElements = useRoutes([
@@ -25,6 +26,14 @@ export default function useRouteElements() {
       element: (
         <MainLayout>
           <CreateMenu />
+        </MainLayout>
+      )
+    },
+    {
+      path: '/info',
+      element: (
+        <MainLayout>
+          <Info />
         </MainLayout>
       )
     },
