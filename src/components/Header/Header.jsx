@@ -89,6 +89,7 @@ function LogInSection(props) {
         <div className={styles.dropdownContent} id='HeaderDropdown'>
           <div>
             <a href='/'>Profile</a>
+            <a href='/createMenu'>Create Menu</a>
             <a
               onClick={() => {
                 AccountManagement.logout()
@@ -112,10 +113,8 @@ function LogInSection(props) {
 function Menu() {
   const menu = [
     { name: 'Home', link: '/' },
-    { name: 'Quick Start', link: '/' },
-    { name: 'References', link: '/' },
+    { name: 'Restaurants', link: '/restaurants' },
     { name: 'Contact', link: '/' },
-    { name: 'Create Menu', link: '/createMenu'}
   ]
   return (
     <div
