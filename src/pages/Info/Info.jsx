@@ -18,52 +18,6 @@ import {
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import AccountManagement from '../../model/AccountManagement'
 
-function InputField({ id, label, value, handleChange }) {
-  return <MDBInput className='mb-4' type='text' id={id} label={label} value={value} onChange={handleChange} />
-}
-
-function ChangeInformaton({ info, handleChange, handleSubmit }) {
-  return (
-    <div className='modal fade' id='exampleModal' tabIndex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-      <div className='modal-dialog'>
-        <div className='modal-content'>
-          <div className='modal-header'>
-            <h5 className='modal-title' id='exampleModalLabel'>
-              Chỉnh sửa thông tin
-            </h5>
-            <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-          </div>
-          <div className='modal-body'>
-            <form>
-              <InputField id='name' label='Họ và tên' value={info.name} onChange={handleChange} />
-              <InputField id='email' label='Email' value={info.email} onChange={handleChange} />
-              <InputField id='phone_number' label='Số điện thoại' value={info.phone_number} onChange={handleChange} />
-              <InputField id='owner_name' label='Tên nhà hàng' value={info.owner_name} onChange={handleChange} />
-              <InputField
-                id='address'
-                label='Số nhà, (Đường, Phường/Xã)'
-                value={info.address}
-                onChange={handleChange}
-              />
-              <InputField
-                id='location'
-                label='Địa chỉ (Quận/Huyện, Tỉnh/Thành phố)'
-                value={info.location}
-                onChange={handleChange}
-              />
-            </form>
-          </div>
-          <div className='modal-footer'>
-            <button type='button' className='btn btn-secondary' data-bs-dismiss='modal' onClick={handleSubmit}>
-              Submit
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 function UploadImageModal({ selectedFile, setSelectedFile }) {
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0])
@@ -101,7 +55,7 @@ function UploadImageModal({ selectedFile, setSelectedFile }) {
         <div className='modal-content'>
           <div className='modal-header'>
             <h5 className='modal-title' id='uploadImageModalLabel'>
-              Cập nhật ảnh đại diện
+              Cập nhật ảnh đại diện nhà hàng
             </h5>
             <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
           </div>
@@ -153,7 +107,7 @@ export default function Info() {
       console.log('Response: ', response)
       window.alert('Update failed')
       // Reload the page
-      // window.location.reload()
+      window.location.reload()
     }
     AccountManagement.updateAccountInformation(info, success, failure)
   }
@@ -164,6 +118,7 @@ export default function Info() {
       ...prevInfo,
       [id]: value
     }))
+    console.log(info)
   }
 
   return (
@@ -176,21 +131,20 @@ export default function Info() {
                 Thông tin
               </MDBBreadcrumbItem>
               <MDBBreadcrumbItem active style={{ fontWeight: 'bold' }}>
-              <a href="/yourMenu">Menu</a> 
+                <a href='/yourMenu'>Menu</a>
               </MDBBreadcrumbItem>
             </MDBBreadcrumb>
           </MDBCol>
-  
         </MDBRow>
 
         <MDBRow>
           <MDBCol lg='4'>
             <MDBCard className='mb-4'>
               <MDBCardBody className='text-center'>
-                <MDBCardImage src={avatar} alt='avatar' className='rounded-circle' style={{ width: '150px' }} fluid />
+                <MDBCardImage src={avatar} alt='avatar' className='' style={{ width: '90%' }} fluid />
                 <div className='d-flex justify-content-center mb-2'>
                   <MDBBtn data-bs-toggle='modal' data-bs-target='#uploadImageModal' style={{ marginTop: '20px' }}>
-                    Edit
+                    Chỉnh sửa
                   </MDBBtn>
                 </div>
               </MDBCardBody>
@@ -232,7 +186,91 @@ export default function Info() {
                     <MDBCardText className='text-muted'>{info.owner_name}</MDBCardText>
                   </MDBCol>
                   <MDBCol sm='2'></MDBCol>
-                  <ChangeInformaton info={info} handleChange={handleChange} handleSubmit={handleSubmit} />
+                  <div
+                    className='modal fade'
+                    id='exampleModal'
+                    tabIndex='-1'
+                    aria-labelledby='exampleModalLabel'
+                    aria-hidden='true'
+                  >
+                    <div className='modal-dialog'>
+                      <div className='modal-content'>
+                        <div className='modal-header'>
+                          <h5 className='modal-title' id='exampleModalLabel'>
+                            Chỉnh sửa thông tin
+                          </h5>
+                          <button
+                            type='button'
+                            className='btn-close'
+                            data-bs-dismiss='modal'
+                            aria-label='Close'
+                          ></button>
+                        </div>
+                        <div className='modal-body'>
+                          <form>
+                            <MDBInput
+                              className='mb-4'
+                              type='text'
+                              id='name'
+                              label='Tên nhà hàng'
+                              value={info.name}
+                              onChange={handleChange}
+                            />
+                            <MDBInput
+                              className='mb-4'
+                              type='email'
+                              id='email'
+                              label='Email'
+                              value={info.email}
+                              onChange={handleChange}
+                            />
+                            <MDBInput
+                              className='mb-4'
+                              type='number'
+                              id='phone_number'
+                              label='Số điện thoại'
+                              value={info.phone_number}
+                              onChange={handleChange}
+                            />
+                            <MDBInput
+                              className='mb-4'
+                              type='text'
+                              id='owner_name'
+                              label='Chủ nhà hàng'
+                              value={info.owner_name}
+                              onChange={handleChange}
+                            />
+                            <MDBInput
+                              className='mb-4'
+                              type='text'
+                              id='address'
+                              label='Địa chỉ (Số nhà, Đường, Phường/Xã)'
+                              value={info.address}
+                              onChange={handleChange}
+                            />
+                            <MDBInput
+                              className='mb-4'
+                              type='text'
+                              id='address'
+                              label='Quận/Huyện/Tỉnh/Thành phố'
+                              value={info.location}
+                              onChange={handleChange}
+                            />
+                          </form>
+                        </div>
+                        <div className='modal-footer'>
+                          <button
+                            type='button'
+                            className='btn btn-secondary'
+                            data-bs-dismiss='modal'
+                            onClick={handleSubmit}
+                          >
+                            OK
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <UploadImageModal selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
                 </MDBRow>
                 <hr />
@@ -295,12 +333,16 @@ export default function Info() {
                 </MDBBreadcrumbItem>
               </MDBBreadcrumb>
               <MDBRow>
-                <img src="/src/assets/images/qr.png" alt="QR code" style={{height: 300, width:300, margin: "auto", marginBottom:20}}/>
+                <img
+                  src='/src/assets/images/qr.png'
+                  alt='QR code'
+                  style={{ height: 300, width: 300, margin: 'auto', marginBottom: 20 }}
+                />
               </MDBRow>
             </MDBCard>
             <div className='d-flex flex-row-reverse'>
               <MDBBtn data-bs-toggle='modal' data-bs-target='#exampleModal'>
-                Edit
+                Chỉnh sửa thông tin
               </MDBBtn>
             </div>
           </MDBCol>
