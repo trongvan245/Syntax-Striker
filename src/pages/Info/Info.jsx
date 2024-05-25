@@ -252,7 +252,7 @@ export default function Info() {
                             <MDBInput
                               className='mb-4'
                               type='text'
-                              id='address'
+                              id='location'
                               label='Quận/Huyện/Tỉnh/Thành phố'
                               value={info.location}
                               onChange={handleChange}
