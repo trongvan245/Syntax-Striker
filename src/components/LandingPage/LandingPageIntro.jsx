@@ -1,5 +1,5 @@
 import styles from './LandingPageStyles.module.scss'
-import {MDBTypography } from 'mdb-react-ui-kit'
+import { MDBTypography } from 'mdb-react-ui-kit'
 
 function Intro() {
   return (
@@ -19,12 +19,11 @@ function Intro() {
           <MDBTypography
             variant='h1'
             style={{
-          
               fontSize: '35px',
               fontWeight: 'bold'
             }}
           >
-             Menu trực tuyến cho nhà hàng của bạn
+            Menu trực tuyến cho nhà hàng của bạn
           </MDBTypography>
           <p>Come hungry, leave happy with Syntax Striker 😁</p>
           <a className='btn btn-primary' href='#contactLandingPage'>
@@ -43,17 +42,15 @@ function Intro() {
           <MDBTypography
             variant='h1'
             style={{
-          
               fontSize: '35px',
               fontWeight: 'bold'
             }}
           >
-             Việc tạo menu thật là đơn giản
+            Việc tạo menu thật là đơn giản
           </MDBTypography>
           <p style={{ textAlign: 'justify' }}>
             Và thật độc đáo. Khám phá những tính năng mới mà chúng tôi mang lại cho bạn.
           </p>
-          
         </div>
       </div>
     </>
