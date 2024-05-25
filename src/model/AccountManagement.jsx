@@ -39,7 +39,7 @@ export default class AccountManagement extends BaseManagement {
       method: 'GET',
       contentType: 'application/json',
       headers: {
-        Authorization: 'Bearer ' + this.#getActiveToken()
+        Authorization: 'Bearer ' + this.getActiveToken()
       },
       success: success,
       error: error
@@ -67,7 +67,7 @@ export default class AccountManagement extends BaseManagement {
       method: 'POST',
       contentType: 'application/json',
       headers: {
-        Authorization: 'Bearer ' + this.#getActiveToken()
+        Authorization: 'Bearer ' + this.getActiveToken()
       },
       data: JSON.stringify(data),
       success: success,
@@ -112,7 +112,7 @@ export default class AccountManagement extends BaseManagement {
   static async logout() {
     const url = this.getHostUrl() + '/users/logout'
     const sendData = {
-      refresh_token: this.#getRefreshToken()
+      refresh_token: this.getRefreshToken()
     }
     const success = () => {
       this.deleteToken()
@@ -124,7 +124,7 @@ export default class AccountManagement extends BaseManagement {
       method: 'POST',
       contentType: 'application/json',
       headers: {
-        Authorization: 'Bearer ' + this.#getActiveToken()
+        Authorization: 'Bearer ' + this.getActiveToken()
       },
       data: JSON.stringify(sendData),
       success: success,
@@ -132,23 +132,7 @@ export default class AccountManagement extends BaseManagement {
     })
   }
 
-  /**
-   * Get name of the user
-   * @returns {string} Name of the user
-   * */
-  static getName() {
-    return localStorage.getItem('name')
-  }
-
-  /**
-   * Get avatar URL of the user
-   * @returns {string} Avatar URL of the user
-   * */
-  static getAvatarURL() {
-    return localStorage.getItem('avatarURL')
-  }
-
-  /**
+    /**
    * Delete token from local storage
    * */
   static deleteToken() {
@@ -173,7 +157,7 @@ export default class AccountManagement extends BaseManagement {
       contentType: false,
       processData: false,
       headers: {
-        Authorization: 'Bearer ' + this.#getActiveToken()
+        Authorization: 'Bearer ' + this.getActiveToken()
       },
       success: mySuccessCallback,
       error: myFailureCallback
@@ -189,15 +173,6 @@ export default class AccountManagement extends BaseManagement {
   static #saveRefreshToken(token) {
     localStorage.setItem('refreshToken', token)
   }
-
-  static #getActiveToken() {
-    return localStorage.getItem('activeToken')
-  }
-
-  static #getRefreshToken() {
-    return localStorage.getItem('refreshToken')
-  }
-
   static #saveName(name) {
     localStorage.setItem('name', name)
   }
