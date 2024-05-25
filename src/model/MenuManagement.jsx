@@ -10,7 +10,7 @@ export default class MenuManagement extends BaseManagement {
   static async getMenuList(mySuccessCallback, myFailureCallback) {
     const url = this.getHostUrl() + '/menu'
     const success = (response) => {
-      mySuccessCallback(response)
+      mySuccessCallback(response.items)
     }
     const error = (response) => {
       myFailureCallback(response)

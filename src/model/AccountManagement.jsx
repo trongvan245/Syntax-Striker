@@ -132,7 +132,7 @@ export default class AccountManagement extends BaseManagement {
     })
   }
 
-    /**
+  /**
    * Delete token from local storage
    * */
   static deleteToken() {

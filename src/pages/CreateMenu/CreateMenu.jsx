@@ -1,25 +1,15 @@
-import React from 'react'
 import { useState } from 'react'
 import styles from './CreateMenu.module.scss'
 import {
   MDBInput,
-  MDBCheckbox,
   MDBCol,
   MDBContainer,
   MDBRow,
   MDBCard,
   MDBCardText,
   MDBCardBody,
-  MDBCardImage,
-  MDBBtn,
   MDBBreadcrumb,
-  MDBBreadcrumbItem,
-  MDBProgress,
-  MDBProgressBar,
-  MDBIcon,
-  MDBListGroup,
-  MDBListGroupItem,
-  MDBFile 
+  MDBBreadcrumbItem
 } from 'mdb-react-ui-kit'
 
 export default function CreateMenu() {
@@ -113,10 +103,9 @@ export default function CreateMenu() {
                 <div className={styles.menuItem}>
                   <button
                     type='button'
-                    class='btn btn-primary'
                     data-bs-toggle='modal'
                     data-bs-target='#staticBackdrop1'
-                    className={styles.addButton}
+                    className={`${styles.addButton} btn btn-primary`}
                   >
                     Add item
                   </button>
@@ -126,7 +115,7 @@ export default function CreateMenu() {
                     id='staticBackdrop1'
                     data-bs-backdrop='static'
                     data-bs-keyboard='false'
-                    tabindex='-1'
+                    tabIndex='-1'
                     aria-labelledby='staticBackdropLabel'
                     aria-hidden='true'
                   >
@@ -136,7 +125,12 @@ export default function CreateMenu() {
                           <h1 className='modal-title fs-5' id='staticBackdropLabel'>
                             Item Info
                           </h1>
-                          <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                          <button
+                            type='button'
+                            className='btn-close'
+                            data-bs-dismiss='modal'
+                            aria-label='Close'
+                          ></button>
                         </div>
                         <div
                           className='modal-body'
@@ -147,7 +141,7 @@ export default function CreateMenu() {
                         >
                           <MDBInput
                             id='name'
-                            wrapperClass='mb-4'
+                            wrapperclassName='mb-4'
                             label='Name'
                             value={newItem.name}
                             onChange={handleChange}
@@ -155,13 +149,13 @@ export default function CreateMenu() {
                           <MDBInput
                             type='number'
                             id='price'
-                            wrapperClass='mb-4'
+                            wrapperclassName='mb-4'
                             label='Price'
                             value={newItem.price}
                             onChange={handleChange}
                           />
                           <MDBInput
-                            wrapperClass='mb-4'
+                            wrapperclassName='mb-4'
                             textarea
                             id='description'
                             rows={4}
@@ -169,14 +163,12 @@ export default function CreateMenu() {
                             value={newItem.description}
                             onChange={handleChange}
                           />
-                          
                         </div>
-                        <div class='modal-footer'>
-                          <button type='button' class='btn btn-primary' onClick={() => handleAddItem('food')}>
+                        <div className='modal-footer'>
+                          <button type='button' className='btn btn-primary' onClick={() => handleAddItem('food')}>
                             Add item
                           </button>
                         </div>
-                        
                       </div>
                     </div>
                   </div>
@@ -192,7 +184,6 @@ export default function CreateMenu() {
               <button type='button' onClick={handleNextStep} className={styles.button}>
                 Next
               </button>
-              
             </div>
           </div>
         </div>
@@ -280,14 +271,16 @@ export default function CreateMenu() {
               </MDBRow>
             </MDBContainer>
           </section>
-          
+
           <div className={styles.menuSection}></div>
           <div className={styles.formNavigation}>
             <button type='button' onClick={handlePreviousStep} className={styles.button}>
               Back
             </button>
             <button type='button' className={styles.button}>
-            <a href='/' style={{color: "white"}}>Submit</a>
+              <a href='/' style={{ color: 'white' }}>
+                Submit
+              </a>
             </button>
           </div>
         </div>
