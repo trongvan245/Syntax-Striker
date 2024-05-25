@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import {
   MDBCol,
@@ -10,13 +10,13 @@ import {
   MDBCardImage,
   MDBBtn,
   MDBBreadcrumb,
-  MDBBreadcrumbItem,
-
+  MDBBreadcrumbItem
 } from 'mdb-react-ui-kit'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 
 import styles from '../CreateMenu/CreateMenu.module.scss'
-
+import MenuManagement from '../../model/MenuManagement'
+import AccountManagement from '../../model/AccountManagement'
 
 export default function Info() {
   // Phuc goi API lay thong tin thay phan nay
@@ -24,7 +24,7 @@ export default function Info() {
   const [restaurantInfo, setRestaurantInfo] = useState({
     address: '3/2 Street',
     location: 'District 10',
-    phone: '03325543267',
+    phone_number: '03325543267',
     name: 'Strike Restaurant'
   })
 
@@ -36,7 +36,7 @@ export default function Info() {
     setStep(step - 1)
   }
 
-  const menuItems = [
+  const [menuItems, setMenuItems] = useState([
     {
       image: 'https://example.com/images/pasta.jpg',
       name: 'Pasta Carbonara',
@@ -72,7 +72,7 @@ export default function Info() {
       description: 'Classic pizza with fresh tomatoes, mozzarella, and basil.',
       rating: 4.6
     }
-  ];
+  ])
   const [newItem, setNewItem] = useState({
     image: '',
     type: 'food', // Default type
@@ -82,8 +82,19 @@ export default function Info() {
     rating: 0
   })
 
-
-  
+  useEffect(() => {
+    const getMenuList = async () => {
+      MenuManagement.getMenuList(
+        (items) => {
+          setMenuItems(items)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    }
+    getMenuList()
+  }, [setMenuItems])
 
   return (
     <section style={{ backgroundColor: '#eee' }}>
@@ -91,8 +102,8 @@ export default function Info() {
         <MDBRow>
           <MDBCol>
             <MDBBreadcrumb className='bg-light rounded-3 p-3 mb-4'>
-              <MDBBreadcrumbItem active style={{ fontWeight: 'bold' }} >
-                <a href="/info">Infomation</a> 
+              <MDBBreadcrumbItem active style={{ fontWeight: 'bold' }}>
+                <a href='/info'>Thông tin</a>
               </MDBBreadcrumbItem>
               <MDBBreadcrumbItem active style={{ fontWeight: 'bold' }}>
                 Menu
@@ -102,35 +113,33 @@ export default function Info() {
         </MDBRow>
 
         <MDBRow>
-                <MDBCard className='mb-4' style={{ fontSize: '20px' }}>
-                  <MDBCardBody>
-                    <MDBRow>
-                      <MDBCol>
-                        <MDBBreadcrumb className='bg-light rounded-3 p-3 mb-4'>
-                          <MDBBreadcrumbItem style={{ fontWeight: 'bold', fontSize: '30px' }}>Menu</MDBBreadcrumbItem>
-                        </MDBBreadcrumb>
-                      </MDBCol>
-                    </MDBRow>
-                    <div className={styles.menuItems}>
-                      {menuItems.map((item, index) => (
-                        <div key={item.index} className={styles.menuItem}>
-                          <img
-                            src={'/src/assets/images/Menu/img.png'} //src={item.image}
-                            alt={item.name}
-                            className={styles.menuItemImage}
-                          />
-                          <div className={styles.menuItemInfo}>
-                            <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
-                            <p className={styles.menuItemPrice}>{item.price} VND</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </MDBCardBody>
-                </MDBCard>
+          <MDBCard className='mb-4' style={{ fontSize: '20px' }}>
+            <MDBCardBody>
+              <MDBRow>
+                <MDBCol>
+                  <MDBBreadcrumb className='bg-light rounded-3 p-3 mb-4'>
+                    <MDBBreadcrumbItem style={{ fontWeight: 'bold', fontSize: '30px' }}>Menu</MDBBreadcrumbItem>
+                  </MDBBreadcrumb>
+                </MDBCol>
               </MDBRow>
-
-        
+              <div className={styles.menuItems}>
+                {menuItems.map((item, index) => (
+                  <div key={item.index} className={styles.menuItem}>
+                    <img
+                      src={item.avatar ? item.avatar : '/src/assets/images/Menu/img.png'}
+                      alt={item.name}
+                      className={styles.menuItemImage}
+                    />
+                    <div className={styles.menuItemInfo}>
+                      <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
+                      <p className={styles.menuItemPrice}>{item.price} VND</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBRow>
       </MDBContainer>
     </section>
   )

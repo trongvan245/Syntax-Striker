@@ -89,7 +89,8 @@ function LogInSection(props) {
         <div className={styles.dropdownContent} id='HeaderDropdown'>
           <div>
             <a href='/Info'>Tiểu sử</a>
-            <a href='/createMenu'>Tạo menu</a>
+            <a href='/yourMenu'>Menu nhà hàng</a>
+            <a href='/createMenu'>Sửa menu</a>
             <a
               onClick={() => {
                 AccountManagement.logout()

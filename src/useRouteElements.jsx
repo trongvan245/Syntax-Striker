@@ -39,14 +39,6 @@ export default function useRouteElements() {
       )
     },
     {
-      path: '/yourMenu',
-      element: (
-        <MainLayout>
-          <Menu />
-        </MainLayout>
-      )
-    },
-    {
       path: '/register',
       element: (
         <RegisterLayout>
