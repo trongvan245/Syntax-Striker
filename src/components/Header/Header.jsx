@@ -117,7 +117,7 @@ function Menu() {
     { name: 'Contact', link: '/' },
   ]
   return (
-    <div
+    <div className={styles.menuSection}
       style={{
         display: 'flex',
         justifyContent: 'center',
