@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './CreateMenu.module.scss'
 import {
   MDBInput,
@@ -11,6 +11,8 @@ import {
   MDBBreadcrumb,
   MDBBreadcrumbItem
 } from 'mdb-react-ui-kit'
+
+import MenuManagement from '../../model/MenuManagement'
 
 export default function CreateMenu() {
   const [step, setStep] = useState(1)
@@ -40,12 +42,37 @@ export default function CreateMenu() {
     rating: 0
   })
 
+  useEffect(() => {
+    const getInfo = async () => {
+      await MenuManagement.getMenuList(
+        (items) => {
+          console.log('Items: ', items)
+          setmenuItems(items)
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+    }
+    getInfo()
+  }, [setmenuItems])
+
   const handleAddItem = (type) => {
     if (newItem.name.trim() !== '') {
       // Check if name is not empty
       console.log(type)
-      setmenuItems([...menuItems, newItem])
-
+      const newItems = [...menuItems, newItem]
+      setmenuItems(newItems)
+      console.log('Add: ', newItems)
+      MenuManagement.updateMenu(
+        newItems,
+        (response) => {
+          console.log(response)
+        },
+        (response) => {
+          console.log(response)
+        }
+      )
       setNewItem({
         image: '',
         type: 'food', // Default type
@@ -62,6 +89,16 @@ export default function CreateMenu() {
     const newmenuItems = [...menuItems]
     newmenuItems.splice(index, 1)
     setmenuItems(newmenuItems)
+    console.log(newmenuItems)
+    MenuManagement.updateMenu(
+      newmenuItems,
+      (response) => {
+        console.log(response)
+      },
+      (response) => {
+        console.log(response)
+      }
+    )
   }
 
   const handleChange = (e) => {
@@ -90,7 +127,11 @@ export default function CreateMenu() {
               <div className={styles.menuItems}>
                 {menuItems.map((item, index) => (
                   <div key={item.index} className={styles.menuItem}>
-                    <img src={'/src/assets/images/Menu/img.png'} alt={item.name} className={styles.menuItemImage} />
+                    <img
+                      src={item.avatar ? item.avatar : '/src/assets/images/Menu/img.png'}
+                      alt={item.name}
+                      className={styles.menuItemImage}
+                    />
                     <div className={styles.menuItemInfo}>
                       <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
                       <p className={styles.menuItemPrice}>{item.price} VND</p>
@@ -107,7 +148,7 @@ export default function CreateMenu() {
                     data-bs-target='#staticBackdrop1'
                     className={`${styles.addButton} btn btn-primary`}
                   >
-                    Add item
+                    Thêm món ăn
                   </button>
 
                   <div
@@ -118,12 +159,13 @@ export default function CreateMenu() {
                     tabIndex='-1'
                     aria-labelledby='staticBackdropLabel'
                     aria-hidden='true'
+                    style={{ width: '90vw' }}
                   >
                     <div className='modal-dialog'>
-                      <div className='modal-content' style={{ width: '600px' }}>
+                      <div className='modal-content'>
                         <div className='modal-header'>
                           <h1 className='modal-title fs-5' id='staticBackdropLabel'>
-                            Item Info
+                            Thông tin sản phẩm
                           </h1>
                           <button
                             type='button'
@@ -142,7 +184,7 @@ export default function CreateMenu() {
                           <MDBInput
                             id='name'
                             wrapperclassName='mb-4'
-                            label='Name'
+                            label='Tên sản phẩm'
                             value={newItem.name}
                             onChange={handleChange}
                           />
@@ -150,7 +192,7 @@ export default function CreateMenu() {
                             type='number'
                             id='price'
                             wrapperclassName='mb-4'
-                            label='Price'
+                            label='Giá cả'
                             value={newItem.price}
                             onChange={handleChange}
                           />
@@ -159,7 +201,7 @@ export default function CreateMenu() {
                             textarea
                             id='description'
                             rows={4}
-                            label='Description'
+                            label='Miêu tả sản phẩm'
                             value={newItem.description}
                             onChange={handleChange}
                           />

@@ -28,11 +28,13 @@ export default class AccountManagement extends BaseManagement {
     const success = (response) => {
       this.#saveName(response.user.name)
       this.#saveAvatarURL(response.user.avatar)
+      this.#saveMenuId(response.user.menu_id)
       myCallback(response.user)
     }
     const error = () => {
       this.deleteToken()
       this.clearInformation()
+      this.deleteMenuId()
     }
     $.ajax({
       url: url,
@@ -57,6 +59,7 @@ export default class AccountManagement extends BaseManagement {
     const success = (response) => {
       this.#saveName(response.user.name)
       this.#saveAvatarURL(response.user.avatar)
+      this.#saveMenuId(response.user.menu_id)
       mySuccessCallback(response.user)
     }
     const error = (response) => {
@@ -148,6 +151,10 @@ export default class AccountManagement extends BaseManagement {
     localStorage.removeItem('avatarURL')
   }
 
+  static deleteMenuId() {
+    localStorage.removeItem('menuId')
+  }
+
   static imageUploader(formData, mySuccessCallback, myFailureCallback) {
     const url = this.getHostUrl() + '/users/avatar'
     $.ajax({
@@ -179,6 +186,10 @@ export default class AccountManagement extends BaseManagement {
 
   static #saveAvatarURL(avatarURL) {
     localStorage.setItem('avatarURL', avatarURL)
+  }
+
+  static #saveMenuId(menuId) {
+    localStorage.setItem('menuId', menuId)
   }
 
   static async hello() {
