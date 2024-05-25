@@ -92,7 +92,7 @@ export default function LandingPage() {
               >
                 <MDBCol size='md-4'>
                   <img
-                    src='/src/assets/images/yumm-menus.png'
+                    src='/src/assets/images/manage.png'
                     alt=''
                     style={{
                       height: 200,
@@ -135,7 +135,7 @@ export default function LandingPage() {
               >
                 <MDBCol size='md-4'>
                   <img
-                    src='/src/assets/images/yumm-menus.png'
+                    src='/src/assets/images/menu.svg'
                     alt=''
                     style={{
                       height: 200,
@@ -180,7 +180,7 @@ export default function LandingPage() {
               >
                 <MDBCol size='md-4'>
                   <img
-                    src='/src/assets/images/yumm-menus.png'
+                    src='/src/assets/images/find.svg'
                     alt=''
                     style={{
                       height: 200,

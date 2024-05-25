@@ -30,13 +30,7 @@ const menuData = [
     price: '$8.00',
     image: '/src/assets/images/Menu/img.png'
   },
-  {
-    id: 6,
-    name: 'Grilled Chicken',
-    price: '$12.00',
-    image: '/src/assets/images/Menu/img.png'
-  }
-  // Add more items as needed
+
 ]
 
 export default menuData
