@@ -400,7 +400,7 @@ export default function CreateMenu() {
               Back
             </button>
             <button type='button' className={styles.button}>
-              <a href='/' style={{ color: 'white' }}>
+              <a href='/yourMenu' style={{ color: 'white' }}>
                 Submit
               </a>
             </button>
