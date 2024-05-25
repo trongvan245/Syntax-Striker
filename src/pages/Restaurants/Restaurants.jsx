@@ -156,22 +156,7 @@ function Restaurants() {
             {paginatedRestaurants.map((restaurant) => (
               <div className='restaurant-box' key={restaurant._id}>
                 <div className='restaurant-info'>
-                  <Link
-                    style={{ marginLeft: '8px' }}
-                    to={{
-                      pathname: `/menu/${restaurant._id}`,
-                      state: {
-                        // Passing restaurant details as state
-                        _id: restaurant._id,
-                        name: restaurant.name,
-                        address: restaurant.address,
-                        location: restaurant.location,
-                        phone_number: restaurant.phone_number,
-                        owner_name: restaurant.owner_name,
-                        rating: restaurant.rating
-                      }
-                    }}
-                  >
+                  <Link style={{ marginLeft: '8px' }} to={`/menu/${restaurant._id}`} state={restaurant}>
                     {restaurant.name}{' '}
                   </Link>
                   <div

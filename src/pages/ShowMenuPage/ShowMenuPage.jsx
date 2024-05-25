@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useParams, useLocation } from 'react-router-dom'
-import $ from 'jquery' // Make sure to import jQuery
 import './ShowMenuPage.scss'
 import Rating from '../Restaurants/Rating'
+import { WiStars } from 'react-icons/wi'
 
 const ShowMenuPage = () => {
   const [menuData, setMenuData] = useState([])
@@ -10,20 +10,20 @@ const ShowMenuPage = () => {
   const location = useLocation()
   const restaurantDetails = location.state || {}
 
+  // console.log(restaurantDetails)
+
   useEffect(() => {
     $.ajax({
       url: 'https://syntax-striker.onrender.com/menu/get-menu',
-      method: 'GET',
-      data: JSON.stringify({ menu_id: id }),
+      method: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({ menu_id: '6650cfb4ed65982ce6eddcb7' }),
       success: (response) => {
-        console.log(response.items)
-        setMenuData(response)
-        // response.items.forEach((item) => {
-        //   console.log(item.name, item.price, item.rating, item.description)
-        // })
+        // console.log(response.items)
+        setMenuData(response.items)
       },
       error: (error) => {
-        console.log('Error fetching data: ', error)
+        console.log('Error fetching data:', error)
         alert('Lỗi truy cập dữ liệu từ server (Error: ' + error.message + ').\n' + 'Vui lòng thử lại sau !!!')
       }
     })
@@ -50,14 +50,17 @@ const ShowMenuPage = () => {
         </div>
       </div>
       <div>
-        <h1 className='heading-menu'>Restaurant Menu</h1>
+        <h1 className='heading-menu'>
+          <WiStars /> Khám phá Thực đơn Nhà hàng <WiStars />
+        </h1>
         {menuData.length > 0 ? (
           <div className='menuItemsContainer'>
             <div className='restaurant-details'>
-              <h2>{restaurantDetails.name}</h2>
-              <p>Address: {restaurantDetails.address}</p>
-              <p>Location: {restaurantDetails.location}</p>
-              <p>Phone: {restaurantDetails.phone_number}</p>
+              <h2>Nhà hàng {restaurantDetails.name}</h2>
+              <p>
+                Địa chỉ: {restaurantDetails.address} -- Quận/Huyện: {restaurantDetails.location}
+              </p>
+              <p>Liên hệ: {restaurantDetails.phone_number}</p>
               {/* <Rating rating={restaurantDetails.rating} style={{ display: 'inline' }} /> */}
             </div>
             <div className='menuItems'>
@@ -66,7 +69,7 @@ const ShowMenuPage = () => {
                   <img src={item.avatar} alt={item.name} className='menuItemImage' />
                   <div className='menuItemInfo'>
                     <h3 style={{ fontSize: '22px', fontWeight: 'bold' }}>{item.name}</h3>
-                    {item.description && <p>{item.description}</p>}
+                    {item.description && <p>Mô tả: {item.description}</p>}
                     <h3>Giá: {item.price} VNĐ</h3>
                     <Rating rating={item.rating} style={{ display: 'inline' }} />
                   </div>
