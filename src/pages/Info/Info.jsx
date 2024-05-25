@@ -175,8 +175,12 @@ export default function Info() {
               <MDBBreadcrumbItem active style={{ fontWeight: 'bold' }}>
                 Thông tin
               </MDBBreadcrumbItem>
+              <MDBBreadcrumbItem active style={{ fontWeight: 'bold' }}>
+              <a href="/yourMenu">Menu</a> 
+              </MDBBreadcrumbItem>
             </MDBBreadcrumb>
           </MDBCol>
+  
         </MDBRow>
 
         <MDBRow>
@@ -282,6 +286,17 @@ export default function Info() {
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
+            </MDBCard>
+
+            <MDBCard className='mb-4'>
+              <MDBBreadcrumb className='bg-light rounded-3 p-3 mb-4'>
+                <MDBBreadcrumbItem active style={{ fontWeight: 'bold' }}>
+                  QR Menu
+                </MDBBreadcrumbItem>
+              </MDBBreadcrumb>
+              <MDBRow>
+                <img src="/src/assets/images/qr.png" alt="QR code" style={{height: 300, width:300, margin: "auto", marginBottom:20}}/>
+              </MDBRow>
             </MDBCard>
             <div className='d-flex flex-row-reverse'>
               <MDBBtn data-bs-toggle='modal' data-bs-target='#exampleModal'>
