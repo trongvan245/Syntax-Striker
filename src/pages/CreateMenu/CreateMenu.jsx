@@ -270,7 +270,6 @@ export default function CreateMenu() {
                           />
                           <div className={styles.menuItemInfo}>
                             <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
-                            <p>{item.description}</p>
                             <p className={styles.menuItemPrice}>{item.price} VND</p>
                           </div>
                         </div>

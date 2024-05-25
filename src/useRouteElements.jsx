@@ -10,6 +10,7 @@ import CreateMenu from './pages/CreateMenu'
 import ShowMenuPage from './pages/ShowMenuPage'
 import { useParams } from 'react-router-dom'
 import Info from './pages/Info/Info.jsx'
+import Menu from './pages/Menu/Menu.jsx'
 
 //Just for testing
 import Test from './pages/Test/Test.jsx'
@@ -21,6 +22,14 @@ export default function useRouteElements() {
       element: (
         <MainLayout>
           <LandingPage />
+        </MainLayout>
+      )
+    },
+    {
+      path: '/yourMenu',
+      element: (
+        <MainLayout>
+          <Menu />
         </MainLayout>
       )
     },
