@@ -1,14 +1,13 @@
+import { useState, useEffect } from 'react'
+
 import { BsTelephoneFill } from 'react-icons/bs'
 import { FaLocationDot } from 'react-icons/fa6'
 import { PiCurrencyDollarSimpleFill } from 'react-icons/pi'
 import { WiStars } from 'react-icons/wi'
 
-import { useState } from 'react'
-
 import './Restaurants.scss'
 import Rating from './Rating'
 import Pagination from './Pagination'
-// import RestaurantMenuPage from '../ShowMenuPage/RestaurantMenuPage'
 import { Link } from 'react-router-dom'
 
 const locationsInHCMC = [
@@ -36,133 +35,30 @@ const locationsInHCMC = [
   'H. Nhà bè'
 ]
 
-const restaurants = [
-  {
-    id: 0,
-    img: 'src/assets/Images/Header/800px-HCMUT_official_logo.png',
-    name: 'Pizza Restaurant 1',
-    price: '150-600',
-    rating: 4.9,
-    tel: '0909123456',
-    location: 'Q. 3'
-  },
-  {
-    id: 1,
-    img: 'src/assets/Images/Header/Logo-DH-Cong-Nghe-Thong-Tin-UIT-V.webp',
-    name: 'Domino Restaurant 1',
-    price: '190-600',
-    rating: 4.9,
-    tel: '0909123456',
-    location: 'Q. 3'
-  },
-  {
-    id: 2,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
-    name: 'Domino Restaurant 2',
-    price: '190-600',
-    rating: 4.3,
-    tel: '0909123456',
-    location: 'Q. 5'
-  },
-  {
-    id: 3,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
-    name: 'Domino Restaurant 3',
-    price: '190-600',
-    rating: 4.0,
-    tel: '0909123456',
-    location: 'Q. 4'
-  },
-  {
-    id: 4,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
-    name: 'Domino Restaurant',
-    price: '190-600',
-    rating: 3.0,
-    tel: '0909123456',
-    location: 'Q. 5'
-  },
-  {
-    id: 5,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
-    name: 'Domino Restaurant',
-    price: '190-600',
-    rating: 2.0,
-    tel: '0909123456',
-    location: 'Q. 5'
-  },
-  {
-    id: 12,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
-    name: 'Domino Restaurant',
-    price: '190-600',
-    rating: 3.0,
-    tel: '0909123456',
-    location: 'Q. 5'
-  },
-  {
-    id: 6,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
-    name: 'Domino Restaurant',
-    price: '190-600',
-    rating: 3.0,
-    tel: '0909123456',
-    location: 'Q. 5'
-  },
-  {
-    id: 7,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
-    name: 'Domino Restaurant',
-    price: '190-600',
-    rating: 2.0,
-    tel: '0909123456',
-    location: 'Q. 5'
-  },
-  {
-    id: 8,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
-    name: 'Domino Restaurant',
-    price: '190-600',
-    rating: 4.2,
-    tel: '0909123456',
-    location: 'Q. 5'
-  },
-  {
-    id: 9,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
-    name: 'Domino Restaurant',
-    price: '190-600',
-    rating: 1.3,
-    tel: '0909123456',
-    location: 'Q. 5'
-  },
-  {
-    id: 10,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
-    name: 'Domino Restaurant',
-    price: '190-600',
-    rating: 4.9,
-    tel: '0909123456',
-    location: 'Q. 5'
-  },
-  {
-    id: 11,
-    img: 'src/assets/Images/LandingPage/background_1.jpg',
-    name: 'Domino Restaurant',
-    price: '190-600',
-    rating: 3.6,
-    tel: '0909123456',
-    location: 'Q. 5'
-  }
-  // ... other restaurants
-]
-
 function Restaurants() {
   const [searchTerm, setSearchTerm] = useState('')
   const [sortOption, setSortOption] = useState('Best Rating')
   const [locationOption, setLocationOption] = useState('All')
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = window.innerWidth < 992 ? 5 : 10
+
+  /** CALL API HERE
+   * to get restaurants data
+   */
+  const [restaurants, setRestaurants] = useState([])
+  useEffect(() => {
+    $.ajax({
+      url: 'https://syntax-striker.onrender.com/users/public',
+      method: 'GET',
+      success: (response) => {
+        setRestaurants(response.data)
+      },
+      error: (error) => {
+        console.error('Error fetching data: ', error)
+        alert('Lỗi truy cập dữ liệu từ server (Error: ' + error.message + ').\n' + 'Vui lòng thử lại sau !!!')
+      }
+    })
+  }, [])
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value)
@@ -174,6 +70,7 @@ function Restaurants() {
 
   const handleLocationChange = (event) => {
     setLocationOption(event.target.value)
+    console.log('Selected Location:', event.target.value) // Add this line for debugging
   }
 
   const handlePageChange = (pageNumber) => {
@@ -188,9 +85,9 @@ function Restaurants() {
     if (sortOption === 'Best Rating') {
       return b.rating - a.rating
     } else if (sortOption === 'Most Expensive') {
-      return b.price - a.price
+      return b.max_price - a.max_price
     } else if (sortOption === 'Cheapest') {
-      return a.price - b.price
+      return a.min_price - b.min_price
     }
     return 0
   })
@@ -257,9 +154,9 @@ function Restaurants() {
         {locationRestaurants.length > 0 ? (
           <div className='restaurants-grid'>
             {paginatedRestaurants.map((restaurant) => (
-              <div className='restaurant-box' key={restaurant.id}>
+              <div className='restaurant-box' key={restaurant._id}>
                 <div className='restaurant-info'>
-                  <Link style={{ marginLeft: '8px' }} to={`/menu/${restaurant.id}`}>
+                  <Link style={{ marginLeft: '8px' }} to={`/menu/${restaurant._id}`} state={restaurant}>
                     {restaurant.name}{' '}
                   </Link>
                   <div
@@ -280,7 +177,8 @@ function Restaurants() {
                     }}
                   >
                     {' '}
-                    Giá: {restaurant.price} <PiCurrencyDollarSimpleFill style={{ scale: '120%', color: '#008839' }} />
+                    Giá: {restaurant.min_price} - {restaurant.max_price}
+                    <PiCurrencyDollarSimpleFill style={{ scale: '120%', color: '#008839' }} />
                   </p>
                   <p
                     style={{
@@ -289,13 +187,20 @@ function Restaurants() {
                       fontWeight: 'bold'
                     }}
                   >
-                    SĐT: {restaurant.tel} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
+                    SĐT: {restaurant.phone_number} <BsTelephoneFill style={{ scale: '80%', color: '#cc3333' }} />
                     {' --- '}
                     Vị trí: {restaurant.location} <FaLocationDot style={{ scale: '80%', color: '#cc3333' }} />
                   </p>
                 </div>
                 <div className='restaurant-image' key={restaurant.id}>
-                  <img src={restaurant.img} alt={restaurant.name} />
+                  <img
+                    src={restaurant.avatar ? restaurant.avatar : './src/assets/Images/logo.png'}
+                    alt={
+                      restaurant.avatar
+                        ? `Rất tiếc, không thể tải ảnh nhà hàng ${restaurant.name} :((`
+                        : restaurant.name
+                    }
+                  />
                 </div>
               </div>
             ))}

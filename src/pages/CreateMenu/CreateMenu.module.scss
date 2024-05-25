@@ -192,8 +192,8 @@
   margin-top: 30px;
 }
 .divider {
-  padding: 30px;
   border-bottom: 1px solid #242020;
+  margin: 20px;
 }
 .menuItem {
   background: #fff;
@@ -202,8 +202,10 @@
   overflow: hidden;
   width: 300px;
   padding: 15px;
-  width: 350px;
-  height: 500px;
+  max-width: 350px;
+  max-height: 500px;
+  font-size: 15px;
+  text-align: center;
 }
 
 .menuItem:hover {
@@ -238,10 +240,10 @@
 .removeButton {
   background-color: #df3333; /* A nice accent color */
   color: white; /* Text color */
-  padding: 10px 20px; /* Padding inside the button */
-  font-size: 1.3em; /* Font size of the text */
+  padding: 10px 10px; /* Padding inside the button */
+  font-size: 1.1em; /* Font size of the text */
   font-weight: bold; /* Bold font weight */
-  width: 50%;
+  width: 40%;
   border: none; /* No border */
   border-radius: 5px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */

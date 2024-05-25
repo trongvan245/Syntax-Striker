@@ -12,8 +12,19 @@
   margin: 30px 0;
   color: $primaryColorDark;
   background-color: $primaryColorLight;
+  font-size: 3em;
 }
-.menuItemsConainer {
+@media (max-width: 992px) {
+  .heading-menu {
+    font-size: 2em;
+  }
+}
+@media (max-width: 600px) {
+  .heading-menu {
+    font-size: 1.5em;
+  }
+}
+.menuItemsContainer {
   padding: 20px;
   max-width: 90%;
   margin: 0 auto;
@@ -41,11 +52,13 @@
   overflow: hidden;
   width: 200px;
   padding: 15px;
-  transition: transform 0.3s ease-in-out,  box-shadow 0.2s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 .menuItem:hover {
   transform: translateY(-5px);
-  box-shadow: 0 2px 8px $primaryColorDark ;
+  box-shadow: 0 2px 8px $primaryColorDark;
 }
 
 .menuItemImage {

@@ -1,14 +1,33 @@
 import React from 'react'
 import { useState } from 'react'
 import styles from './CreateMenu.module.scss'
+import {
+  MDBInput,
+  MDBCheckbox,
+  MDBCol,
+  MDBContainer,
+  MDBRow,
+  MDBCard,
+  MDBCardText,
+  MDBCardBody,
+  MDBCardImage,
+  MDBBtn,
+  MDBBreadcrumb,
+  MDBBreadcrumbItem,
+  MDBProgress,
+  MDBProgressBar,
+  MDBIcon,
+  MDBListGroup,
+  MDBListGroupItem
+} from 'mdb-react-ui-kit'
 
 export default function CreateMenu() {
   const [step, setStep] = useState(1)
-  const [restaurantName, setRestaurantName] = useState('')
   const [restaurantInfo, setRestaurantInfo] = useState({
-    address: '',
-    city: '',
-    phone: ''
+    address: '3/2 Street',
+    location: 'District 10',
+    phone: '03325543267',
+    name: 'Strike Restaurant'
   })
 
   const handleNextStep = () => {
@@ -19,14 +38,13 @@ export default function CreateMenu() {
     setStep(step - 1)
   }
 
-  const [menuFoodItems, setmenuFoodItems] = useState([])
-  const [menuDrinkItems, setmenuDrinkItems] = useState([])
+  const [menuItems, setmenuItems] = useState([])
 
   const [newItem, setNewItem] = useState({
-    // image: '',
+    image: '',
     type: 'food', // Default type
     name: '',
-    price: '100',
+    price: '10000',
     description: '',
     rating: 0
   })
@@ -35,61 +53,39 @@ export default function CreateMenu() {
     if (newItem.name.trim() !== '') {
       // Check if name is not empty
       console.log(type)
-      if (type === 'food') {
-        setmenuFoodItems([...menuFoodItems, newItem])
-      } else if (type) {
-        setmenuDrinkItems([...menuDrinkItems, newItem])
-      }
+      setmenuItems([...menuItems, newItem])
+
       setNewItem({
-        //image: '',
+        image: '',
         type: 'food', // Default type
         name: '',
-        price: '100',
-        description: ''
-        // rating: 0,
+        price: '10000',
+        description: '',
+        rating: 0
       })
     }
   }
 
   const handleRemoveItem = (type, index) => {
     //console.log(newItem);
-    if (type === 'food') {
-      const newmenuFoodItems = [...menuFoodItems]
-      newmenuFoodItems.splice(index, 1)
-      setmenuFoodItems(newmenuFoodItems)
-    } else {
-      const newmenuDrinkItems = [...menuDrinkItems]
-      newmenuDrinkItems.splice(index, 1)
-      setmenuDrinkItems(newmenuDrinkItems)
-    }
+    const newmenuItems = [...menuItems]
+    newmenuItems.splice(index, 1)
+    setmenuItems(newmenuItems)
   }
 
-  const handleChange = (event) => {
-    const { name, value } = event.target
-    setNewItem((prevItem) => ({ ...prevItem, [name]: value }))
+  const handleChange = (e) => {
+    const { id, value } = e.target
+    setNewItem((prevState) => ({
+      ...prevState,
+      [id]: value
+    }))
   }
-
   const handleRatingChange = (event) => {
     setNewItem((prevItem) => ({ ...prevItem, rating: event.target.value }))
-  }
-  console.log(menuFoodItems)
-
-  const FormRow = ({ label, value, onChange }) => {
-    return (
-      <div className='row'>
-        <div className='col-lg-3'>
-          <label>{label}:</label>
-        </div>
-        <div className='col-lg-9'>
-          <input type='text' value={value} onChange={onChange} className={styles.input} />
-        </div>
-      </div>
-    )
   }
 
   return (
     <>
-      
       {step === 1 && (
         <div className>
           <div className={styles.createMenu}>
@@ -98,174 +94,96 @@ export default function CreateMenu() {
             <div className={styles.menuContainer}>
               <h1 className={styles.heading}>Your Menu</h1>
 
-              <div className={styles.divider}>
-                <h2 className={styles.headingMenuType}>Food</h2>
-                <div className={styles.menuItems}>
-                  {menuFoodItems.map((item, index) => (
-                    <div key={item.index} className={styles.menuItem}>
-                      <img src={'/src/assets/images/Menu/img.png'} alt={item.name} className={styles.menuItemImage} />
-                      <div className={styles.menuItemInfo}>
-                        <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
-                        <p>{item.description}</p>
-                        <p className={styles.menuItemPrice}>{item.price} VND</p>
-                      </div>
-                      <button onClick={() => handleRemoveItem('food', index)} className={styles.removeButton}>
-                        Remove
-                      </button>
+              <div className={styles.divider}> </div>
+
+              <div className={styles.menuItems}>
+                {menuItems.map((item, index) => (
+                  <div key={item.index} className={styles.menuItem}>
+                    <img src={'/src/assets/images/Menu/img.png'} alt={item.name} className={styles.menuItemImage} />
+                    <div className={styles.menuItemInfo}>
+                      <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
+                      <p className={styles.menuItemPrice}>{item.price} VND</p>
                     </div>
-                  ))}
-                  <div className={styles.menuItem}>
-                    <button
-                      type='button'
-                      class='btn btn-primary'
-                      data-bs-toggle='modal'
-                      data-bs-target='#staticBackdrop1'
-                      className={styles.addButton}
-                    >
-                      Add item
+                    <button onClick={() => handleRemoveItem('food', index)} className={styles.removeButton}>
+                      Remove
                     </button>
+                  </div>
+                ))}
+                <div className={styles.menuItem}>
+                  <button
+                    type='button'
+                    class='btn btn-primary'
+                    data-bs-toggle='modal'
+                    data-bs-target='#staticBackdrop1'
+                    className={styles.addButton}
+                  >
+                    Add item
+                  </button>
 
-                    <div
-                      class='modal fade'
-                      id='staticBackdrop1'
-                      data-bs-backdrop='static'
-                      data-bs-keyboard='false'
-                      tabindex='-1'
-                      aria-labelledby='staticBackdropLabel'
-                      aria-hidden='true'
-                    >
-                      <div class='modal-dialog'>
-                        <div class='modal-content' style={{ width: '600px' }}>
-                          <div class='modal-header'>
-                            <h1 class='modal-title fs-5' id='staticBackdropLabel'>
-                              Item Info
-                            </h1>
-                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                          </div>
-                          <div
-                            class='modal-body'
-                            style={{
-                              display: 'flex',
-                              flexDirection: 'column'
-                            }}
-                          >
-                            <div>
-                              <label htmlFor='name'>Name:</label>
-                              <input type='text' name='name' value={newItem.name} onChange={handleChange} required />
-                            </div>
-
-                            <div>
-                              <label htmlFor='price'>Price:</label>
-                              <input
-                                type='number'
-                                name='price'
-                                value={newItem.price}
-                                onChange={handleChange}
-                                required
-                              />
-                            </div>
-                            <div>
-                              <label htmlFor='description'>Description:</label>
-                              <textarea name='description' value={newItem.description} onChange={handleChange} />
-                            </div>
-                          </div>
-                          <div class='modal-footer'>
-                            <button type='button' class='btn btn-primary' onClick={() => handleAddItem('food')}>
-                              Add item
-                            </button>
-                          </div>
+                  <div
+                    class='modal fade'
+                    id='staticBackdrop1'
+                    data-bs-backdrop='static'
+                    data-bs-keyboard='false'
+                    tabindex='-1'
+                    aria-labelledby='staticBackdropLabel'
+                    aria-hidden='true'
+                  >
+                    <div class='modal-dialog'>
+                      <div class='modal-content' style={{ width: '600px' }}>
+                        <div class='modal-header'>
+                          <h1 class='modal-title fs-5' id='staticBackdropLabel'>
+                            Item Info
+                          </h1>
+                          <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                        </div>
+                        <div
+                          class='modal-body'
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column'
+                          }}
+                        >
+                          <MDBInput
+                            id='name'
+                            wrapperClass='mb-4'
+                            label='Name'
+                            value={newItem.name}
+                            onChange={handleChange}
+                          />
+                          <MDBInput
+                            type='number'
+                            id='price'
+                            wrapperClass='mb-4'
+                            label='Price'
+                            value={newItem.price}
+                            onChange={handleChange}
+                          />
+                          <MDBInput
+                            wrapperClass='mb-4'
+                            textarea
+                            id='description'
+                            rows={4}
+                            label='Description'
+                            value={newItem.description}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div class='modal-footer'>
+                          <button type='button' class='btn btn-primary' onClick={() => handleAddItem('food')}>
+                            Add item
+                          </button>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <div className={styles.divider}>
-                <h2 className={styles.headingMenuType}>Drink</h2>
-                <div className={styles.menuItems}>
-                  {menuDrinkItems.map((item, index) => (
-                    <div key={item.index} className={styles.menuItem}>
-                      <img src={'/src/assets/images/Menu/img.png'} alt={item.name} className={styles.menuItemImage} />
-                      <div className={styles.menuItemInfo}>
-                        <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
-                        <p>{item.description}</p>
-                        <p className={styles.menuItemPrice}>{item.price} VND</p>
-                      </div>
-                      <button onClick={() => handleRemoveItem('drink', index)} className={styles.removeButton}>
-                        Remove
-                      </button>
-                    </div>
-                  ))}
-                  <div className={styles.menuItem}>
-                    <button
-                      type='button'
-                      class='btn btn-primary'
-                      data-bs-toggle='modal'
-                      data-bs-target='#staticBackdrop2'
-                      className={styles.addButton}
-                    >
-                      Add item
-                    </button>
-
-                    <div
-                      class='modal fade'
-                      id='staticBackdrop2'
-                      data-bs-backdrop='static'
-                      data-bs-keyboard='false'
-                      tabindex='-1'
-                      aria-labelledby='staticBackdropLabel'
-                      aria-hidden='true'
-                    >
-                      <div class='modal-dialog'>
-                        <div class='modal-content' style={{ width: '600px' }}>
-                          <div class='modal-header'>
-                            <h1 class='modal-title fs-5' id='staticBackdropLabel'>
-                              Item Info
-                            </h1>
-                            <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
-                          </div>
-                          <div
-                            class='modal-body'
-                            style={{
-                              display: 'flex',
-                              flexDirection: 'column'
-                            }}
-                          >
-                            <div>
-                              <label htmlFor='name'>Name:</label>
-                              <input type='text' name='name' value={newItem.name} onChange={handleChange} required />
-                            </div>
-
-                            <div>
-                              <label htmlFor='price'>Price:</label>
-                              <input
-                                type='number'
-                                name='price'
-                                value={newItem.price}
-                                onChange={handleChange}
-                                required
-                              />
-                            </div>
-                            <div>
-                              <label htmlFor='description'>Description:</label>
-                              <textarea name='description' value={newItem.description} onChange={handleChange} />
-                            </div>
-                          </div>
-                          <div class='modal-footer'>
-                            <button type='button' class='btn btn-primary' onClick={() => handleAddItem('drink')}>
-                              Add item
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div className={styles.divider}></div>
             </div>
+
             <div className={styles.formNavigation}>
-              <button type='button' onClick={handlePreviousStep} className={styles.button}disabled>
+              <button type='button' onClick={handlePreviousStep} className={styles.button} disabled>
                 Back
               </button>
               <button type='button' onClick={handleNextStep} className={styles.button}>
@@ -276,46 +194,91 @@ export default function CreateMenu() {
         </div>
       )}
       {step == 2 && (
-        <div className={styles.stepContainer}>
-          <h1 className={styles.heading}>Review</h1>
-          <div className={styles.restaurantInfo}>
-            <h3>Restaurant Info</h3>
-            <p>Name: {restaurantName}</p>
-            <p>Address: {restaurantInfo.address}</p>
-            <p>City: {restaurantInfo.city}</p>
-            <p>Phone: {restaurantInfo.phone}</p>
-          </div>
-          <h3>Menu</h3>
-          <div className={styles.menuSection}>
-            <h4>Food</h4>
-            <div className={styles.menuItems}>
-              {menuFoodItems.map((item, index) => (
-                <div key={item.index} className={styles.menuItem}>
-                  <img src={'/src/assets/images/Menu/img.png'} alt={item.name} className={styles.menuItemImage} />
-                  <div className={styles.menuItemInfo}>
-                    <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
-                    <p>{item.description}</p>
-                    <p className={styles.menuItemPrice}>{item.price} VND</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className={styles.menuSection}>
-            <h4>Drink</h4>
-            <div className={styles.menuItems}>
-              {menuDrinkItems.map((item, index) => (
-                <div key={item.index} className={styles.menuItem}>
-                  <img src={'/src/assets/images/Menu/img.png'} alt={item.name} className={styles.menuItemImage} />
-                  <div className={styles.menuItemInfo}>
-                    <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
-                    <p>{item.description}</p>
-                    <p className={styles.menuItemPrice}>{item.price} VND</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div>
+          <section style={{ backgroundColor: '#eee' }}>
+            <h1 className={styles.heading} style={{ margin: 0, paddingTop: 40, fontSize: '3em' }}>
+              Review
+            </h1>
+            <MDBContainer className='py-5'>
+              <MDBRow>
+                <MDBCard className='mb-4' style={{ fontSize: '20px' }}>
+                  <MDBCardBody>
+                    <MDBRow>
+                      <MDBCol>
+                        <MDBBreadcrumb className='bg-light rounded-3 p-3 mb-4'>
+                          <MDBBreadcrumbItem style={{ fontWeight: 'bold', fontSize: '30px' }}>
+                            Restaurant Infomation
+                          </MDBBreadcrumbItem>
+                        </MDBBreadcrumb>
+                      </MDBCol>
+                    </MDBRow>
+                    <MDBRow>
+                      <MDBCol sm='3'>
+                        <MDBCardText>Restaurant name</MDBCardText>
+                      </MDBCol>
+                      <MDBCol sm='9'>
+                        <MDBCardText className='text-muted'>{restaurantInfo.name}</MDBCardText>
+                      </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                      <MDBCol sm='3'>
+                        <MDBCardText>Address</MDBCardText>
+                      </MDBCol>
+                      <MDBCol sm='9'>
+                        <MDBCardText className='text-muted'>
+                          {restaurantInfo.address + ', ' + restaurantInfo.location}
+                        </MDBCardText>
+                      </MDBCol>
+                    </MDBRow>
+                    <hr />
+                    <MDBRow>
+                      <MDBCol sm='3'>
+                        <MDBCardText>Phone</MDBCardText>
+                      </MDBCol>
+                      <MDBCol sm='9'>
+                        <MDBCardText className='text-muted'>{restaurantInfo.phone}</MDBCardText>
+                      </MDBCol>
+                    </MDBRow>
+
+                    <hr />
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBRow>
+
+              <MDBRow>
+                <MDBCard className='mb-4' style={{ fontSize: '20px' }}>
+                  <MDBCardBody>
+                    <MDBRow>
+                      <MDBCol>
+                        <MDBBreadcrumb className='bg-light rounded-3 p-3 mb-4'>
+                          <MDBBreadcrumbItem style={{ fontWeight: 'bold', fontSize: '30px' }}>Menu</MDBBreadcrumbItem>
+                        </MDBBreadcrumb>
+                      </MDBCol>
+                    </MDBRow>
+                    <div className={styles.menuItems}>
+                      {menuItems.map((item, index) => (
+                        <div key={item.index} className={styles.menuItem}>
+                          <img
+                            src={'/src/assets/images/Menu/img.png'}
+                            alt={item.name}
+                            className={styles.menuItemImage}
+                          />
+                          <div className={styles.menuItemInfo}>
+                            <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
+                            <p>{item.description}</p>
+                            <p className={styles.menuItemPrice}>{item.price} VND</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBRow>
+            </MDBContainer>
+          </section>
+          
+          <div className={styles.menuSection}></div>
           <div className={styles.formNavigation}>
             <button type='button' onClick={handlePreviousStep} className={styles.button}>
               Back
