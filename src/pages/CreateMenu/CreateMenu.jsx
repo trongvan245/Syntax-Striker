@@ -14,6 +14,7 @@ import {
 } from 'mdb-react-ui-kit'
 
 import MenuManagement from '../../model/MenuManagement'
+import AccountManagement from '../../model/AccountManagement'
 
 function UploadImageModal({ selectedFile, setSelectedFile, index, menuItems }) {
   const handleFileChange = (event) => {
@@ -24,7 +25,6 @@ function UploadImageModal({ selectedFile, setSelectedFile, index, menuItems }) {
       alert('Please select a file first.')
       return
     }
-
 
     const formData = new FormData()
     formData.append('image', selectedFile)
@@ -78,7 +78,7 @@ export default function CreateMenu() {
   const [restaurantInfo, setRestaurantInfo] = useState({
     address: '3/2 Street',
     location: 'District 10',
-    phone: '03325543267',
+    phone_number: '03325543267',
     name: 'Strike Restaurant'
   })
 
@@ -114,8 +114,14 @@ export default function CreateMenu() {
         }
       )
     }
+    const getRestaurantInfo = async () => {
+      await AccountManagement.getAccountInformation((response) => {
+        setRestaurantInfo(response)
+      })
+    }
     getInfo()
-  }, [setmenuItems])
+    getRestaurantInfo()
+  }, [setmenuItems, setRestaurantInfo])
 
   const handleAddItem = (type) => {
     if (newItem.name.trim() !== '') {
@@ -325,7 +331,7 @@ export default function CreateMenu() {
                     </MDBRow>
                     <MDBRow>
                       <MDBCol sm='3'>
-                        <MDBCardText>Restaurant name</MDBCardText>
+                        <MDBCardText>Tên nhà hàng</MDBCardText>
                       </MDBCol>
                       <MDBCol sm='9'>
                         <MDBCardText className='text-muted'>{restaurantInfo.name}</MDBCardText>
@@ -334,7 +340,7 @@ export default function CreateMenu() {
                     <hr />
                     <MDBRow>
                       <MDBCol sm='3'>
-                        <MDBCardText>Address</MDBCardText>
+                        <MDBCardText>Địa chỉ</MDBCardText>
                       </MDBCol>
                       <MDBCol sm='9'>
                         <MDBCardText className='text-muted'>
@@ -345,10 +351,10 @@ export default function CreateMenu() {
                     <hr />
                     <MDBRow>
                       <MDBCol sm='3'>
-                        <MDBCardText>Phone</MDBCardText>
+                        <MDBCardText>SĐT</MDBCardText>
                       </MDBCol>
                       <MDBCol sm='9'>
-                        <MDBCardText className='text-muted'>{restaurantInfo.phone}</MDBCardText>
+                        <MDBCardText className='text-muted'>{restaurantInfo.phone_number}</MDBCardText>
                       </MDBCol>
                     </MDBRow>
 
@@ -371,7 +377,7 @@ export default function CreateMenu() {
                       {menuItems.map((item, index) => (
                         <div key={item.index} className={styles.menuItem}>
                           <img
-                            src={'/src/assets/images/Menu/img.png'}
+                            src={item.avatar ? item.avatar : '/src/assets/images/Menu/img.png'}
                             alt={item.name}
                             className={styles.menuItemImage}
                           />

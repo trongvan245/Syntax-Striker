@@ -6,19 +6,7 @@ import AccountManagement from '../../model/AccountManagement.jsx'
 import { AuthContext } from '/src/components/Context.jsx'
 
 import React from 'react'
-import {
-  MDBRow,
-  MDBCol,
-  MDBInput,
-  MDBCheckbox,
-  MDBBtn,
-  MDBIcon,
-  MDBTabs,
-  MDBTabsItem,
-  MDBTabsLink,
-  MDBTabsContent,
-  MDBTabsPane
-} from 'mdb-react-ui-kit'
+import { MDBRow, MDBCol, MDBInput, MDBCheckbox, MDBBtn, MDBIcon } from 'mdb-react-ui-kit'
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
