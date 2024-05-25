@@ -30,6 +30,7 @@ function UploadImageModal({ selectedFile, setSelectedFile }) {
 
     const formData = new FormData()
     formData.append('image', selectedFile)
+    console.log(formData)
 
     const successCallback = () => {
       alert('Upload successful')

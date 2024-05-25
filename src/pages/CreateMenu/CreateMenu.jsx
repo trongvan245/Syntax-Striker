@@ -9,10 +9,69 @@ import {
   MDBCardText,
   MDBCardBody,
   MDBBreadcrumb,
-  MDBBreadcrumbItem
+  MDBBreadcrumbItem,
+  MDBBtn
 } from 'mdb-react-ui-kit'
 
 import MenuManagement from '../../model/MenuManagement'
+
+function UploadImageModal({ selectedFile, setSelectedFile, index, menuItems }) {
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0])
+  }
+  const handleUpload = () => {
+    if (!selectedFile) {
+      alert('Please select a file first.')
+      return
+    }
+
+
+    const formData = new FormData()
+    formData.append('image', selectedFile)
+
+    const successCallback = () => {
+      alert('Upload successful')
+      window.location.reload()
+    }
+
+    const errorCallback = (response) => {
+      alert('Upload failed')
+      console.log(response)
+    }
+
+    MenuManagement.modifyPreview(menuItems[index]._id, formData, successCallback, errorCallback)
+  }
+  return (
+    <div
+      className='modal fade'
+      id='uploadImageModal'
+      tabIndex='-1'
+      aria-labelledby='uploadImageModalLabel'
+      aria-hidden='true'
+    >
+      <div className='modal-dialog'>
+        <div className='modal-content'>
+          <div className='modal-header'>
+            <h5 className='modal-title' id='uploadImageModalLabel'>
+              Cập nhật ảnh sản phâm
+            </h5>
+            <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+          </div>
+          <div className='modal-body'>
+            <form>
+              <input className='form-control' type='file' id='formFile' onChange={handleFileChange} />
+            </form>
+          </div>
+          <div className='modal-footer'>
+            <button type='button' className='btn btn-secondary' data-bs-dismiss='modal' onClick={handleUpload}>
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export default function CreateMenu() {
   const [step, setStep] = useState(1)
@@ -23,6 +82,7 @@ export default function CreateMenu() {
     name: 'Strike Restaurant'
   })
 
+  const [selectedFile, setSelectedFile] = useState(null)
   const handleNextStep = () => {
     setStep(step + 1)
   }
@@ -32,6 +92,7 @@ export default function CreateMenu() {
   }
 
   const [menuItems, setmenuItems] = useState([])
+  const [imgIdx, setImgIdx] = useState(-1)
 
   const [newItem, setNewItem] = useState({
     image: '',
@@ -46,7 +107,6 @@ export default function CreateMenu() {
     const getInfo = async () => {
       await MenuManagement.getMenuList(
         (items) => {
-          console.log('Items: ', items)
           setmenuItems(items)
         },
         (error) => {
@@ -63,7 +123,6 @@ export default function CreateMenu() {
       console.log(type)
       const newItems = [...menuItems, newItem]
       setmenuItems(newItems)
-      console.log('Add: ', newItems)
       MenuManagement.updateMenu(
         newItems,
         (response) => {
@@ -83,23 +142,24 @@ export default function CreateMenu() {
       })
     }
   }
-
   const handleRemoveItem = (type, index) => {
     //console.log(newItem);
     const newmenuItems = [...menuItems]
+    const removedItemId = newmenuItems[index]._id
     newmenuItems.splice(index, 1)
     setmenuItems(newmenuItems)
-    console.log(newmenuItems)
-    MenuManagement.updateMenu(
-      newmenuItems,
+    MenuManagement.deleteItem(
+      [removedItemId],
       (response) => {
-        console.log(response)
+        console.log('Success: ', response)
       },
       (response) => {
         console.log(response)
       }
     )
   }
+
+  const changePreviewImage = (index) => {}
 
   const handleChange = (e) => {
     const { id, value } = e.target
@@ -114,13 +174,19 @@ export default function CreateMenu() {
 
   return (
     <>
+      <UploadImageModal
+        selectedFile={selectedFile}
+        setSelectedFile={setSelectedFile}
+        index={imgIdx}
+        menuItems={menuItems}
+      />
       {step === 1 && (
         <div className>
           <div className={styles.createMenu}>
             {/* <h1 className={styles.headingMenu} style={{textAlign: "center"}}>Create Your Menu</h1> */}
 
             <div className={styles.menuContainer}>
-              <h1 className={styles.heading}>Your Menu</h1>
+              <h1 className={styles.heading}>Menu nhà hàng</h1>
 
               <div className={styles.divider}> </div>
 
@@ -136,8 +202,16 @@ export default function CreateMenu() {
                       <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
                       <p className={styles.menuItemPrice}>{item.price} VND</p>
                     </div>
-                    <button onClick={() => handleRemoveItem('food', index)} className={styles.removeButton}>
-                      Remove
+                    <MDBBtn
+                      data-bs-toggle='modal'
+                      data-bs-target='#uploadImageModal'
+                      style={{ marginTop: '20px' }}
+                      onClick={() => setImgIdx(index)}
+                    >
+                      Sửa ảnh
+                    </MDBBtn>
+                    <button onClick={() => handleRemoveItem('food', index)} className={`btn btn-danger`}>
+                      Xóa
                     </button>
                   </div>
                 ))}
@@ -148,7 +222,7 @@ export default function CreateMenu() {
                     data-bs-target='#staticBackdrop1'
                     className={`${styles.addButton} btn btn-primary`}
                   >
-                    Thêm món ăn
+                    Thêm
                   </button>
 
                   <div
@@ -208,7 +282,7 @@ export default function CreateMenu() {
                         </div>
                         <div className='modal-footer'>
                           <button type='button' className='btn btn-primary' onClick={() => handleAddItem('food')}>
-                            Add item
+                            Thêm
                           </button>
                         </div>
                       </div>
@@ -221,10 +295,10 @@ export default function CreateMenu() {
 
             <div className={styles.formNavigation}>
               <button type='button' onClick={handlePreviousStep} className={styles.button} disabled>
-                Back
+                Trở về
               </button>
               <button type='button' onClick={handleNextStep} className={styles.button}>
-                Next
+                Tiếp theo
               </button>
             </div>
           </div>

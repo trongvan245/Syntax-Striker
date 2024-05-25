@@ -187,6 +187,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
+  padding: 5px;
 }
 .headingMenuType {
   margin-top: 30px;
@@ -224,17 +225,18 @@
 
 .menuItemInfo h3 {
   margin: 10px 0;
-  font-size: 1.5em;
+  font-size: 1em;
 }
 
 .menuItemInfo p {
   margin: 5px 0;
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
 .menuItemPrice {
   font-weight: bold;
   color: #02761d;
+  
 }
 
 .removeButton {
@@ -285,6 +287,15 @@
 
 .menuItem {
   margin-left: 1em;
+  button{
+    width: 100px;
+    height: 30px;
+    padding: 5px 5px;
+    margin-right: 5px;
+  }
+  img{
+    width: 80%;
+  }
 }
 
 // @media (max-width: 992px) {
