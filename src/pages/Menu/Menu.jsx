@@ -92,7 +92,7 @@ export default function Info() {
           <MDBCol>
             <MDBBreadcrumb className='bg-light rounded-3 p-3 mb-4'>
               <MDBBreadcrumbItem active style={{ fontWeight: 'bold' }} >
-                <a href="/info">Infomation</a> 
+                <a href="/info">Thông tin</a> 
               </MDBBreadcrumbItem>
               <MDBBreadcrumbItem active style={{ fontWeight: 'bold' }}>
                 Menu
