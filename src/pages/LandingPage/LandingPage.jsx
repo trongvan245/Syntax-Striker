@@ -46,7 +46,7 @@ export default function LandingPage() {
                 fontWeight: 'bold'
               }}
             >
-              Quản lý nhà hàng và tạo menu online thật dễ dàng với Strike Syntax
+              Quản lý nhà hàng và tạo menu online thật dễ dàng với Syntax Strike
             </MDBTypography>
             <MDBTypography
               style={{
@@ -54,7 +54,7 @@ export default function LandingPage() {
                 fontSize: '25px'
               }}
             >
-              Strike Syntax là nền tảng hoàn hảo cho
+              Syntax Strike là nền tảng hoàn hảo cho
               <MDBTypography tag='strong'> quản lý nhà hàng </MDBTypography>
               việc của bạn và tạo ra những
               <MDBTypography tag='strong'> menu trực tuyến</MDBTypography> đẹp mắt, hiệu quả và dễ dàng.
@@ -77,7 +77,7 @@ export default function LandingPage() {
             padding: '20px'
           }}
         >
-          Những dịch vụ mà Strike Syntax cung cấp cho bạn
+          Những dịch vụ mà Syntax Strike cung cấp cho bạn
         </MDBTypography>
         <MDBContainer>
           <MDBRow>
@@ -276,7 +276,7 @@ export default function LandingPage() {
                 paddingLeft: '80px'
               }}
             >
-              Tại sao nên chọn Strike Syntax
+              Tại sao nên chọn Syntax Strike
             </MDBTypography>
             <MDBTypography
               style={{
@@ -285,7 +285,7 @@ export default function LandingPage() {
                 paddingLeft: '80px'
               }}
             >
-              Với Strike Syntax, bạn sẽ <MDBTypography tag='strong'>tiết kiệm</MDBTypography>  thời gian và công sức trong việc quản lý nhà hàng của mình. 
+              Với Syntax Strike, bạn sẽ <MDBTypography tag='strong'>tiết kiệm</MDBTypography>  thời gian và công sức trong việc quản lý nhà hàng của mình. 
               Hệ thống đơn giản và dễ sử dụng, giúp bạn tối ưu hóa hoạt động kinh doanh và tạo ra trải nghiệm
                ẩm thực tốt nhất cho khách hàng của bạn.
             </MDBTypography>

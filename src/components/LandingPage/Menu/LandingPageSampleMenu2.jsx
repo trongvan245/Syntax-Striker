@@ -4,7 +4,9 @@ import { MDBContainer, MDBRow, MDBCol, MDBTypography } from 'mdb-react-ui-kit'
 
 function SampleMenu2() {
   return (
-    <>
+    <div style={{
+      marginBottom: '100px',
+    }}>
       <MDBTypography
         variant='h1'
         className='bg-primary-light'
@@ -14,7 +16,6 @@ function SampleMenu2() {
           fontSize: '45px',
           fontWeight: 'bold',
           textAlign: 'center',
-
           padding: '20px'
         }}
       >
@@ -24,9 +25,13 @@ function SampleMenu2() {
         <div className={styles.menuItems}>
           {menuData.map((item) => (
             <div key={item.id} className={styles.menuItem}>
-              <img src={item.image} alt={item.name} className={styles.menuItemImage} />
-              <div className={styles.menuItemInfo}>
-                <h3 style={{ fontWeight: 'bold' }}>{item.name}</h3>
+              <img src={item.image} alt={item.name} className={styles.menuItemImage} style={{
+                width: '100%',
+                height: '200px',
+                borderRadius: '10px'
+              }} />
+              <div className={styles.menuItemInfo} style={{height: "120px"}}>
+                <h3 style={{ fontWeight: 'bold', height: "45px" }}>{item.name}</h3>
                 <p>{item.description}</p>
                 <p className={styles.menuItemPrice}>{item.price}</p>
               </div>
@@ -35,7 +40,7 @@ function SampleMenu2() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 export default SampleMenu2
