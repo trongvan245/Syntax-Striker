@@ -14,11 +14,11 @@ export default function Footer() {
     <>
       <footer className={`bg-secondary-3 text-white text-center pb-3 overflow-scroll ${styles.footer}`}>
         <div className={`bg-primary-dark d-flex justify-content-around p-3 ${styles.contactBox}`}>
-          <ContactInfo name='Thái Nguyễn Gia Bảo' email='another.email@example.com' phone='+^_^' />
+          <ContactInfo name='Thái Nguyễn Gia Bảo' email='bao.thainguyenkhmt@hcmut.edu.vn' phone='+^_^' />
           <ContactInfo name='Lê Hồng Phúc' email='phuc.lechieuvinh@hcmut.edu.vn' phone='+84 962 534 955' />
-          <ContactInfo name='Nguyễn Ngọc Minh Quốc' email='???@???.com' phone='@_@' />
-          <ContactInfo name='Nguyễn Truyền Tuấn' email='???@???.com' phone=':>>' />
-          <ContactInfo name='Bùi Trọng Văn' email='yet.another@example.com' phone=':))' />
+          <ContactInfo name='Nguyễn Ngọc Minh Quốc' email='22521214@gm.uit.edu.vn' phone='+84 971 944 204' />
+          <ContactInfo name='Nguyễn Truyền Tuấn' email='tuan.nguyenkhmtk22@hcmut.edu.vn' phone='+84 914 243 306' />
+          <ContactInfo name='Bùi Trọng Văn' email='van.bui240504@hcmut.edu.vn' phone='+84 764 547 013' />
         </div>
         <p
           className='mb-0 mt-3'
