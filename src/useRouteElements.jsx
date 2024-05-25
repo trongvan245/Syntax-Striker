@@ -5,11 +5,14 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import MainLayout from './layout/MainLayout'
 import Restaurants from './pages/Restaurants'
-import Test from './../src/Test.jsx'
+//import Test from './../src/Test.jsx'
 import CreateMenu from './pages/CreateMenu'
 import ShowMenuPage from './pages/ShowMenuPage'
 import { useParams } from 'react-router-dom'
 import Info from './pages/Info/Info.jsx'
+
+//Just for testing
+import Test from './pages/Test/Test.jsx'
 
 export default function useRouteElements() {
   const routeElements = useRoutes([
@@ -19,6 +22,12 @@ export default function useRouteElements() {
         <MainLayout>
           <LandingPage />
         </MainLayout>
+      )
+    },
+    {
+      path: '/test',
+      element: (
+          <Test/>
       )
     },
     {
