@@ -4,7 +4,9 @@ import { MDBContainer, MDBRow, MDBCol, MDBTypography } from 'mdb-react-ui-kit'
 
 function SampleMenu2() {
   return (
-    <>
+    <div style={{
+      marginBottom: '100px',
+    }}>
       <MDBTypography
         variant='h1'
         className='bg-primary-light'
@@ -14,7 +16,6 @@ function SampleMenu2() {
           fontSize: '45px',
           fontWeight: 'bold',
           textAlign: 'center',
-
           padding: '20px'
         }}
       >
@@ -35,7 +36,7 @@ function SampleMenu2() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 export default SampleMenu2

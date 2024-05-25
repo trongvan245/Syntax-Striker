@@ -14,7 +14,7 @@ function Address() {
 
             }}
           >
-            Menu mẫu cho nhà hàng
+             Trụ sở của chúng tôi
           </MDBTypography>
           <p>
             <strong>Chi nhánh 1: Đường Hàn Thuyên, khu phố 6 P, Thủ Đức, Thành phố Hồ Chí Minh</strong>
