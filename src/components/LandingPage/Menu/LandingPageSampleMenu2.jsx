@@ -4,7 +4,7 @@ import menuData from './menuData'
 function SampleMenu2() {
   return (
     <div className={styles.menuContainer}>
-      <h1 className={styles.headingMenu}>Restaurant Menu</h1>
+      <h1 className={styles.headingMenu}>Mẫu menu nhà hàng</h1>
       <div className={styles.menuItems}>
         {menuData.map((item) => (
           <div key={item.id} className={styles.menuItem}>

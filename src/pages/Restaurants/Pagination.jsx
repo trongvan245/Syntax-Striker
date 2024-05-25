@@ -6,7 +6,7 @@ const Pagination = ({ totalPages, currentPage, handlePageChange }) => {
     let pages = []
 
     // Add the '<<' button to navigate to the first page
-    if (currentPage > 1) {
+    if (currentPage > 2) {
       pages.push(
         <button key='first' onClick={() => handlePageChange(1)}>
           {'First'}
@@ -27,14 +27,13 @@ const Pagination = ({ totalPages, currentPage, handlePageChange }) => {
     }
 
     // Add the '>>' button to navigate to the last page
-    if (currentPage < totalPages) {
+    if (currentPage + 1 < totalPages) {
       pages.push(
         <button key='last' onClick={() => handlePageChange(totalPages)}>
           {'Last'}
         </button>
       )
     }
-
     return pages
   }
 
