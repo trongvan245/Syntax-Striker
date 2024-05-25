@@ -5,6 +5,20 @@ import { faGoogle, faTwitter, faFacebook } from '@fortawesome/free-brands-svg-ic
 import AccountManagement from '../../model/AccountManagement.jsx'
 import { AuthContext } from '/src/components/Context.jsx'
 
+import React from 'react'
+import {
+  MDBRow,
+  MDBCol,
+  MDBInput,
+  MDBCheckbox,
+  MDBBtn,
+  MDBIcon,
+  MDBTabs,
+  MDBTabsItem,
+  MDBTabsLink,
+  MDBTabsContent,
+  MDBTabsPane
+} from 'mdb-react-ui-kit'
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -24,7 +38,7 @@ export default function Login() {
   const handlePasswordChange = (e) => setPassword(e.target.value)
 
   const handleSubmit = (e) => {
-    e.preventDefault()  
+    e.preventDefault()
     const loginResult = (response) => {
       window.alert(response.message)
       window.location.href = '/'
@@ -42,7 +56,9 @@ export default function Login() {
 
     const failToLogin = (response) => {
       console.log(response.responseJSON)
-      const message = response.responseJSON.message + (response.responseJSON?.errors?.email?.msg ? ': ' + response.responseJSON.errors.email.msg : '.')
+      const message =
+        response.responseJSON.message +
+        (response.responseJSON?.errors?.email?.msg ? ': ' + response.responseJSON.errors.email.msg : '.')
       $('#login-error').text(message)
       $('#login-button').html(backup)
       $('#login-button').prop('disabled', false)
@@ -76,37 +92,61 @@ export default function Login() {
               <span className='text-danger' id='login-error'></span>
             </div>
             <h2>Log In</h2>
-            <input type='email' placeholder='Email' value={email} onChange={handleEmailChange} />
-            <input type='password' placeholder='Password' value={password} onChange={handlePasswordChange} required />
-            <div className='login-options'>
-              <label>
-                <input type='checkbox' />
-                Remember me
-              </label>
-              <a href='#' className='forgot-password'>
-                Forgot password
-              </a>
+
+            <MDBInput
+              className='mb-4'
+              type='email'
+              id='form2Example1'
+              label='Email address'
+              value={email}
+              onChange={handleEmailChange}
+              required
+            />
+            <MDBInput
+              className='mb-4'
+              type='password'
+              id='form2Example2'
+              label='Password'
+              value={password}
+              onChange={handlePasswordChange}
+              required
+            />
+
+            <MDBRow className='mb-4'>
+              <MDBCol className='d-flex justify-content-center'>
+                <MDBCheckbox id='form7Example3' label='Remember me' defaultChecked />
+              </MDBCol>
+              <MDBCol>
+                <a href='#!'>Forgot password?</a>
+              </MDBCol>
+            </MDBRow>
+
+            <MDBBtn type='submit' className='mb-4' block>
+              Sign in
+            </MDBBtn>
+
+            <div className='text-center'>
+              <p>
+                Not a member? <a href='/register'>Register</a>
+              </p>
+              <p>or sign up with:</p>
+
+              <MDBBtn floating color='secondary' className='mx-1'>
+                <MDBIcon fab icon='facebook-f' />
+              </MDBBtn>
+
+              <MDBBtn floating color='secondary' className='mx-1'>
+                <MDBIcon fab icon='google' />
+              </MDBBtn>
+
+              <MDBBtn floating color='secondary' className='mx-1'>
+                <MDBIcon fab icon='twitter' />
+              </MDBBtn>
+
+              <MDBBtn floating color='secondary' className='mx-1'>
+                <MDBIcon fab icon='github' />
+              </MDBBtn>
             </div>
-            <button type='submit' className='login-button' id='login-button'>
-              Log In
-            </button>
-            <div className='divider'>or</div>
-
-            <div className='social-buttons'>
-              <button className='social-button google' disabled={true}>
-                <FontAwesomeIcon icon={faGoogle} size='2x' />
-              </button>
-              <button className='social-button twitter'>
-                <FontAwesomeIcon icon={faTwitter} size='2x' disabled={true} />
-              </button>
-              <button className='social-button facebook'>
-                <FontAwesomeIcon icon={faFacebook} size='2x' disabled={true} />
-              </button>
-            </div>
-
-            <div className='divider-dash'></div>
-
-            <button className='register-button'>Create new account</button>
           </form>
         </div>
         <div className='login-image-container'>
