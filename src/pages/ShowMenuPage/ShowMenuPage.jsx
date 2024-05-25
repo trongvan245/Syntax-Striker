@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useParams, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import './ShowMenuPage.scss'
 import Rating from '../Restaurants/Rating'
 import { WiStars } from 'react-icons/wi'
 
 const ShowMenuPage = () => {
   const [menuData, setMenuData] = useState([])
-  const { id } = useParams()
   const location = useLocation()
   const restaurantDetails = location.state || {}
 
@@ -17,7 +16,7 @@ const ShowMenuPage = () => {
       url: 'https://syntax-striker.onrender.com/menu/get-menu',
       method: 'POST',
       contentType: 'application/json',
-      data: JSON.stringify({ menu_id: '6650cfb4ed65982ce6eddcb7' }),
+      data: JSON.stringify({ menu_id: restaurantDetails.menu_id }),
       success: (response) => {
         // console.log(response.items)
         setMenuData(response.items)
@@ -27,7 +26,7 @@ const ShowMenuPage = () => {
         alert('Lỗi truy cập dữ liệu từ server (Error: ' + error.message + ').\n' + 'Vui lòng thử lại sau !!!')
       }
     })
-  }, [id])
+  }, [restaurantDetails.menu_id])
 
   return (
     <>
@@ -57,20 +56,22 @@ const ShowMenuPage = () => {
           <div className='menuItemsContainer'>
             <div className='restaurant-details'>
               <h2>Nhà hàng {restaurantDetails.name}</h2>
-              <p>
-                Địa chỉ: {restaurantDetails.address} -- Quận/Huyện: {restaurantDetails.location}
-              </p>
+              <p>Địa chỉ: {restaurantDetails.address}</p>
+              <p>Quận/Huyện: {restaurantDetails.location}</p>
               <p>Liên hệ: {restaurantDetails.phone_number}</p>
-              {/* <Rating rating={restaurantDetails.rating} style={{ display: 'inline' }} /> */}
+              <p>
+                <Rating rating={restaurantDetails.rating} />
+              </p>
             </div>
             <div className='menuItems'>
               {menuData.map((item) => (
                 <div key={item._id} className='menuItem'>
                   <img src={item.avatar} alt={item.name} className='menuItemImage' />
                   <div className='menuItemInfo'>
-                    <h3 style={{ fontSize: '22px', fontWeight: 'bold' }}>{item.name}</h3>
-                    {item.description && <p>Mô tả: {item.description}</p>}
-                    <h3>Giá: {item.price} VNĐ</h3>
+                    <h3 style={{ fontSize: '1.5em', fontWeight: 'bold' }}>
+                      {item.name} {item.description && <span className='description-tooltip'>{item.description}</span>}
+                    </h3>
+                    <h3 className='menuItemPrice'>Giá: {item.price} VNĐ</h3>
                     <Rating rating={item.rating} style={{ display: 'inline' }} />
                   </div>
                   <button className='orderButton' style={{ alignContent: 'center', display: 'inline' }}>
