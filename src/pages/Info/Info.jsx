@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect } from 'react'
 import {
   MDBCol,
@@ -11,21 +10,120 @@ import {
   MDBBtn,
   MDBBreadcrumb,
   MDBBreadcrumbItem,
-  MDBProgress,
-  MDBProgressBar,
   MDBIcon,
   MDBListGroup,
   MDBListGroupItem,
-  MDBInput,
-  MDBDropdown,
-  MDBDropdownMenu,
-  MDBDropdownToggle,
-  MDBDropdownItem
+  MDBInput
 } from 'mdb-react-ui-kit'
 import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import AccountManagement from '../../model/AccountManagement'
 
+function InputField({ id, label, value, handleChange }) {
+  return <MDBInput className='mb-4' type='text' id={id} label={label} value={value} onChange={handleChange} />
+}
+
+function ChangeInformaton({ info, handleChange, handleSubmit }) {
+  return (
+    <div className='modal fade' id='exampleModal' tabIndex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+      <div className='modal-dialog'>
+        <div className='modal-content'>
+          <div className='modal-header'>
+            <h5 className='modal-title' id='exampleModalLabel'>
+              Chỉnh sửa thông tin
+            </h5>
+            <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+          </div>
+          <div className='modal-body'>
+            <form>
+              <InputField id='name' label='Họ và tên' value={info.name} onChange={handleChange} />
+              <InputField id='email' label='Email' value={info.email} onChange={handleChange} />
+              <InputField id='phone_number' label='Số điện thoại' value={info.phone_number} onChange={handleChange} />
+              <InputField id='owner_name' label='Tên nhà hàng' value={info.owner_name} onChange={handleChange} />
+              <InputField
+                id='address'
+                label='Số nhà, (Đường, Phường/Xã)'
+                value={info.address}
+                onChange={handleChange}
+              />
+              <InputField
+                id='location'
+                label='Địa chỉ (Quận/Huyện, Tỉnh/Thành phố)'
+                value={info.location}
+                onChange={handleChange}
+              />
+            </form>
+          </div>
+          <div className='modal-footer'>
+            <button type='button' className='btn btn-secondary' data-bs-dismiss='modal' onClick={handleSubmit}>
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function UploadImageModal({ selectedFile, setSelectedFile }) {
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0])
+  }
+  const handleUpload = () => {
+    if (!selectedFile) {
+      alert('Please select a file first.')
+      return
+    }
+
+    const formData = new FormData()
+    formData.append('image', selectedFile)
+
+    const successCallback = () => {
+      alert('Upload successful')
+      window.location.reload()
+    }
+
+    const errorCallback = (response) => {
+      alert('Upload failed')
+      console.log(response)
+    }
+
+    AccountManagement.imageUploader(formData, successCallback, errorCallback)
+  }
+  return (
+    <div
+      className='modal fade'
+      id='uploadImageModal'
+      tabIndex='-1'
+      aria-labelledby='uploadImageModalLabel'
+      aria-hidden='true'
+    >
+      <div className='modal-dialog'>
+        <div className='modal-content'>
+          <div className='modal-header'>
+            <h5 className='modal-title' id='uploadImageModalLabel'>
+              Cập nhật ảnh đại diện
+            </h5>
+            <button type='button' className='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+          </div>
+          <div className='modal-body'>
+            <form>
+              <input className='form-control' type='file' id='formFile' onChange={handleFileChange} />
+            </form>
+          </div>
+          <div className='modal-footer'>
+            <button type='button' className='btn btn-secondary' data-bs-dismiss='modal' onClick={handleUpload}>
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function Info() {
+  const [selectedFile, setSelectedFile] = useState(null)
+  const [avatar, setAvatar] = useState('https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp')
   const [info, setInfo] = useState({
     name: '',
     email: '',
@@ -39,6 +137,7 @@ export default function Info() {
     const fetchData = async () => {
       await AccountManagement.getAccountInformation((response) => {
         setInfo(response)
+        setAvatar(response.avatar)
       })
     }
     fetchData()
@@ -84,17 +183,11 @@ export default function Info() {
           <MDBCol lg='4'>
             <MDBCard className='mb-4'>
               <MDBCardBody className='text-center'>
-                <MDBCardImage
-                  src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp'
-                  alt='avatar'
-                  className='rounded-circle'
-                  style={{ width: '150px' }}
-                  fluid
-                />
-                {/* <p className="text-muted mb-1">Full Stack Developer</p>
-                <p className="text-muted mb-4">Bay Area, San Francisco, CA</p> */}
+                <MDBCardImage src={avatar} alt='avatar' className='rounded-circle' style={{ width: '150px' }} fluid />
                 <div className='d-flex justify-content-center mb-2'>
-                  <MDBBtn style={{ marginTop: '20px' }}>Edit</MDBBtn>
+                  <MDBBtn data-bs-toggle='modal' data-bs-target='#uploadImageModal' style={{ marginTop: '20px' }}>
+                    Edit
+                  </MDBBtn>
                 </div>
               </MDBCardBody>
             </MDBCard>
@@ -135,92 +228,8 @@ export default function Info() {
                     <MDBCardText className='text-muted'>{info.owner_name}</MDBCardText>
                   </MDBCol>
                   <MDBCol sm='2'></MDBCol>
-
-                  <div
-                    className='modal fade'
-                    id='exampleModal'
-                    tabIndex='-1'
-                    aria-labelledby='exampleModalLabel'
-                    aria-hidden='true'
-                  >
-                    <div className='modal-dialog'>
-                      <div className='modal-content'>
-                        <div className='modal-header'>
-                          <h5 className='modal-title' id='exampleModalLabel'>
-                            Chỉnh sửa thông tin
-                          </h5>
-                          <button
-                            type='button'
-                            className='btn-close'
-                            data-bs-dismiss='modal'
-                            aria-label='Close'
-                          ></button>
-                        </div>
-                        <div className='modal-body'>
-                          <form>
-                            <MDBInput
-                              className='mb-4'
-                              type='text'
-                              id='name'
-                              label='Họ và tên'
-                              value={info.name}
-                              onChange={handleChange}
-                            />
-                            <MDBInput
-                              className='mb-4'
-                              type='email'
-                              id='email'
-                              label='Email'
-                              value={info.email}
-                              onChange={handleChange}
-                            />
-                            <MDBInput
-                              className='mb-4'
-                              type='number'
-                              id='phone_number'
-                              label='Số điện thoại'
-                              value={info.phone_number}
-                              onChange={handleChange}
-                            />
-                            <MDBInput
-                              className='mb-4'
-                              type='text'
-                              id='owner_name'
-                              label='Tên nhà hàng'
-                              value={info.owner_name}
-                              onChange={handleChange}
-                            />
-                            <MDBInput
-                              className='mb-4'
-                              type='text'
-                              id='address'
-                              label='Số nhà, (Đường, Phường/Xã)'
-                              value={info.address}
-                              onChange={handleChange}
-                            />
-                            <MDBInput
-                              className='mb-4'
-                              type='text'
-                              id='location'
-                              label='Địa chỉ (Quận/Huyện, Tỉnh/Thành phố)'
-                              value={info.location}
-                              onChange={handleChange}
-                            />
-                          </form>
-                        </div>
-                        <div className='modal-footer'>
-                          <button
-                            type='button'
-                            className='btn btn-secondary'
-                            data-bs-dismiss='modal'
-                            onClick={handleSubmit}
-                          >
-                            Submit
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <ChangeInformaton info={info} handleChange={handleChange} handleSubmit={handleSubmit} />
+                  <UploadImageModal selectedFile={selectedFile} setSelectedFile={setSelectedFile} />
                 </MDBRow>
                 <hr />
                 <MDBRow>

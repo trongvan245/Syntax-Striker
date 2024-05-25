@@ -1,6 +1,7 @@
 import AccountManagement from './model/AccountManagement.jsx'
 import { useEffect, useState, useContext } from 'react'
 import { AuthContext } from './components/Context.jsx'
+import ImageUpload from './components/ImageUploader/ImageUploader.jsx'
 
 export default function Test() {
   const [isLoaded, setIsLoaded] = useState(false)
@@ -28,6 +29,7 @@ export default function Test() {
       >
         Test
       </button>
+      <ImageUpload />
     </div>
   )
 }

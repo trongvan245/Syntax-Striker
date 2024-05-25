@@ -1,4 +1,5 @@
 import BaseManagement from './BaseManagement.jsx'
+import $ from 'jquery'
 
 export default class AccountManagement extends BaseManagement {
   constructor() {
@@ -161,6 +162,22 @@ export default class AccountManagement extends BaseManagement {
   static clearInformation() {
     localStorage.removeItem('name')
     localStorage.removeItem('avatarURL')
+  }
+
+  static imageUploader(formData, mySuccessCallback, myFailureCallback) {
+    const url = this.getHostUrl() + '/users/avatar'
+    $.ajax({
+      url: url,
+      type: 'POST',
+      data: formData,
+      contentType: false,
+      processData: false,
+      headers: {
+        Authorization: 'Bearer ' + this.#getActiveToken()
+      },
+      success: mySuccessCallback,
+      error: myFailureCallback
+    })
   }
 
   // ======================= PRIVATE METHODS ZONE =======================

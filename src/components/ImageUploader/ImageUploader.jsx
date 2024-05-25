@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import $ from 'jquery'
+import { useState } from 'react'
+import AccountManagement from '../../model/AccountManagement'
 
 const ImageUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null)
@@ -18,33 +18,19 @@ const ImageUpload = () => {
     const formData = new FormData()
     formData.append('image', selectedFile)
 
-    $.ajax({
-      url: 'YOUR_SERVER_ENDPOINT',
-      type: 'POST',
-      data: formData,
-      contentType: false,
-      processData: false,
-      xhr: function () {
-        const xhr = new window.XMLHttpRequest()
-        xhr.upload.addEventListener(
-          'progress',
-          function (event) {
-            if (event.lengthComputable) {
-              const percentCompleted = Math.round((event.loaded * 100) / event.total)
-              setUploadProgress(percentCompleted)
-            }
-          },
-          false
-        )
-        return xhr
-      },
-      success: function (response) {
-        console.log('File uploaded successfully', response)
-      },
-      error: function (xhr, status, error) {
-        console.error('Error uploading file', xhr.responseText)
-      }
-    })
+    const successCallback = (response) => {
+      alert('Upload successful')
+      setUploadProgress(0)
+      console.log(response)
+    }
+
+    const errorCallback = (response) => {
+      alert('Upload failed')
+      setUploadProgress(0)
+      console.log(response)
+    }
+
+    AccountManagement.imageUploader(formData, setUploadProgress, successCallback, errorCallback)
   }
 
   return (
