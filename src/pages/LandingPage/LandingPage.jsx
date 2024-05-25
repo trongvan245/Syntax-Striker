@@ -32,10 +32,10 @@ export default function LandingPage() {
       {/* <SampleMenu1 /> */}
       <div className='Introducition'>
         <MDBRow className='mb-3'>
-          <MDBCol size='6'>
-            <img src='/src/assets/images/yumm-menus.png' alt='Introduction' style={{ scale: '0.7' }} />
+          <MDBCol className='col-md-6'>
+            <img src='/src/assets/images/yumm-menus.png' alt='Introduction' style={{ scale: '0.7', width: "100%" }} />
           </MDBCol>
-          <MDBCol size='6'>
+          <MDBCol className='col-md-6'>
             <MDBTypography
               variant='h1'
               
@@ -81,7 +81,7 @@ export default function LandingPage() {
         </MDBTypography>
         <MDBContainer>
           <MDBRow>
-            <MDBCol size='md'>
+            <MDBCol className='col-md'>
               <MDBRow
                 className={styles.featureDiv}
                 style={{
