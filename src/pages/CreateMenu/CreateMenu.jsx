@@ -127,7 +127,7 @@ export default function CreateMenu() {
     if (newItem.name.trim() !== '') {
       // Check if name is not empty
       console.log(type)
-      const newItems = [...menuItems, newItem]
+      const newItems = [...menuItems, { ...newItem, price: parseInt(newItem.price) }]
       setmenuItems(newItems)
       MenuManagement.updateMenu(
         newItems,
